@@ -7,26 +7,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'obsidian': '#06070a',
-                        'slate-dark': '#0c0e13',
-                        'slate-mid': '#14171e',
-                        'slate-light': '#1e222b',
-                        'mist': '#6b7689',
-                        'silver': '#a8b1c1',
-                        'frost': '#e8ecf2',
-                        'copper': '#d4a574',
-                        'copper-light': '#e5c4a0',
-                        'copper-dark': '#b08650',
+                        'ink': '#222222',
+                        'ink-light': '#3a3a3a',
+                        'gray-mid': '#BFBFBF',
+                        'gray-light': '#E5E5E5',
+                        'surface': '#F0F0F0',
+                        'surface-bright': '#FAFAFA',
+                        'accent': '#222222',
+                        'accent-light': '#444444',
                     },
                     fontFamily: {
-                        'display': ['Space Grotesk', 'sans-serif'],
-                        'mono': ['JetBrains Mono', 'monospace']
+                        'display': ['SN Pro', 'sans-serif'],
+                        'mono': ['SN Pro', 'monospace']
                     }
                 }
             }
@@ -34,47 +32,51 @@
     </script>
     <style>
         :root {
-            --bg: #06070a;
-            --bg-secondary: #0c0e13;
-            --fg: #e8ecf2;
-            --muted: #6b7689;
-            --accent: #d4a574;
-            --accent-light: #e5c4a0;
-            --accent-dark: #b08650;
-            --card: #14171e;
-            --border: #1e222b;
+            --bg: #FAFAFA;
+            --bg-secondary: #F0F0F0;
+            --fg: #222222;
+            --fg-secondary: #3a3a3a;
+            --muted: #BFBFBF;
+            --accent: #222222;
+            --accent-light: #444444;
+            --card: #FFFFFF;
+            --card-secondary: #F0F0F0;
+            --border: #E5E5E5;
+            --border-light: #F0F0F0;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --shadow-strong: rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'SN Pro', sans-serif;
             background: var(--bg);
             color: var(--fg);
             overflow-x: hidden;
         }
 
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-        /* Optimized Background */
-        .deep-bg {
+        /* Light Theme Background with Subtle Gradients */
+        .light-bg {
             background: 
-                radial-gradient(ellipse 100% 60% at 50% -30%, rgba(212, 165, 116, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse 50% 50% at 100% 50%, rgba(212, 165, 116, 0.04) 0%, transparent 40%),
-                radial-gradient(ellipse 50% 50% at 0% 80%, rgba(176, 134, 80, 0.03) 0%, transparent 40%),
-                linear-gradient(180deg, #06070a 0%, #080910 50%, #06070a 100%);
+                radial-gradient(ellipse 100% 60% at 50% -30%, rgba(34, 34, 34, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 50% at 100% 50%, rgba(34, 34, 34, 0.02) 0%, transparent 40%),
+                radial-gradient(ellipse 50% 50% at 0% 80%, rgba(34, 34, 34, 0.015) 0%, transparent 40%),
+                linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%);
         }
 
-        /* CSS Particles instead of Canvas */
+        /* CSS Particles */
         .particle {
             position: fixed;
             width: 2px;
             height: 2px;
-            background: var(--accent);
+            background: var(--fg);
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
@@ -83,17 +85,17 @@
 
         .particle.animate {
             animation: particleFloat 20s ease-in-out infinite;
-            opacity: 0.4;
+            opacity: 0.15;
         }
 
         @keyframes particleFloat {
-            0%, 100% { transform: translate(0, 0); opacity: 0.2; }
-            25% { transform: translate(30px, -20px); opacity: 0.5; }
-            50% { transform: translate(-20px, 30px); opacity: 0.3; }
-            75% { transform: translate(25px, 10px); opacity: 0.4; }
+            0%, 100% { transform: translate(0, 0); opacity: 0.08; }
+            25% { transform: translate(30px, -20px); opacity: 0.2; }
+            50% { transform: translate(-20px, 30px); opacity: 0.12; }
+            75% { transform: translate(25px, 10px); opacity: 0.15; }
         }
 
-        /* Static Ambient Orbs */
+        /* Ambient Orbs - Light Theme */
         .ambient-orb {
             position: absolute;
             border-radius: 50%;
@@ -107,16 +109,16 @@
             inset: 0;
             border-radius: 50%;
             background: inherit;
-            filter: blur(80px);
+            filter: blur(100px);
         }
 
-        /* Blueprint Grid */
+        /* Blueprint Grid - Light */
         .blueprint-grid {
             background-image: 
-                linear-gradient(rgba(212, 165, 116, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(212, 165, 116, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(212, 165, 116, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(212, 165, 116, 0.015) 1px, transparent 1px);
+                linear-gradient(rgba(34, 34, 34, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 34, 34, 0.04) 1px, transparent 1px),
+                linear-gradient(rgba(34, 34, 34, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 34, 34, 0.02) 1px, transparent 1px);
             background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
         }
 
@@ -139,10 +141,10 @@
         .delay-4 { transition-delay: 0.4s; }
         .delay-5 { transition-delay: 0.5s; }
 
-        /* Service Card */
+        /* Service Card - Light Theme */
         .service-card {
-            background: linear-gradient(165deg, rgba(20, 23, 30, 0.95) 0%, rgba(12, 14, 19, 0.98) 100%);
-            border: 1px solid rgba(30, 34, 43, 0.7);
+            background: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.98) 100%);
+            border: 1px solid rgba(229, 229, 229, 0.8);
             position: relative;
             overflow: hidden;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -157,7 +159,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.5) 50%, transparent 100%);
+            background: linear-gradient(90deg, transparent 0%, var(--fg) 50%, transparent 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -166,7 +168,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 165, 116, 0.06), transparent 40%);
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(34, 34, 34, 0.04), transparent 40%);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -174,17 +176,18 @@
 
         .service-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(212, 165, 116, 0.25);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5),
-                        0 0 60px -20px rgba(212, 165, 116, 0.15);
+            border-color: rgba(34, 34, 34, 0.2);
+            box-shadow: 
+                0 20px 40px -15px rgba(0, 0, 0, 0.08),
+                0 0 60px -20px rgba(34, 34, 34, 0.05);
         }
 
-        .service-card:hover::before { opacity: 1; }
+        .service-card:hover::before { opacity: 0.5; }
         .service-card:hover::after { opacity: 1; }
 
         .service-card:hover .icon-box {
-            background: rgba(212, 165, 116, 0.12);
-            border-color: rgba(212, 165, 116, 0.35);
+            background: rgba(34, 34, 34, 0.08);
+            border-color: rgba(34, 34, 34, 0.25);
             transform: scale(1.08);
         }
 
@@ -192,11 +195,12 @@
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Button */
+        /* Button - Light Theme */
         .btn-primary {
             position: relative;
-            background: linear-gradient(135deg, rgba(212, 165, 116, 0.12) 0%, rgba(212, 165, 116, 0.04) 100%);
-            border: 1px solid rgba(212, 165, 116, 0.35);
+            background: linear-gradient(135deg, rgba(34, 34, 34, 0.9) 0%, rgba(34, 34, 34, 1) 100%);
+            border: 1px solid rgba(34, 34, 34, 1);
+            color: #FAFAFA;
             transition: all 0.35s ease;
             overflow: hidden;
         }
@@ -208,25 +212,38 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
             transition: left 0.5s ease;
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(212, 165, 116, 0.08) 100%);
-            border-color: rgba(212, 165, 116, 0.5);
-            box-shadow: 0 0 30px -8px rgba(212, 165, 116, 0.35);
+            background: linear-gradient(135deg, rgba(58, 58, 58, 1) 0%, rgba(34, 34, 34, 1) 100%);
+            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.3);
             transform: translateY(-2px);
         }
 
         .btn-primary:hover::before { left: 100%; }
 
-        /* Project Card */
+        /* Secondary Button */
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(229, 229, 229, 0.8);
+            color: var(--fg);
+            transition: all 0.35s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(34, 34, 34, 0.3);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Project Card - Light Theme */
         .project-card {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(165deg, var(--card) 0%, rgba(12, 14, 19, 0.98) 100%);
-            border: 1px solid rgba(30, 34, 43, 0.5);
+            background: linear-gradient(165deg, #FFFFFF 0%, #FAFAFA 100%);
+            border: 1px solid rgba(229, 229, 229, 0.6);
             transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
@@ -234,8 +251,8 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(to top, 
-                rgba(6, 7, 10, 0.98) 0%, 
-                rgba(6, 7, 10, 0.8) 30%, 
+                rgba(250, 250, 250, 0.98) 0%, 
+                rgba(250, 250, 250, 0.85) 30%, 
                 transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -243,8 +260,8 @@
 
         .project-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(212, 165, 116, 0.25);
-            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.45);
+            border-color: rgba(34, 34, 34, 0.15);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.08);
         }
 
         .project-card:hover .overlay { opacity: 1; }
@@ -260,17 +277,17 @@
             opacity: 1;
         }
 
-        /* Header */
+        /* Header - Light Theme */
         .header-solid {
-            background: rgba(6, 7, 10, 0.92);
-            border-bottom: 1px solid rgba(30, 34, 43, 0.5);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+            background: rgba(250, 250, 250, 0.92);
+            border-bottom: 1px solid rgba(229, 229, 229, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
         }
 
-        /* Stats Card */
+        /* Stats Card - Light Theme */
         .stats-card {
-            background: linear-gradient(165deg, rgba(20, 23, 30, 0.6) 0%, rgba(12, 14, 19, 0.8) 100%);
-            border: 1px solid rgba(30, 34, 43, 0.6);
+            background: linear-gradient(165deg, rgba(255, 255, 255, 0.9) 0%, rgba(250, 250, 250, 0.95) 100%);
+            border: 1px solid rgba(229, 229, 229, 0.7);
             position: relative;
             overflow: hidden;
             transition: transform 0.35s ease, border-color 0.35s ease;
@@ -284,28 +301,30 @@
             transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            background: linear-gradient(90deg, transparent, var(--fg), transparent);
             transition: width 0.4s ease;
         }
 
         .stats-card:hover {
-            border-color: rgba(212, 165, 116, 0.25);
+            border-color: rgba(34, 34, 34, 0.15);
             transform: translateY(-3px);
+            box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.06);
         }
 
         .stats-card:hover::after { width: 70%; }
 
-        /* Mobile Menu */
+        /* Mobile Menu - Light Theme */
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(250, 250, 250, 0.98);
         }
 
         .mobile-menu.open { transform: translateX(0); }
 
         /* Focus */
         button:focus-visible, a:focus-visible {
-            outline: 2px solid var(--accent);
+            outline: 2px solid var(--fg);
             outline-offset: 3px;
         }
 
@@ -318,20 +337,20 @@
             }
         }
 
-        /* Form */
+        /* Form - Light Theme */
         .form-input {
-            background: rgba(12, 14, 19, 0.95);
-            border: 1px solid rgba(30, 34, 43, 0.8);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(229, 229, 229, 0.9);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: rgba(212, 165, 116, 0.45);
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.08);
+            border-color: rgba(34, 34, 34, 0.4);
+            box-shadow: 0 0 0 3px rgba(34, 34, 34, 0.05);
         }
 
-        .form-input::placeholder { color: rgba(107, 118, 137, 0.5); }
+        .form-input::placeholder { color: rgba(191, 191, 191, 0.8); }
 
         /* Tech Line Animation */
         .tech-line-animated {
@@ -342,7 +361,7 @@
 
         @keyframes drawLine {
             0%, 100% { stroke-dashoffset: 200; opacity: 0; }
-            30%, 70% { stroke-dashoffset: 0; opacity: 1; }
+            30%, 70% { stroke-dashoffset: 0; opacity: 0.3; }
         }
 
         /* Corner Marks */
@@ -350,7 +369,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            border-color: rgba(212, 165, 116, 0.25);
+            border-color: rgba(34, 34, 34, 0.15);
             border-style: solid;
         }
 
@@ -393,8 +412,8 @@
         }
 
         @keyframes pulseSoft {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.35; }
         }
 
         /* Float */
@@ -410,12 +429,7 @@
         /* Section Divider */
         .section-divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.15) 50%, transparent 100%);
-        }
-
-        /* Glow Text */
-        .text-glow {
-            text-shadow: 0 0 60px rgba(212, 165, 116, 0.2);
+            background: linear-gradient(90deg, transparent 0%, rgba(34, 34, 34, 0.08) 50%, transparent 100%);
         }
 
         /* Status Indicator */
@@ -424,7 +438,7 @@
         }
 
         @keyframes statusPulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
+            0%, 100% { opacity: 0.4; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.15); }
         }
 
@@ -433,7 +447,7 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(34, 34, 34, 0.15), transparent);
             animation: scanMove 8s linear infinite;
         }
 
@@ -456,7 +470,7 @@
             right: -50%;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, rgba(212, 165, 116, 0.15), transparent);
+            background: linear-gradient(90deg, rgba(34, 34, 34, 0.08), transparent);
         }
 
         .process-step:last-child::after { display: none; }
@@ -473,14 +487,37 @@
             left: 0;
             width: 0;
             height: 1px;
-            background: var(--accent);
+            background: var(--fg);
             transition: width 0.3s ease;
         }
 
         .nav-link:hover::after { width: 100%; }
+
+        /* Feature Icon Container */
+        .feature-icon {
+            background: rgba(34, 34, 34, 0.04);
+            border: 1px solid rgba(34, 34, 34, 0.08);
+            transition: all 0.35s ease;
+        }
+
+        .feature-icon:hover {
+            background: rgba(34, 34, 34, 0.08);
+            border-color: rgba(34, 34, 34, 0.15);
+        }
+
+        /* Info Card */
+        .info-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(229, 229, 229, 0.6);
+            transition: border-color 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: rgba(34, 34, 34, 0.15);
+        }
     </style>
 </head>
-<body class="antialiased deep-bg">
+<body class="antialiased light-bg">
     <!-- CSS Particles -->
     <div id="particles-container" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></div>
 
@@ -489,29 +526,29 @@
         <div class="max-w-7xl mx-auto px-6">
             <nav class="flex items-center justify-between h-20">
                 <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-11 h-11 border border-copper/35 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:border-copper group-hover:bg-copper/10 group-hover:shadow-lg group-hover:shadow-copper/15">
-                        <svg class="w-5 h-5 text-copper transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <div class="w-11 h-11 border border-ink/20 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:border-ink/40 group-hover:bg-ink/5 group-hover:shadow-lg group-hover:shadow-ink/5">
+                        <svg class="w-5 h-5 text-ink transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                             <path d="M2 17l10 5 10-5"/>
                             <path d="M2 12l10 5 10-5"/>
                         </svg>
                     </div>
                     <div>
-                        <span class="font-display font-semibold text-lg text-frost block leading-none tracking-wide">ВентПром</span>
-                        <span class="text-[10px] text-copper/60 tracking-widest uppercase font-mono">engineering</span>
+                        <span class="font-display font-semibold text-lg text-ink block leading-none tracking-wide">ВентПром</span>
+                        <span class="text-[10px] text-ink/40 tracking-widest uppercase font-mono">engineering</span>
                     </div>
                 </a>
 
                 <div class="hidden lg:flex items-center gap-10">
-                    <a href="#services" class="nav-link text-sm text-mist hover:text-copper transition-colors tracking-wide">Услуги</a>
-                    <a href="#about" class="nav-link text-sm text-mist hover:text-copper transition-colors tracking-wide">О компании</a>
-                    <a href="#projects" class="nav-link text-sm text-mist hover:text-copper transition-colors tracking-wide">Проекты</a>
-                    <a href="#process" class="nav-link text-sm text-mist hover:text-copper transition-colors tracking-wide">Этапы</a>
-                    <a href="#contacts" class="nav-link text-sm text-mist hover:text-copper transition-colors tracking-wide">Контакты</a>
+                    <a href="#services" class="nav-link text-sm text-ink/60 hover:text-ink transition-colors tracking-wide">Услуги</a>
+                    <a href="#about" class="nav-link text-sm text-ink/60 hover:text-ink transition-colors tracking-wide">О компании</a>
+                    <a href="#projects" class="nav-link text-sm text-ink/60 hover:text-ink transition-colors tracking-wide">Проекты</a>
+                    <a href="#process" class="nav-link text-sm text-ink/60 hover:text-ink transition-colors tracking-wide">Этапы</a>
+                    <a href="#contacts" class="nav-link text-sm text-ink/60 hover:text-ink transition-colors tracking-wide">Контакты</a>
                 </div>
 
                 <div class="hidden lg:flex items-center gap-4">
-                    <a href="#contacts" class="btn-primary px-6 py-3 rounded-xl text-sm font-medium text-frost flex items-center gap-2">
+                    <a href="#contacts" class="btn-primary px-6 py-3 rounded-xl text-sm font-medium text-surface-bright flex items-center gap-2">
                         Расчёт проекта
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -519,8 +556,8 @@
                     </a>
                 </div>
 
-                <button id="menu-btn" class="lg:hidden w-11 h-11 flex items-center justify-center border border-slate-light/35 rounded-xl hover:border-copper/35 transition-colors" aria-label="Меню">
-                    <svg class="w-5 h-5 text-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="menu-btn" class="lg:hidden w-11 h-11 flex items-center justify-center border border-gray-light rounded-xl hover:border-ink/20 transition-colors" aria-label="Меню">
+                    <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
@@ -529,22 +566,22 @@
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 bg-obsidian/98 lg:hidden">
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 lg:hidden">
         <div class="flex flex-col h-full pt-24 px-6 pb-8">
-            <button id="close-menu" class="absolute top-6 right-6 w-11 h-11 flex items-center justify-center border border-slate-light/35 rounded-xl hover:border-copper/35 transition-colors" aria-label="Закрыть">
-                <svg class="w-5 h-5 text-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="close-menu" class="absolute top-6 right-6 w-11 h-11 flex items-center justify-center border border-gray-light rounded-xl hover:border-ink/20 transition-colors" aria-label="Закрыть">
+                <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
             <nav class="flex flex-col gap-6">
-                <a href="#services" class="mobile-link text-2xl font-display text-frost hover:text-copper transition-colors">Услуги</a>
-                <a href="#about" class="mobile-link text-2xl font-display text-frost hover:text-copper transition-colors">О компании</a>
-                <a href="#projects" class="mobile-link text-2xl font-display text-frost hover:text-copper transition-colors">Проекты</a>
-                <a href="#process" class="mobile-link text-2xl font-display text-frost hover:text-copper transition-colors">Этапы работы</a>
-                <a href="#contacts" class="mobile-link text-2xl font-display text-frost hover:text-copper transition-colors">Контакты</a>
+                <a href="#services" class="mobile-link text-2xl font-display text-ink hover:text-ink/60 transition-colors">Услуги</a>
+                <a href="#about" class="mobile-link text-2xl font-display text-ink hover:text-ink/60 transition-colors">О компании</a>
+                <a href="#projects" class="mobile-link text-2xl font-display text-ink hover:text-ink/60 transition-colors">Проекты</a>
+                <a href="#process" class="mobile-link text-2xl font-display text-ink hover:text-ink/60 transition-colors">Этапы работы</a>
+                <a href="#contacts" class="mobile-link text-2xl font-display text-ink hover:text-ink/60 transition-colors">Контакты</a>
             </nav>
             <div class="mt-auto">
-                <a href="#contacts" class="btn-primary w-full py-4 rounded-xl font-medium text-center flex items-center justify-center gap-2 text-frost">
+                <a href="#contacts" class="btn-primary w-full py-4 rounded-xl font-medium text-center flex items-center justify-center gap-2 text-surface-bright">
                     Заказать расчёт
                 </a>
             </div>
@@ -554,8 +591,8 @@
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <!-- Ambient Orbs -->
-        <div class="ambient-orb" style="width: 500px; height: 500px; top: -150px; right: -100px; background: radial-gradient(circle, rgba(212, 165, 116, 0.08) 0%, transparent 60%);"></div>
-        <div class="ambient-orb" style="width: 400px; height: 400px; bottom: 5%; left: -150px; background: radial-gradient(circle, rgba(176, 134, 80, 0.06) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 500px; height: 500px; top: -150px; right: -100px; background: radial-gradient(circle, rgba(34, 34, 34, 0.03) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 400px; height: 400px; bottom: 5%; left: -150px; background: radial-gradient(circle, rgba(34, 34, 34, 0.02) 0%, transparent 60%);"></div>
         
         <!-- Blueprint Grid -->
         <div class="absolute inset-0 blueprint-grid"></div>
@@ -563,7 +600,7 @@
         <!-- Animated Blueprint SVG -->
         <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <!-- Technical lines -->
-            <g stroke="rgba(212, 165, 116, 0.12)" stroke-width="1" fill="none">
+            <g stroke="rgba(34, 34, 34, 0.06)" stroke-width="1" fill="none">
                 <line x1="100" y1="200" x2="550" y2="200"/>
                 <line x1="1370" y1="150" x2="1820" y2="150"/>
                 <line x1="100" y1="880" x2="450" y2="880"/>
@@ -572,20 +609,20 @@
             </g>
             
             <!-- Animated paths -->
-            <path class="tech-line-animated" d="M100 300 L280 300 L280 480 L460 480" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="1"/>
-            <path class="tech-line-animated" style="animation-delay: 1.5s" d="M1460 200 L1640 200 L1640 380 L1820 380" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="1"/>
+            <path class="tech-line-animated" d="M100 300 L280 300 L280 480 L460 480" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="1"/>
+            <path class="tech-line-animated" style="animation-delay: 1.5s" d="M1460 200 L1640 200 L1640 380 L1820 380" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="1"/>
             
             <!-- Corner markers -->
-            <g stroke="rgba(212, 165, 116, 0.15)" stroke-width="1" fill="none">
+            <g stroke="rgba(34, 34, 34, 0.08)" stroke-width="1" fill="none">
                 <path d="M80 180 L80 150 L110 150"/>
                 <path d="M1840 120 L1840 150 L1810 150"/>
                 <path d="M80 900 L80 930 L110 930"/>
             </g>
             
             <!-- Technical circles -->
-            <circle cx="380" cy="380" r="50" fill="none" stroke="rgba(212, 165, 116, 0.08)" stroke-width="1" class="pulse-soft"/>
-            <circle cx="380" cy="380" r="70" fill="none" stroke="rgba(212, 165, 116, 0.04)" stroke-width="1"/>
-            <circle cx="1540" cy="280" r="35" fill="none" stroke="rgba(212, 165, 116, 0.08)" stroke-width="1" class="pulse-soft" style="animation-delay: -1s"/>
+            <circle cx="380" cy="380" r="50" fill="none" stroke="rgba(34, 34, 34, 0.04)" stroke-width="1" class="pulse-soft"/>
+            <circle cx="380" cy="380" r="70" fill="none" stroke="rgba(34, 34, 34, 0.02)" stroke-width="1"/>
+            <circle cx="1540" cy="280" r="35" fill="none" stroke="rgba(34, 34, 34, 0.04)" stroke-width="1" class="pulse-soft" style="animation-delay: -1s"/>
         </svg>
         
         <!-- Scan Line -->
@@ -594,32 +631,32 @@
         <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-0">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
-                    <div class="inline-flex items-center gap-3 bg-slate-dark/50 border border-copper/25 px-5 py-2.5 rounded-full mb-8">
-                        <span class="w-2 h-2 bg-copper rounded-full status-pulse"></span>
-                        <span class="text-xs text-copper/80 tracking-widest uppercase font-mono">Engineering since 2009</span>
+                    <div class="inline-flex items-center gap-3 bg-white/70 border border-ink/10 px-5 py-2.5 rounded-full mb-8">
+                        <span class="w-2 h-2 bg-ink rounded-full status-pulse"></span>
+                        <span class="text-xs text-ink/50 tracking-widest uppercase font-mono">Engineering since 2009</span>
                     </div>
                     
-                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-frost leading-tight mb-6 text-glow">
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-ink leading-tight mb-6">
                         Промышленная
                         <br>
-                        <span class="font-semibold text-copper">вентиляция</span>
+                        <span class="font-semibold">вентиляция</span>
                         <br>
-                        <span class="text-silver/50">и аспирация</span>
+                        <span class="text-ink/40">и аспирация</span>
                     </h1>
                     
-                    <p class="text-base lg:text-lg text-mist max-w-lg mb-10 leading-relaxed">
+                    <p class="text-base lg:text-lg text-ink/50 max-w-lg mb-10 leading-relaxed">
                         Проектирование, монтаж и сервис систем вентиляции для промышленных объектов. 
                         Точные инженерные решения для безопасного производства.
                     </p>
                     
                     <div class="flex flex-wrap gap-4">
-                        <a href="#contacts" class="btn-primary px-8 py-4 rounded-xl font-medium text-frost flex items-center gap-3 text-base">
+                        <a href="#contacts" class="btn-primary px-8 py-4 rounded-xl font-medium text-surface-bright flex items-center gap-3 text-base">
                             Получить расчёт
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </a>
-                        <a href="#projects" class="inline-flex items-center gap-3 bg-slate-dark/40 border border-slate-light/35 text-silver px-8 py-4 rounded-xl font-medium hover:border-copper/35 hover:text-frost transition-all">
+                        <a href="#projects" class="btn-secondary inline-flex items-center gap-3 px-8 py-4 rounded-xl font-medium">
                             Проекты
                         </a>
                     </div>
@@ -629,7 +666,7 @@
                 <div class="reveal delay-2 relative hidden lg:block">
                     <div class="hero-visual-inner float" id="hero-visual">
                         <!-- Main Card -->
-                        <div class="relative bg-gradient-to-br from-slate-dark/85 to-slate-mid/60 rounded-3xl p-8 border border-slate-light/25 overflow-hidden shadow-2xl shadow-black/40">
+                        <div class="relative bg-gradient-to-br from-white/95 to-surface/90 rounded-3xl p-8 border border-gray-light/60 overflow-hidden shadow-xl shadow-black/5">
                             <!-- Corner marks -->
                             <div class="corner-mark corner-mark-tl"></div>
                             <div class="corner-mark corner-mark-tr"></div>
@@ -639,7 +676,7 @@
                             <!-- Animated ventilation diagram -->
                             <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 300" aria-hidden="true">
                                 <!-- Duct system -->
-                                <g stroke="rgba(212, 165, 116, 0.12)" stroke-width="1" fill="none">
+                                <g stroke="rgba(34, 34, 34, 0.06)" stroke-width="1" fill="none">
                                     <rect x="30" y="130" width="340" height="40" rx="4"/>
                                     <rect x="60" y="70" width="50" height="60" rx="3"/>
                                     <rect x="175" y="50" width="50" height="80" rx="3"/>
@@ -647,7 +684,7 @@
                                 </g>
                                 
                                 <!-- Air flow lines -->
-                                <g stroke="rgba(212, 165, 116, 0.45)" stroke-width="2" fill="none" class="air-flow">
+                                <g stroke="rgba(34, 34, 34, 0.25)" stroke-width="2" fill="none" class="air-flow">
                                     <path d="M85 100 L85 130"/>
                                     <path d="M200 90 L200 130"/>
                                     <path d="M315 105 L315 130"/>
@@ -655,67 +692,67 @@
                                 
                                 <!-- Fans -->
                                 <g class="vent-fan" style="transform-origin: 85px 100px">
-                                    <circle cx="85" cy="100" r="15" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
-                                    <line x1="85" y1="85" x2="85" y2="115" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
-                                    <line x1="70" y1="100" x2="100" y2="100" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
+                                    <circle cx="85" cy="100" r="15" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
+                                    <line x1="85" y1="85" x2="85" y2="115" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
+                                    <line x1="70" y1="100" x2="100" y2="100" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
                                 </g>
                                 <g class="vent-fan" style="transform-origin: 200px 90px; animation-delay: -0.8s">
-                                    <circle cx="200" cy="90" r="18" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
-                                    <line x1="200" y1="72" x2="200" y2="108" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
-                                    <line x1="182" y1="90" x2="218" y2="90" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
+                                    <circle cx="200" cy="90" r="18" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
+                                    <line x1="200" y1="72" x2="200" y2="108" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
+                                    <line x1="182" y1="90" x2="218" y2="90" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
                                 </g>
                                 <g class="vent-fan" style="transform-origin: 315px 105px; animation-delay: -1.6s">
-                                    <circle cx="315" cy="105" r="12" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
-                                    <line x1="315" y1="93" x2="315" y2="117" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
-                                    <line x1="303" y1="105" x2="327" y2="105" stroke="rgba(212, 165, 116, 0.35)" stroke-width="2"/>
+                                    <circle cx="315" cy="105" r="12" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
+                                    <line x1="315" y1="93" x2="315" y2="117" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
+                                    <line x1="303" y1="105" x2="327" y2="105" stroke="rgba(34, 34, 34, 0.2)" stroke-width="2"/>
                                 </g>
                             </svg>
                             
                             <div class="relative z-10">
                                 <div class="flex items-center gap-4 mb-8">
-                                    <div class="w-16 h-16 bg-copper/12 rounded-2xl flex items-center justify-center border border-copper/25">
-                                        <svg class="w-7 h-7 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-16 h-16 bg-ink/5 rounded-2xl flex items-center justify-center border border-ink/10">
+                                        <svg class="w-7 h-7 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
                                         </svg>
                                     </div>
                                     <div>
-                                        <p class="text-copper/60 text-xs tracking-wider uppercase font-mono">Производительность</p>
-                                        <p class="text-frost font-display text-2xl font-semibold">до 150 000 м³/ч</p>
+                                        <p class="text-ink/40 text-xs tracking-wider uppercase font-mono">Производительность</p>
+                                        <p class="text-ink font-display text-2xl font-semibold">до 150 000 м³/ч</p>
                                     </div>
                                 </div>
                                 
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="bg-obsidian/50 rounded-xl p-4 border border-slate-light/15 hover:border-copper/25 transition-colors">
-                                        <p class="text-mist text-xs mb-1 tracking-wide">Диаметр</p>
-                                        <p class="text-frost font-medium">100–2000 мм</p>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink/40 text-xs mb-1 tracking-wide">Диаметр</p>
+                                        <p class="text-ink font-medium">100–2000 мм</p>
                                     </div>
-                                    <div class="bg-obsidian/50 rounded-xl p-4 border border-slate-light/15 hover:border-copper/25 transition-colors">
-                                        <p class="text-mist text-xs mb-1 tracking-wide">Мощность</p>
-                                        <p class="text-frost font-medium">до 500 кВт</p>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink/40 text-xs mb-1 tracking-wide">Мощность</p>
+                                        <p class="text-ink font-medium">до 500 кВт</p>
                                     </div>
-                                    <div class="bg-obsidian/50 rounded-xl p-4 border border-slate-light/15 hover:border-copper/25 transition-colors">
-                                        <p class="text-mist text-xs mb-1 tracking-wide">Фильтрация</p>
-                                        <p class="text-frost font-medium">до класса H14</p>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink/40 text-xs mb-1 tracking-wide">Фильтрация</p>
+                                        <p class="text-ink font-medium">до класса H14</p>
                                     </div>
-                                    <div class="bg-obsidian/50 rounded-xl p-4 border border-slate-light/15 hover:border-copper/25 transition-colors">
-                                        <p class="text-mist text-xs mb-1 tracking-wide">Гарантия</p>
-                                        <p class="text-frost font-medium">5 лет</p>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink/40 text-xs mb-1 tracking-wide">Гарантия</p>
+                                        <p class="text-ink font-medium">5 лет</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Floating Stats -->
-                        <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-slate-dark/95 to-obsidian/90 rounded-2xl p-5 border border-copper/25 shadow-xl shadow-black/25">
+                        <div class="absolute -bottom-6 -left-6 bg-white/95 rounded-2xl p-5 border border-gray-light/60 shadow-xl shadow-black/5">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-copper/12 rounded-xl flex items-center justify-center border border-copper/25">
-                                    <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-12 h-12 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/10">
+                                    <svg class="w-6 h-6 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-mist text-xs">Проектов</p>
-                                    <p class="font-display font-bold text-2xl text-copper">500+</p>
+                                    <p class="text-ink/40 text-xs">Проектов</p>
+                                    <p class="font-display font-bold text-2xl text-ink">500+</p>
                                 </div>
                             </div>
                         </div>
@@ -726,20 +763,20 @@
             <!-- Stats -->
             <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 reveal delay-3">
                 <div class="stats-card rounded-2xl p-6 text-center">
-                    <p class="font-display text-4xl lg:text-5xl font-bold text-copper counter" data-target="15">0</p>
-                    <p class="text-mist text-sm mt-2 tracking-wide">лет опыта</p>
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-ink counter" data-target="15">0</p>
+                    <p class="text-ink/40 text-sm mt-2 tracking-wide">лет опыта</p>
                 </div>
                 <div class="stats-card rounded-2xl p-6 text-center">
-                    <p class="font-display text-4xl lg:text-5xl font-bold text-copper counter" data-target="500">0</p>
-                    <p class="text-mist text-sm mt-2 tracking-wide">проектов</p>
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-ink counter" data-target="500">0</p>
+                    <p class="text-ink/40 text-sm mt-2 tracking-wide">проектов</p>
                 </div>
                 <div class="stats-card rounded-2xl p-6 text-center">
-                    <p class="font-display text-4xl lg:text-5xl font-bold text-copper counter" data-target="50">0</p>
-                    <p class="text-mist text-sm mt-2 tracking-wide">специалистов</p>
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-ink counter" data-target="50">0</p>
+                    <p class="text-ink/40 text-sm mt-2 tracking-wide">специалистов</p>
                 </div>
                 <div class="stats-card rounded-2xl p-6 text-center">
-                    <p class="font-display text-4xl lg:text-5xl font-bold text-copper">24/7</p>
-                    <p class="text-mist text-sm mt-2 tracking-wide">поддержка</p>
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-ink">24/7</p>
+                    <p class="text-ink/40 text-sm mt-2 tracking-wide">поддержка</p>
                 </div>
             </div>
         </div>
@@ -750,15 +787,15 @@
     <!-- Services Section -->
     <section id="services" class="py-24 lg:py-32 relative overflow-hidden">
         <!-- Ambient orb -->
-        <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; right: -120px; background: radial-gradient(circle, rgba(212, 165, 116, 0.05) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; right: -120px; background: radial-gradient(circle, rgba(34, 34, 34, 0.02) 0%, transparent 60%);"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
-                <span class="inline-block text-copper/60 text-xs tracking-widest uppercase mb-4 font-mono">Services</span>
-                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-frost mb-6">
-                    Комплексные <span class="font-semibold text-copper">решения</span>
+                <span class="inline-block text-ink/40 text-xs tracking-widest uppercase mb-4 font-mono">Services</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-ink mb-6">
+                    Комплексные <span class="font-semibold">решения</span>
                 </h2>
-                <p class="text-mist max-w-xl mx-auto">
+                <p class="text-ink/50 max-w-xl mx-auto">
                     Полный цикл работ по созданию и обслуживанию систем вентиляции
                 </p>
             </div>
@@ -772,8 +809,8 @@
     <!-- About Section -->
     <section id="about" class="py-24 lg:py-32 relative overflow-hidden">
         <!-- Ambient orbs -->
-        <div class="ambient-orb" style="width: 450px; height: 450px; top: 0; left: -200px; background: radial-gradient(circle, rgba(212, 165, 116, 0.06) 0%, transparent 60%);"></div>
-        <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; right: -150px; background: radial-gradient(circle, rgba(176, 134, 80, 0.04) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 450px; height: 450px; top: 0; left: -200px; background: radial-gradient(circle, rgba(34, 34, 34, 0.02) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; right: -150px; background: radial-gradient(circle, rgba(34, 34, 34, 0.015) 0%, transparent 60%);"></div>
         
         <!-- Blueprint grid -->
         <div class="absolute inset-0 blueprint-grid opacity-40"></div>
@@ -781,62 +818,62 @@
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
-                    <span class="inline-block text-copper/60 text-xs tracking-widest uppercase mb-4 font-mono">About</span>
-                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-frost mb-6">
-                        Точный <span class="font-semibold text-copper">инженерный</span> подход
+                    <span class="inline-block text-ink/40 text-xs tracking-widest uppercase mb-4 font-mono">About</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-ink mb-6">
+                        Точный <span class="font-semibold">инженерный</span> подход
                     </h2>
-                    <p class="text-mist mb-6 leading-relaxed text-lg">
+                    <p class="text-ink/50 mb-6 leading-relaxed text-lg">
                         ВентПром — эксперт в области промышленной вентиляции с 2009 года. 
                         Реализовано более 500 проектов для предприятий различных отраслей.
                     </p>
-                    <p class="text-mist mb-10 leading-relaxed">
+                    <p class="text-ink/50 mb-10 leading-relaxed">
                         Команда из 50+ специалистов. Сертифицированное оборудование 
                         от ведущих производителей.
                     </p>
                     
                     <div class="grid grid-cols-2 gap-5">
                         <div class="flex items-start gap-4 group">
-                            <div class="w-12 h-12 bg-copper/8 rounded-xl flex items-center justify-center flex-shrink-0 border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-medium text-frost mb-1">Гарантия 5 лет</h4>
-                                <p class="text-mist text-sm">на все работы</p>
+                                <h4 class="font-medium text-ink mb-1">Гарантия 5 лет</h4>
+                                <p class="text-ink/40 text-sm">на все работы</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4 group">
-                            <div class="w-12 h-12 bg-copper/8 rounded-xl flex items-center justify-center flex-shrink-0 border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-medium text-frost mb-1">Точные сроки</h4>
-                                <p class="text-mist text-sm">соблюдаем договор</p>
+                                <h4 class="font-medium text-ink mb-1">Точные сроки</h4>
+                                <p class="text-ink/40 text-sm">соблюдаем договор</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4 group">
-                            <div class="w-12 h-12 bg-copper/8 rounded-xl flex items-center justify-center flex-shrink-0 border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-medium text-frost mb-1">50+ экспертов</h4>
-                                <p class="text-mist text-sm">в команде</p>
+                                <h4 class="font-medium text-ink mb-1">50+ экспертов</h4>
+                                <p class="text-ink/40 text-sm">в команде</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4 group">
-                            <div class="w-12 h-12 bg-copper/8 rounded-xl flex items-center justify-center flex-shrink-0 border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-medium text-frost mb-1">Фиксированная цена</h4>
-                                <p class="text-mist text-sm">прозрачная смета</p>
+                                <h4 class="font-medium text-ink mb-1">Фиксированная цена</h4>
+                                <p class="text-ink/40 text-sm">прозрачная смета</p>
                             </div>
                         </div>
                     </div>
@@ -844,7 +881,7 @@
                 
                 <!-- Technical Visual -->
                 <div class="reveal delay-2 relative">
-                    <div class="relative bg-gradient-to-br from-slate-dark/60 to-slate-mid/45 rounded-3xl border border-slate-light/25 overflow-hidden shadow-2xl shadow-black/35">
+                    <div class="relative bg-gradient-to-br from-white/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/4">
                         <!-- Corner marks -->
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
@@ -857,7 +894,7 @@
                                 <!-- Grid -->
                                 <defs>
                                     <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(212, 165, 116, 0.04)" stroke-width="0.5"/>
+                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(34, 34, 34, 0.03)" stroke-width="0.5"/>
                                     </pattern>
                                 </defs>
                                 <rect width="100%" height="100%" fill="url(#smallGrid)"/>
@@ -865,61 +902,61 @@
                                 <!-- Ventilation system schematic -->
                                 <g>
                                     <!-- Main duct -->
-                                    <rect x="60" y="120" width="280" height="60" rx="4" fill="none" stroke="rgba(212, 165, 116, 0.3)" stroke-width="1.5"/>
+                                    <rect x="60" y="120" width="280" height="60" rx="4" fill="none" stroke="rgba(34, 34, 34, 0.15)" stroke-width="1.5"/>
                                     
                                     <!-- Branch ducts -->
-                                    <rect x="80" y="80" width="40" height="40" rx="2" fill="none" stroke="rgba(212, 165, 116, 0.25)" stroke-width="1"/>
-                                    <rect x="180" y="60" width="40" height="60" rx="2" fill="none" stroke="rgba(212, 165, 116, 0.25)" stroke-width="1"/>
-                                    <rect x="280" y="90" width="40" height="30" rx="2" fill="none" stroke="rgba(212, 165, 116, 0.25)" stroke-width="1"/>
+                                    <rect x="80" y="80" width="40" height="40" rx="2" fill="none" stroke="rgba(34, 34, 34, 0.12)" stroke-width="1"/>
+                                    <rect x="180" y="60" width="40" height="60" rx="2" fill="none" stroke="rgba(34, 34, 34, 0.12)" stroke-width="1"/>
+                                    <rect x="280" y="90" width="40" height="30" rx="2" fill="none" stroke="rgba(34, 34, 34, 0.12)" stroke-width="1"/>
                                     
                                     <!-- Fan circles -->
                                     <g class="vent-fan" style="transform-origin: 100px 100px">
-                                        <circle cx="100" cy="100" r="12" fill="none" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1.5"/>
-                                        <line x1="100" y1="88" x2="100" y2="112" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1"/>
-                                        <line x1="88" y1="100" x2="112" y2="100" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1"/>
+                                        <circle cx="100" cy="100" r="12" fill="none" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1.5"/>
+                                        <line x1="100" y1="88" x2="100" y2="112" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1"/>
+                                        <line x1="88" y1="100" x2="112" y2="100" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1"/>
                                     </g>
                                     <g class="vent-fan" style="transform-origin: 200px 90px; animation-delay: -1s">
-                                        <circle cx="200" cy="90" r="15" fill="none" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1.5"/>
-                                        <line x1="200" y1="75" x2="200" y2="105" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1"/>
-                                        <line x1="185" y1="90" x2="215" y2="90" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1"/>
+                                        <circle cx="200" cy="90" r="15" fill="none" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1.5"/>
+                                        <line x1="200" y1="75" x2="200" y2="105" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1"/>
+                                        <line x1="185" y1="90" x2="215" y2="90" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1"/>
                                     </g>
                                     <g class="vent-fan" style="transform-origin: 300px 105px; animation-delay: -2s">
-                                        <circle cx="300" cy="105" r="10" fill="none" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1.5"/>
-                                        <line x1="300" y1="95" x2="300" y2="115" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1"/>
-                                        <line x1="290" y1="105" x2="310" y2="105" stroke="rgba(212, 165, 116, 0.45)" stroke-width="1"/>
+                                        <circle cx="300" cy="105" r="10" fill="none" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1.5"/>
+                                        <line x1="300" y1="95" x2="300" y2="115" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1"/>
+                                        <line x1="290" y1="105" x2="310" y2="105" stroke="rgba(34, 34, 34, 0.25)" stroke-width="1"/>
                                     </g>
                                     
                                     <!-- Air flow arrows -->
-                                    <path d="M95 100 L100 94 L105 100" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="0.8" class="air-flow"/>
-                                    <path d="M195 90 L200 82 L205 90" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="0.8" class="air-flow"/>
-                                    <path d="M295 105 L300 99 L305 105" fill="none" stroke="rgba(212, 165, 116, 0.35)" stroke-width="0.8" class="air-flow"/>
+                                    <path d="M95 100 L100 94 L105 100" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="0.8" class="air-flow"/>
+                                    <path d="M195 90 L200 82 L205 90" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="0.8" class="air-flow"/>
+                                    <path d="M295 105 L300 99 L305 105" fill="none" stroke="rgba(34, 34, 34, 0.2)" stroke-width="0.8" class="air-flow"/>
                                     
                                     <!-- Connection lines -->
-                                    <line x1="100" y1="120" x2="100" y2="140" stroke="rgba(212, 165, 116, 0.2)" stroke-width="1"/>
-                                    <line x1="200" y1="120" x2="200" y2="150" stroke="rgba(212, 165, 116, 0.2)" stroke-width="1"/>
-                                    <line x1="300" y1="120" x2="300" y2="140" stroke="rgba(212, 165, 116, 0.2)" stroke-width="1"/>
+                                    <line x1="100" y1="120" x2="100" y2="140" stroke="rgba(34, 34, 34, 0.1)" stroke-width="1"/>
+                                    <line x1="200" y1="120" x2="200" y2="150" stroke="rgba(34, 34, 34, 0.1)" stroke-width="1"/>
+                                    <line x1="300" y1="120" x2="300" y2="140" stroke="rgba(34, 34, 34, 0.1)" stroke-width="1"/>
                                 </g>
                                 
                                 <!-- Dimension lines -->
-                                <g stroke="rgba(212, 165, 116, 0.15)" stroke-width="0.5">
+                                <g stroke="rgba(34, 34, 34, 0.08)" stroke-width="0.5">
                                     <line x1="60" y1="200" x2="340" y2="200" stroke-dasharray="4 2"/>
                                     <line x1="60" y1="195" x2="60" y2="205"/>
                                     <line x1="340" y1="195" x2="340" y2="205"/>
                                 </g>
                                 
                                 <!-- Labels -->
-                                <text x="200" y="220" text-anchor="middle" fill="rgba(212, 165, 116, 0.35)" font-size="9" font-family="monospace">2800mm</text>
+                                <text x="200" y="220" text-anchor="middle" fill="rgba(34, 34, 34, 0.25)" font-size="9" font-family="monospace">2800mm</text>
                             </svg>
                         </div>
                     </div>
                     
                     <!-- ISO Badge -->
-                    <div class="absolute -bottom-4 -right-4 bg-copper/8 rounded-xl p-4 border border-copper/25 shadow-lg shadow-black/15">
+                    <div class="absolute -bottom-4 -right-4 bg-ink/5 rounded-xl p-4 border border-ink/10 shadow-lg shadow-black/5">
                         <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                             </svg>
-                            <span class="text-sm text-copper font-mono font-medium">ISO 9001</span>
+                            <span class="text-sm text-ink font-mono font-medium">ISO 9001</span>
                         </div>
                     </div>
                 </div>
@@ -931,15 +968,15 @@
 
     <!-- Projects Section -->
     <section id="projects" class="py-24 lg:py-32 relative overflow-hidden">
-        <div class="ambient-orb" style="width: 400px; height: 400px; top: 50%; right: -200px; background: radial-gradient(circle, rgba(212, 165, 116, 0.04) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 400px; height: 400px; top: 50%; right: -200px; background: radial-gradient(circle, rgba(34, 34, 34, 0.015) 0%, transparent 60%);"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
-                <span class="inline-block text-copper/60 text-xs tracking-widest uppercase mb-4 font-mono">Portfolio</span>
-                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-frost mb-6">
-                    Реализованные <span class="font-semibold text-copper">проекты</span>
+                <span class="inline-block text-ink/40 text-xs tracking-widest uppercase mb-4 font-mono">Portfolio</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-ink mb-6">
+                    Реализованные <span class="font-semibold">проекты</span>
                 </h2>
-                <p class="text-mist max-w-xl mx-auto">
+                <p class="text-ink/50 max-w-xl mx-auto">
                     Примеры наших работ для различных отраслей промышленности
                 </p>
             </div>
@@ -953,17 +990,17 @@
     <!-- Process Section -->
     <section id="process" class="py-24 lg:py-32 relative overflow-hidden">
         <!-- Ambient orbs -->
-        <div class="ambient-orb" style="width: 350px; height: 350px; top: 0; right: -150px; background: radial-gradient(circle, rgba(212, 165, 116, 0.05) 0%, transparent 60%);"></div>
-        <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; left: -120px; background: radial-gradient(circle, rgba(176, 134, 80, 0.04) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 350px; height: 350px; top: 0; right: -150px; background: radial-gradient(circle, rgba(34, 34, 34, 0.02) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; left: -120px; background: radial-gradient(circle, rgba(34, 34, 34, 0.015) 0%, transparent 60%);"></div>
         
         <!-- Blueprint grid -->
         <div class="absolute inset-0 blueprint-grid opacity-40"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
-                <span class="inline-block text-copper/60 text-xs tracking-widest uppercase mb-4 font-mono">Process</span>
-                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-frost mb-6">
-                    Этапы <span class="font-semibold text-copper">работы</span>
+                <span class="inline-block text-ink/40 text-xs tracking-widest uppercase mb-4 font-mono">Process</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-ink mb-6">
+                    Этапы <span class="font-semibold">работы</span>
                 </h2>
             </div>
             
@@ -976,105 +1013,105 @@
     <!-- Contact Section -->
     <section id="contacts" class="py-24 lg:py-32 relative overflow-hidden">
         <!-- Ambient orbs -->
-        <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; left: -120px; background: radial-gradient(circle, rgba(212, 165, 116, 0.05) 0%, transparent 60%);"></div>
-        <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 20%; right: -150px; background: radial-gradient(circle, rgba(176, 134, 80, 0.04) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; left: -120px; background: radial-gradient(circle, rgba(34, 34, 34, 0.02) 0%, transparent 60%);"></div>
+        <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 20%; right: -150px; background: radial-gradient(circle, rgba(34, 34, 34, 0.015) 0%, transparent 60%);"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16">
                 <div class="reveal">
-                    <span class="inline-block text-copper/60 text-xs tracking-widest uppercase mb-4 font-mono">Contact</span>
-                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-frost mb-6">
-                        Начнём <span class="font-semibold text-copper">сотрудничество</span>
+                    <span class="inline-block text-ink/40 text-xs tracking-widest uppercase mb-4 font-mono">Contact</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-ink mb-6">
+                        Начнём <span class="font-semibold">сотрудничество</span>
                     </h2>
-                    <p class="text-mist mb-10 leading-relaxed text-lg">
+                    <p class="text-ink/50 mb-10 leading-relaxed text-lg">
                         Свяжитесь с нами для бесплатной консультации. 
                         Наши эксперты помогут определить оптимальное решение.
                     </p>
                     
                     <div class="space-y-5">
                         <div class="flex items-center gap-5 group">
-                            <div class="w-14 h-14 bg-copper/8 rounded-xl flex items-center justify-center border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-mist text-sm">Москва, ул. Промышленная, 42</p>
+                                <p class="text-ink/50 text-sm">Москва, ул. Промышленная, 42</p>
                             </div>
                         </div>
                         
                         <div class="flex items-center gap-5 group">
-                            <div class="w-14 h-14 bg-copper/8 rounded-xl flex items-center justify-center border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                 </svg>
                             </div>
-                            <a href="tel:+74951234567" class="text-frost hover:text-copper transition-colors text-lg">+7 (495) 123-45-67</a>
+                            <a href="tel:+74951234567" class="text-ink hover:text-ink/60 transition-colors text-lg">+7 (495) 123-45-67</a>
                         </div>
                         
                         <div class="flex items-center gap-5 group">
-                            <div class="w-14 h-14 bg-copper/8 rounded-xl flex items-center justify-center border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <a href="mailto:info@ventprom.ru" class="text-frost hover:text-copper transition-colors text-lg">info@ventprom.ru</a>
+                            <a href="mailto:info@ventprom.ru" class="text-ink hover:text-ink/60 transition-colors text-lg">info@ventprom.ru</a>
                         </div>
                         
                         <div class="flex items-center gap-5 group">
-                            <div class="w-14 h-14 bg-copper/8 rounded-xl flex items-center justify-center border border-copper/15 group-hover:bg-copper/12 group-hover:border-copper/30 transition-all">
-                                <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <p class="text-mist">Пн-Пт: 9:00 - 18:00</p>
+                            <p class="text-ink/50">Пн-Пт: 9:00 - 18:00</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Form -->
                 <div class="reveal delay-2">
-                    <form id="contact-form" class="relative bg-gradient-to-br from-slate-dark/70 to-slate-mid/50 rounded-3xl p-8 border border-slate-light/25 overflow-hidden shadow-2xl shadow-black/35">
+                    <form id="contact-form" class="relative bg-gradient-to-br from-white/90 to-surface/80 rounded-3xl p-8 border border-gray-light/50 overflow-hidden shadow-xl shadow-black/4">
                         <!-- Corner marks -->
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
                         <div class="corner-mark corner-mark-br"></div>
                         
-                        <h3 class="font-display text-xl font-semibold text-frost mb-8">Оставить заявку</h3>
+                        <h3 class="font-display text-xl font-semibold text-ink mb-8">Оставить заявку</h3>
                         
                         <div class="space-y-5">
                             <div>
-                                <label for="name" class="block text-xs text-mist mb-2 tracking-wide">Имя</label>
+                                <label for="name" class="block text-xs text-ink/40 mb-2 tracking-wide">Имя</label>
                                 <input type="text" id="name" name="name" required
-                                    class="form-input w-full px-5 py-4 rounded-xl text-frost text-sm"
+                                    class="form-input w-full px-5 py-4 rounded-xl text-ink text-sm"
                                     placeholder="Ваше имя">
                             </div>
                             
                             <div>
-                                <label for="phone" class="block text-xs text-mist mb-2 tracking-wide">Телефон</label>
+                                <label for="phone" class="block text-xs text-ink/40 mb-2 tracking-wide">Телефон</label>
                                 <input type="tel" id="phone" name="phone" required
-                                    class="form-input w-full px-5 py-4 rounded-xl text-frost text-sm"
+                                    class="form-input w-full px-5 py-4 rounded-xl text-ink text-sm"
                                     placeholder="+7 (___) ___-__-__">
                             </div>
                             
                             <div>
-                                <label for="email" class="block text-xs text-mist mb-2 tracking-wide">Email</label>
+                                <label for="email" class="block text-xs text-ink/40 mb-2 tracking-wide">Email</label>
                                 <input type="email" id="email" name="email"
-                                    class="form-input w-full px-5 py-4 rounded-xl text-frost text-sm"
+                                    class="form-input w-full px-5 py-4 rounded-xl text-ink text-sm"
                                     placeholder="email@example.com">
                             </div>
                             
                             <div>
-                                <label for="message" class="block text-xs text-mist mb-2 tracking-wide">Сообщение</label>
+                                <label for="message" class="block text-xs text-ink/40 mb-2 tracking-wide">Сообщение</label>
                                 <textarea id="message" name="message" rows="4"
-                                    class="form-input w-full px-5 py-4 rounded-xl text-frost text-sm resize-none"
+                                    class="form-input w-full px-5 py-4 rounded-xl text-ink text-sm resize-none"
                                     placeholder="Опишите ваш проект"></textarea>
                             </div>
                             
                             <button type="submit" 
-                                class="btn-primary w-full py-4 rounded-xl font-medium text-frost flex items-center justify-center gap-3 text-base">
+                                class="btn-primary w-full py-4 rounded-xl font-medium text-surface-bright flex items-center justify-center gap-3 text-base">
                                 Отправить
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -1088,30 +1125,30 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-slate-light/8 relative">
+    <footer class="py-12 border-t border-gray-light/40 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 border border-copper/25 rounded-xl flex items-center justify-center">
-                        <svg class="w-5 h-5 text-copper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <div class="w-10 h-10 border border-ink/15 rounded-xl flex items-center justify-center">
+                        <svg class="w-5 h-5 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                             <path d="M2 17l10 5 10-5"/>
                             <path d="M2 12l10 5 10-5"/>
                         </svg>
                     </div>
-                    <span class="font-display text-frost font-medium">ВентПром</span>
+                    <span class="font-display text-ink font-medium">ВентПром</span>
                 </div>
                 
-                <p class="text-mist text-sm">2024 ВентПром. Все права защищены.</p>
+                <p class="text-ink/40 text-sm">2024 ВентПром. Все права защищены.</p>
                 
                 <div class="flex gap-3">
-                    <a href="#" class="w-11 h-11 bg-copper/5 rounded-xl flex items-center justify-center border border-copper/15 hover:border-copper/35 hover:bg-copper/10 transition-all" aria-label="Telegram">
-                        <svg class="w-5 h-5 text-copper" fill="currentColor" viewBox="0 0 24 24">
+                    <a href="#" class="w-11 h-11 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/8 hover:border-ink/20 hover:bg-ink/8 transition-all" aria-label="Telegram">
+                        <svg class="w-5 h-5 text-ink" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
                         </svg>
                     </a>
-                    <a href="#" class="w-11 h-11 bg-copper/5 rounded-xl flex items-center justify-center border border-copper/15 hover:border-copper/35 hover:bg-copper/10 transition-all" aria-label="WhatsApp">
-                        <svg class="w-5 h-5 text-copper" fill="currentColor" viewBox="0 0 24 24">
+                    <a href="#" class="w-11 h-11 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/8 hover:border-ink/20 hover:bg-ink/8 transition-all" aria-label="WhatsApp">
+                        <svg class="w-5 h-5 text-ink" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                         </svg>
                     </a>
@@ -1147,7 +1184,7 @@
             { number: '04', title: 'Сервис', description: 'Поддержка, обслуживание' }
         ];
 
-        // Initialize CSS Particles (much lighter than canvas)
+        // Initialize CSS Particles
         function initParticles() {
             const container = document.getElementById('particles-container');
             if (!container) return;
@@ -1163,7 +1200,6 @@
                 particle.style.animationDuration = (15 + Math.random() * 10) + 's';
                 container.appendChild(particle);
                 
-                // Start animation when in viewport
                 setTimeout(() => particle.classList.add('animate'), 100);
             }
         }
@@ -1190,11 +1226,11 @@
             
             grid.innerHTML = services.map((s, i) => `
                 <div class="service-card rounded-2xl p-7 reveal delay-${(i % 4) + 1}">
-                    <div class="icon-box w-14 h-14 bg-copper/8 rounded-xl flex items-center justify-center text-copper mb-5 border border-copper/15">
+                    <div class="icon-box w-14 h-14 bg-ink/4 rounded-xl flex items-center justify-center text-ink mb-5 border border-ink/8">
                         ${s.icon}
                     </div>
-                    <h3 class="font-display text-lg font-semibold text-frost mb-3">${s.title}</h3>
-                    <p class="text-mist text-sm leading-relaxed">${s.description}</p>
+                    <h3 class="font-display text-lg font-semibold text-ink mb-3">${s.title}</h3>
+                    <p class="text-ink/50 text-sm leading-relaxed">${s.description}</p>
                 </div>
             `).join('');
         }
@@ -1209,20 +1245,20 @@
                     <div class="aspect-[4/3] relative">
                         <!-- Blueprint schematic -->
                         <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 150" aria-hidden="true">
-                            <rect x="20" y="30" width="160" height="90" rx="4" fill="none" stroke="rgba(212, 165, 116, 0.08)" stroke-width="1"/>
-                            <circle cx="60" cy="75" r="20" fill="none" stroke="rgba(212, 165, 116, 0.1)" stroke-width="1"/>
-                            <circle cx="140" cy="75" r="20" fill="none" stroke="rgba(212, 165, 116, 0.1)" stroke-width="1"/>
-                            <rect x="85" y="45" width="30" height="60" rx="2" fill="none" stroke="rgba(212, 165, 116, 0.1)" stroke-width="1"/>
-                            <line x1="60" y1="95" x2="60" y2="120" stroke="rgba(212, 165, 116, 0.15)" stroke-width="2" stroke-linecap="round"/>
-                            <line x1="140" y1="95" x2="140" y2="120" stroke="rgba(212, 165, 116, 0.15)" stroke-width="2" stroke-linecap="round"/>
-                            <line x1="100" y1="45" x2="100" y2="25" stroke="rgba(212, 165, 116, 0.15)" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="20" y="30" width="160" height="90" rx="4" fill="none" stroke="rgba(34, 34, 34, 0.04)" stroke-width="1"/>
+                            <circle cx="60" cy="75" r="20" fill="none" stroke="rgba(34, 34, 34, 0.05)" stroke-width="1"/>
+                            <circle cx="140" cy="75" r="20" fill="none" stroke="rgba(34, 34, 34, 0.05)" stroke-width="1"/>
+                            <rect x="85" y="45" width="30" height="60" rx="2" fill="none" stroke="rgba(34, 34, 34, 0.05)" stroke-width="1"/>
+                            <line x1="60" y1="95" x2="60" y2="120" stroke="rgba(34, 34, 34, 0.08)" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="140" y1="95" x2="140" y2="120" stroke="rgba(34, 34, 34, 0.08)" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="100" y1="45" x2="100" y2="25" stroke="rgba(34, 34, 34, 0.08)" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                         
                         <div class="overlay flex flex-col justify-end p-6">
                             <div class="content">
-                                <span class="text-copper/70 text-xs font-mono tracking-wider uppercase">${p.category}</span>
-                                <h3 class="font-display text-lg font-semibold text-frost mt-2">${p.title}</h3>
-                                <p class="text-mist text-sm mt-2">${p.description}</p>
+                                <span class="text-ink/50 text-xs font-mono tracking-wider uppercase">${p.category}</span>
+                                <h3 class="font-display text-lg font-semibold text-ink mt-2">${p.title}</h3>
+                                <p class="text-ink/50 text-sm mt-2">${p.description}</p>
                             </div>
                         </div>
                     </div>
@@ -1238,12 +1274,12 @@
             grid.innerHTML = processSteps.map((s, i) => `
                 <div class="process-step text-center reveal delay-${i + 1} group">
                     <div class="relative inline-block mb-5">
-                        <div class="w-20 h-20 border border-copper/25 rounded-2xl flex items-center justify-center bg-slate-dark/40 group-hover:border-copper/50 group-hover:bg-copper/8 transition-all">
-                            <span class="font-mono text-xl text-copper font-medium">${s.number}</span>
+                        <div class="w-20 h-20 border border-ink/12 rounded-2xl flex items-center justify-center bg-white/50 group-hover:border-ink/25 group-hover:bg-ink/4 transition-all">
+                            <span class="font-mono text-xl text-ink font-medium">${s.number}</span>
                         </div>
                     </div>
-                    <h3 class="font-display text-lg font-semibold text-frost mb-2">${s.title}</h3>
-                    <p class="text-mist text-sm">${s.description}</p>
+                    <h3 class="font-display text-lg font-semibold text-ink mb-2">${s.title}</h3>
+                    <p class="text-ink/50 text-sm">${s.description}</p>
                 </div>
             `).join('');
         }
@@ -1349,7 +1385,7 @@
                 setTimeout(() => {
                     btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Отправлено`;
                     btn.style.borderColor = 'rgba(34, 197, 94, 0.4)';
-                    btn.style.background = 'rgba(34, 197, 94, 0.08)';
+                    btn.style.background = 'rgba(34, 197, 94, 0.1)';
 
                     setTimeout(() => {
                         btn.innerHTML = original;
