@@ -1,1 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВентПром — Промышленная вентиляция и аспирация</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#0A1628',
+                        'navy-light': '#132035',
+                        'slate': '#1E293B',
+                        'accent': '#0EA5A0',
+                        'accent-light': '#14B8A6',
+                        'copper': '#D97706',
+                        'muted': '#64748B',
+                        'light': '#F8FAFC',
+                        'border': '#334155'
+                    },
+                    fontFamily: {
+                        'display': ['DM Sans', 'sans-serif'],
+                        'body': ['Source Sans 3', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg: #F8FAFC;
+            --fg: #0A1628;
+            --muted: #64748B;
+            --accent: #0EA5A0;
+            --card: #FFFFFF;
+            --border: #334155;
+            --navy: #0A1628;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+        }
+
+        .font-display { font-family: 'DM Sans', sans-serif; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes drawPath {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* Service Card */
+        .service-card {
+            position: relative;
+            background: white;
+            border: 1px solid #E2E8F0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #14B8A6);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(10, 22, 40, 0.15);
+            border-color: transparent;
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .service-card .icon-box {
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .icon-box {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Button Primary */
+        .btn-primary {
+            position: relative;
+            background: var(--navy);
+            color: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(14, 165, 160, 0.5);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* Nav Link */
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Project Card */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.4) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .project-card .content {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .project-card:hover .content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Header */
+        .header-solid {
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 0 #E2E8F0;
+        }
+
+        /* Counter Animation */
+        .counter {
+            display: inline-block;
+        }
+
+        /* Form Input */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid #E2E8F0;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(14, 165, 160, 0.1);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Focus States */
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Grid Pattern */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(14, 165, 160, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 160, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--navy) 0%, #1E40AF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animated Line */
+        .animated-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+
+        .animated-line.visible {
+            animation: drawPath 2s ease forwards;
+        }
+
+        /* Floating Badge */
+        .float-badge {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Process Step */
+        .process-step {
+            position: relative;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: calc(50% + 50px);
+            width: calc(100% - 100px);
+            height: 2px;
+            background: linear-gradient(90deg, rgba(14, 165, 160, 0.3), transparent);
+        }
+
+        .process-step:last-child::before {
+            display: none;
+        }
+
+        /* Stats Card */
+        .stats-card {
+            background: linear-gradient(135deg, rgba(14, 165, 160, 0.05) 0%, rgba(14, 165, 160, 0.02) 100%);
+            border: 1px solid rgba(14, 165, 160, 0.1);
+        }
+
+        /* Interactive Canvas Area */
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6">
+            <nav class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 bg-navy rounded-xl flex items-center justify-center transition-transform group-hover:scale-105">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-display font-bold text-xl text-navy block leading-none">ВентПром</span>
+                        <span class="text-xs text-muted tracking-wide">с 2009 года</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex items-center gap-10">
+                    <a href="#services" class="nav-link text-slate font-medium hover:text-navy transition-colors">Услуги</a>
+                    <a href="#about" class="nav-link text-slate font-medium hover:text-navy transition-colors">О компании</a>
+                    <a href="#projects" class="nav-link text-slate font-medium hover:text-navy transition-colors">Проекты</a>
+                    <a href="#process" class="nav-link text-slate font-medium hover:text-navy transition-colors">Этапы работы</a>
+                    <a href="#contacts" class="nav-link text-slate font-medium hover:text-navy transition-colors">Контакты</a>
+                </div>
+
+                <!-- CTA -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="tel:+74951234567" class="flex items-center gap-2 text-navy font-semibold hover:text-accent transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        +7 (495) 123-45-67
+                    </a>
+                    <a href="#contacts" class="btn-primary px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+                        Расчёт проекта
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Mobile Button -->
+                <button id="menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center" aria-label="Меню">
+                    <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 bg-navy lg:hidden">
+        <div class="flex flex-col h-full pt-24 px-6 pb-8">
+            <button id="close-menu" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center" aria-label="Закрыть">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <nav class="flex flex-col gap-6">
+                <a href="#services" class="mobile-link text-2xl font-display font-bold text-white hover:text-accent transition-colors">Услуги</a>
+                <a href="#about" class="mobile-link text-2xl font-display font-bold text-white hover:text-accent transition-colors">О компании</a>
+                <a href="#projects" class="mobile-link text-2xl font-display font-bold text-white hover:text-accent transition-colors">Проекты</a>
+                <a href="#process" class="mobile-link text-2xl font-display font-bold text-white hover:text-accent transition-colors">Этапы работы</a>
+                <a href="#contacts" class="mobile-link text-2xl font-display font-bold text-white hover:text-accent transition-colors">Контакты</a>
+            </nav>
+            <div class="mt-auto">
+                <a href="#contacts" class="btn-primary w-full py-4 rounded-xl font-semibold text-center flex items-center justify-center gap-2">
+                    Заказать расчёт
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-20 bg-gradient-to-br from-light via-white to-light grid-pattern overflow-hidden">
+        <canvas id="particles-canvas"></canvas>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-0">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Content -->
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-3 bg-navy/5 px-5 py-2.5 rounded-full mb-8">
+                        <span class="w-2 h-2 bg-accent rounded-full"></span>
+                        <span class="text-sm font-semibold text-navy tracking-wide">Лидер отрасли с 2009 года</span>
+                    </div>
+                    
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-navy leading-tight mb-6">
+                        Промышленная
+                        <br>
+                        <span class="text-accent">вентиляция</span>
+                        <br>
+                        и аспирация
+                    </h1>
+                    
+                    <p class="text-lg text-muted max-w-lg mb-10 leading-relaxed">
+                        Полный цикл работ: от проектирования до монтажа и сервисного обслуживания. 
+                        Создаём безопасные и комфортные условия труда на производстве.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contacts" class="btn-primary px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-3">
+                            Получить расчёт
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="#projects" class="inline-flex items-center gap-3 bg-white border-2 border-slate/20 text-navy px-8 py-4 rounded-xl font-semibold text-lg hover:border-accent hover:text-accent transition-all">
+                            Наши проекты
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Visual -->
+                <div class="reveal delay-2 relative hidden lg:block">
+                    <div class="relative">
+                        <!-- Main Card -->
+                        <div class="bg-navy rounded-3xl p-8 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-4 mb-8">
+                                    <div class="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/50 text-sm">Производительность систем</p>
+                                        <p class="text-white font-display text-2xl font-bold">до 150 000 м³/ч</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-white/50 text-sm mb-1">Диаметр воздуховодов</p>
+                                        <p class="text-white font-semibold text-lg">100–2000 мм</p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-white/50 text-sm mb-1">Мощность систем</p>
+                                        <p class="text-white font-semibold text-lg">до 500 кВт</p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-white/50 text-sm mb-1">Класс фильтрации</p>
+                                        <p class="text-white font-semibold text-lg">до H14</p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-white/50 text-sm mb-1">Гарантия</p>
+                                        <p class="text-white font-semibold text-lg">5 лет</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-2xl p-5 float-badge border border-slate/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center">
+                                    <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-muted">Реализовано проектов</p>
+                                    <p class="font-display font-bold text-2xl text-navy">500+</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Certificate Badge -->
+                        <div class="absolute -top-4 -right-4 bg-accent rounded-xl shadow-xl p-4 float-badge" style="animation-delay: -2s">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-white/70 text-xs">Сертификация</p>
+                                    <p class="text-white font-semibold">ISO 9001</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 reveal delay-3">
+                <div class="stats-card rounded-2xl p-6 text-center">
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-navy counter" data-target="15">0</p>
+                    <p class="text-muted mt-1 font-medium">лет на рынке</p>
+                </div>
+                <div class="stats-card rounded-2xl p-6 text-center">
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-navy counter" data-target="500">0</p>
+                    <p class="text-muted mt-1 font-medium">проектов</p>
+                </div>
+                <div class="stats-card rounded-2xl p-6 text-center">
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-navy counter" data-target="50">0</p>
+                    <p class="text-muted mt-1 font-medium">специалистов</p>
+                </div>
+                <div class="stats-card rounded-2xl p-6 text-center">
+                    <p class="font-display text-4xl lg:text-5xl font-bold text-accent">24/7</p>
+                    <p class="text-muted mt-1 font-medium">поддержка</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 lg:py-32 bg-white relative">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate/20 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block text-accent font-semibold tracking-wider uppercase text-sm mb-4">Услуги</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-6">
+                    Комплексные решения
+                </h2>
+                <p class="text-muted text-lg max-w-2xl mx-auto">
+                    Полный спектр услуг по созданию и обслуживанию систем вентиляции и аспирации
+                </p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="services-grid"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 lg:py-32 bg-light relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern opacity-50"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="inline-block text-accent font-semibold tracking-wider uppercase text-sm mb-4">О компании</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-6">
+                        Создаём безопасный климат на производстве
+                    </h2>
+                    <p class="text-muted text-lg mb-6 leading-relaxed">
+                        ВентПром — эксперт в области промышленной вентиляции с 2009 года. Мы реализовали 
+                        более 500 проектов для предприятий пищевой, химической, деревообрабатывающей 
+                        и других отраслей.
+                    </p>
+                    <p class="text-muted text-lg mb-8 leading-relaxed">
+                        Команда из 50+ квалифицированных специалистов. Используем сертифицированное 
+                        оборудование от ведущих мировых производителей.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Гарантия 5 лет</h4>
+                                <p class="text-muted text-sm">на все виды работ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Точные сроки</h4>
+                                <p class="text-muted text-sm">соблюдаем договорённости</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Команда экспертов</h4>
+                                <p class="text-muted text-sm">50+ специалистов</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Прозрачные цены</h4>
+                                <p class="text-muted text-sm">фиксированная смета</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visual -->
+                <div class="reveal delay-2 relative">
+                    <div class="aspect-[4/3] bg-navy rounded-3xl overflow-hidden relative">
+                        <div class="absolute inset-0 opacity-10">
+                            <svg class="w-full h-full" viewBox="0 0 400 300">
+                                <defs>
+                                    <pattern id="grid-small" width="30" height="30" patternUnits="userSpaceOnUse">
+                                        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#0EA5A0" stroke-width="0.5"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100%" height="100%" fill="url(#grid-small)"/>
+                            </svg>
+                        </div>
+                        
+                        <svg class="w-full h-full p-8" viewBox="0 0 400 300">
+                            <!-- Industrial system illustration -->
+                            <rect x="40" y="120" width="320" height="100" rx="8" fill="rgba(14, 165, 160, 0.1)"/>
+                            <rect x="70" y="60" width="80" height="60" rx="6" fill="rgba(14, 165, 160, 0.15)"/>
+                            <rect x="180" y="40" width="80" height="80" rx="6" fill="rgba(14, 165, 160, 0.2)"/>
+                            <rect x="290" y="80" width="60" height="40" rx="6" fill="rgba(14, 165, 160, 0.15)"/>
+                            
+                            <!-- Pipes -->
+                            <path d="M110 120 L110 180" stroke="#0EA5A0" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+                            <path d="M220 120 L220 180" stroke="#0EA5A0" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+                            <path d="M320 120 L320 180" stroke="#0EA5A0" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+                            
+                            <!-- Fans -->
+                            <circle cx="110" cy="90" r="18" fill="none" stroke="#0EA5A0" stroke-width="2" opacity="0.6"/>
+                            <circle cx="220" cy="80" r="24" fill="none" stroke="#0EA5A0" stroke-width="2" opacity="0.7"/>
+                            <circle cx="320" cy="100" r="14" fill="none" stroke="#0EA5A0" stroke-width="2" opacity="0.6"/>
+                            
+                            <!-- Airflow arrows -->
+                            <path d="M85 90 L110 75 L135 90" fill="none" stroke="#0EA5A0" stroke-width="2" opacity="0.5"/>
+                            <path d="M185 80 L220 60 L255 80" fill="none" stroke="#0EA5A0" stroke-width="2" opacity="0.6"/>
+                            <path d="M300 100 L320 87 L340 100" fill="none" stroke="#0EA5A0" stroke-width="2" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-5 border border-slate/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-navy rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-muted">Сертификация</p>
+                                <p class="font-bold text-navy">ISO 9001:2015</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block text-accent font-semibold tracking-wider uppercase text-sm mb-4">Портфолио</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-6">
+                    Реализованные проекты
+                </h2>
+                <p class="text-muted text-lg max-w-2xl mx-auto">
+                    Примеры наших работ для различных отраслей промышленности
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid"></div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-24 lg:py-32 bg-navy relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="0.5" fill="#0EA5A0"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#dots)"/>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block text-accent font-semibold tracking-wider uppercase text-sm mb-4">Процесс</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+                    Этапы работы
+                </h2>
+                <p class="text-white/50 text-lg max-w-2xl mx-auto">
+                    От первой консультации до сдачи объекта в эксплуатацию
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" id="process-grid"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacts" class="py-24 lg:py-32 bg-light relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern opacity-50"></div>
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate/20 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <span class="inline-block text-accent font-semibold tracking-wider uppercase text-sm mb-4">Контакты</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-6">
+                        Начнём сотрудничество
+                    </h2>
+                    <p class="text-muted text-lg mb-10 leading-relaxed">
+                        Свяжитесь с нами для бесплатной консультации. Наши эксперты помогут 
+                        определить оптимальное решение для вашего производства.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Адрес</h4>
+                                <p class="text-muted">г. Москва, ул. Промышленная, д. 42, офис 301</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Телефон</h4>
+                                <a href="tel:+74951234567" class="text-muted hover:text-accent transition-colors text-lg">+7 (495) 123-45-67</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Email</h4>
+                                <a href="mailto:info@ventprom.ru" class="text-muted hover:text-accent transition-colors">info@ventprom.ru</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy mb-1">Режим работы</h4>
+                                <p class="text-muted">Пн-Пт: 9:00 - 18:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form -->
+                <div class="reveal delay-2">
+                    <form id="contact-form" class="bg-white rounded-3xl shadow-xl p-8 border border-slate/10">
+                        <h3 class="font-display text-2xl font-bold text-navy mb-6">Оставить заявку</h3>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label for="name" class="block text-sm font-semibold text-navy mb-2">Имя</label>
+                                <input type="text" id="name" name="name" required
+                                    class="form-input w-full px-4 py-3 rounded-xl text-navy"
+                                    placeholder="Введите ваше имя">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-semibold text-navy mb-2">Телефон</label>
+                                <input type="tel" id="phone" name="phone" required
+                                    class="form-input w-full px-4 py-3 rounded-xl text-navy"
+                                    placeholder="+7 (___) ___-__-__">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-navy mb-2">Email</label>
+                                <input type="email" id="email" name="email"
+                                    class="form-input w-full px-4 py-3 rounded-xl text-navy"
+                                    placeholder="email@example.com">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-semibold text-navy mb-2">Сообщение</label>
+                                <textarea id="message" name="message" rows="4"
+                                    class="form-input w-full px-4 py-3 rounded-xl text-navy resize-none"
+                                    placeholder="Опишите ваш проект"></textarea>
+                            </div>
+                            
+                            <button type="submit" 
+                                class="btn-primary w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-2">
+                                Отправить заявку
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <p class="text-sm text-muted mt-4 text-center">
+                            Нажимая кнопку, вы соглашаетесь с 
+                            <a href="#" class="text-accent hover:underline">политикой конфиденциальности</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 bg-accent/20 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span class="font-display font-bold text-xl text-white">ВентПром</span>
+                    </a>
+                    <p class="text-white/40 max-w-md leading-relaxed">
+                        Профессиональные решения в области промышленной вентиляции и аспирации. 
+                        Проектирование, монтаж, сервис.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Навигация</h4>
+                    <nav class="flex flex-col gap-3">
+                        <a href="#services" class="text-white/40 hover:text-accent transition-colors">Услуги</a>
+                        <a href="#about" class="text-white/40 hover:text-accent transition-colors">О компании</a>
+                        <a href="#projects" class="text-white/40 hover:text-accent transition-colors">Проекты</a>
+                        <a href="#process" class="text-white/40 hover:text-accent transition-colors">Этапы работы</a>
+                        <a href="#contacts" class="text-white/40 hover:text-accent transition-colors">Контакты</a>
+                    </nav>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Контакты</h4>
+                    <div class="flex flex-col gap-3">
+                        <a href="tel:+74951234567" class="text-white/40 hover:text-accent transition-colors">+7 (495) 123-45-67</a>
+                        <a href="mailto:info@ventprom.ru" class="text-white/40 hover:text-accent transition-colors">info@ventprom.ru</a>
+                        <p class="text-white/40">г. Москва, ул. Промышленная, 42</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/30 text-sm">2024 ВентПром. Все права защищены.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="Telegram">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="WhatsApp">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const services = [
+            {
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>`,
+                title: 'Приточная вентиляция',
+                description: 'Подача свежего воздуха с очисткой, нагревом или охлаждением. Производительность до 150 000 м³/ч.'
+            },
+            {
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>`,
+                title: 'Вытяжная вентиляция',
+                description: 'Удаление загрязнённого воздуха, избыточного тепла и влаги из производственных помещений.'
+            },
+            {
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`,
+                title: 'Аспирация',
+                description: 'Удаление пыли и стружки от технологического оборудования. Фильтрация до класса H14.'
+            },
+            {
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+                title: 'Сервис и обслуживание',
+                description: 'Регулярное ТО, ремонт и модернизация. Гарантийное и постгарантийное обслуживание.'
+            },
+            {
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+                title: 'Проектирование',
+                description: 'Разработка проектной документации. Расчёты, схемы, спецификации. Согласование.'
+            },
+            {
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+                title: 'Монтаж',
+                description: 'Профессиональный монтаж систем вентиляции и аспирации. Работы любой сложности.'
+            }
+        ];
+
+        const projects = [
+            { title: 'Мебельная фабрика', category: 'Аспирация', description: 'Система аспирации для удаления древесной пыли, 45 000 м³/ч', color: '#0A1628' },
+            { title: 'Пищевой комбинат', category: 'Вентиляция', description: 'Комплексная система вентиляции цехов, соответствует СанПиН', color: '#132035' },
+            { title: 'Металлообработка', category: 'Аспирация', description: 'Система удаления металлической стружки и пыли, 12 постов', color: '#1E293B' },
+            { title: 'Фармацевтика', category: 'Чистые помещения', description: 'Вентиляция чистых помещений класса D и C', color: '#0EA5A0' },
+            { title: 'Логистический центр', category: 'Вентиляция склада', description: 'Система вентиляции склада площадью 15 000 м²', color: '#334155' },
+            { title: 'Химический завод', category: 'Промышленная', description: 'Удаление вредных веществ, взрывозащищённое исполнение', color: '#64748B' }
+        ];
+
+        const processSteps = [
+            { number: '01', title: 'Консультация', description: 'Выезд на объект, анализ потребностей, замеры' },
+            { number: '02', title: 'Проектирование', description: 'Разработка проекта, расчёты, согласование' },
+            { number: '03', title: 'Монтаж', description: 'Поставка оборудования, монтаж, пусконаладка' },
+            { number: '04', title: 'Сервис', description: 'Техподдержка, регулярное обслуживание' }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderServices();
+            renderProjects();
+            renderProcess();
+            initRevealAnimations();
+            initHeader();
+            initMobileMenu();
+            initParticles();
+            initCounters();
+            initForm();
+        });
+
+        // Render Services
+        function renderServices() {
+            const grid = document.getElementById('services-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = services.map((s, i) => `
+                <div class="service-card rounded-2xl p-6 reveal delay-${(i % 4) + 1}">
+                    <div class="icon-box w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center text-accent mb-5">
+                        ${s.icon}
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-navy mb-3">${s.title}</h3>
+                    <p class="text-muted leading-relaxed">${s.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Render Projects
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = projects.map((p, i) => `
+                <div class="project-card rounded-2xl overflow-hidden reveal delay-${(i % 3) + 1}" style="background: ${p.color}">
+                    <div class="aspect-[4/3] relative">
+                        <svg class="absolute inset-0 w-full h-full p-8" viewBox="0 0 200 150">
+                            <rect x="20" y="40" width="160" height="80" rx="6" fill="rgba(255,255,255,0.08)"/>
+                            <circle cx="60" cy="80" r="18" fill="rgba(255,255,255,0.1)"/>
+                            <circle cx="140" cy="80" r="18" fill="rgba(255,255,255,0.1)"/>
+                            <rect x="80" y="50" width="40" height="50" rx="4" fill="rgba(255,255,255,0.12)"/>
+                            <path d="M50 100 L50 120" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M150 100 L150 120" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M100 50 L100 30" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                        <div class="overlay flex flex-col justify-end p-6">
+                            <div class="content">
+                                <span class="text-accent text-sm font-semibold">${p.category}</span>
+                                <h3 class="font-display text-xl font-bold text-white mt-1">${p.title}</h3>
+                                <p class="text-white/60 text-sm mt-2">${p.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Process
+        function renderProcess() {
+            const grid = document.getElementById('process-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = processSteps.map((s, i) => `
+                <div class="process-step text-center reveal delay-${i + 1}">
+                    <div class="relative inline-block mb-6">
+                        <div class="w-20 h-20 border-2 border-accent/40 rounded-full flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-accent">${s.number}</span>
+                        </div>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-white mb-3">${s.title}</h3>
+                    <p class="text-white/50 leading-relaxed">${s.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Reveal Animations
+        function initRevealAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // Header
+        function initHeader() {
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-solid');
+                } else {
+                    header.classList.remove('header-solid');
+                }
+            });
+        }
+
+        // Mobile Menu
+        function initMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const openBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-menu');
+            const links = menu.querySelectorAll('.mobile-link');
+
+            openBtn.addEventListener('click', () => {
+                menu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                menu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Particles
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId = null;
+
+            const resize = () => {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+                initParticleArray();
+            };
+
+            const initParticleArray = () => {
+                particles = [];
+                const count = Math.min(50, Math.floor((canvas.width * canvas.height) / 20000));
+                
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        radius: Math.random() * 2 + 1,
+                        opacity: Math.random() * 0.3 + 0.1
+                    });
+                }
+            };
+
+            const animate = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, Math.max(0.5, p.radius), 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(14, 165, 160, ${p.opacity})`;
+                    ctx.fill();
+                });
+
+                // Draw connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(14, 165, 160, ${0.1 * (1 - dist / 120)})`;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                animationId = requestAnimationFrame(animate);
+            };
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (!prefersReducedMotion) {
+                resize();
+                animate();
+                window.addEventListener('resize', resize);
+            }
+        }
+
+        // Counters
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.dataset.target);
+                        animateCounter(counter, target);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(c => observer.observe(c));
+        }
+
+        function animateCounter(el, target) {
+            let current = 0;
+            const increment = target / 60;
+            const duration = 1500;
+            const step = duration / 60;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, step);
+        }
+
+        // Form
+        function initForm() {
+            const form = document.getElementById('contact-form');
+            if (!form) return;
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                const original = btn.innerHTML;
+
+                btn.innerHTML = `<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>Отправка...</span>`;
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Отправлено</span>`;
+                    btn.style.background = '#059669';
+
+                    setTimeout(() => {
+                        btn.innerHTML = original;
+                        btn.disabled = false;
+                        btn.style.background = '';
+                        form.reset();
+                    }, 2500);
+                }, 1500);
+            });
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
