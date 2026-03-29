@@ -64,11 +64,6 @@ export function initVentilationAnimation(containerId) {
         camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
         camera.position.set(-14, 6, 8);
 
-        // Масштабируем сцену: уменьшаем на 30% (scale 0.7) и смещаем на 200px влево и 100px вверх
-        const sceneGroup = new THREE.Group();
-        sceneGroup.scale.set(0.7, 0.7, 0.7);
-        sceneGroup.position.set(-2, 1, 0); // Смещение: влево и вверх (в единицах сцены)
-
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -79,8 +74,8 @@ export function initVentilationAnimation(containerId) {
         controls.target.set(0, 2, 0);
         controls.enableZoom = false;
         controls.enablePan = false;
-        controls.autoRotate = false;
-        controls.autoRotateSpeed = 0;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         scene.add(ambientLight);
@@ -89,9 +84,6 @@ export function initVentilationAnimation(containerId) {
         createDuctSystem();
         createInternalComponents();
         initParticleSystem();
-
-        // Добавляем все объекты в группу сцены для масштабирования и смещения
-        scene.add(sceneGroup);
 
         animate();
 
@@ -214,7 +206,7 @@ export function initVentilationAnimation(containerId) {
             mainGroup.add(ring);
         }
 
-        sceneGroup.add(mainGroup);
+        scene.add(mainGroup);
 
         window.ductBounds = {
             minX: -horizLength,
@@ -267,7 +259,7 @@ export function initVentilationAnimation(containerId) {
         damperBlades.add(createTechEdges(shaftGeo).clone().rotateX(Math.PI/2));
 
         damperGroup.add(damperBlades);
-        sceneGroup.add(damperGroup);
+        scene.add(damperGroup);
 
         // --- ВЕНТИЛЯТОР ---
         const fanGroup = new THREE.Group();
@@ -311,7 +303,7 @@ export function initVentilationAnimation(containerId) {
         fanRotor.add(createTechEdges(ringGeo).clone().rotateY(Math.PI / 2));
 
         fanGroup.add(fanRotor);
-        sceneGroup.add(fanGroup);
+        scene.add(fanGroup);
 
         window.sceneObjects = {
             damper: damperGroup,
@@ -324,7 +316,7 @@ export function initVentilationAnimation(containerId) {
         const grid = new THREE.GridHelper(30, 60, CONFIG.scene.gridColor, CONFIG.scene.bgColor);
         grid.material.opacity = CONFIG.scene.gridOpacity;
         grid.material.transparent = true;
-        sceneGroup.add(grid);
+        scene.add(grid);
     }
 
     // ==========================================
@@ -384,7 +376,7 @@ export function initVentilationAnimation(containerId) {
         });
 
         particleSystem = new THREE.Points(geometry, material);
-        sceneGroup.add(particleSystem);
+        scene.add(particleSystem);
     }
 
     class DuctParticle {
