@@ -317,6 +317,11 @@
 
         .stats-card:hover::after { width: 70%; }
 
+        /* Карточка "Производительность" - смещена вниз на 60px от карточки "24/7 поддержка" */
+        .performance-card {
+            margin-top: 60px;
+        }
+
         /* Mobile Menu - Dark Theme */
         .mobile-menu {
             transform: translateX(100%);
@@ -687,7 +692,7 @@
                 <div class="reveal delay-2 relative hidden lg:block">
                     <div class="hero-visual-inner float" id="hero-visual">
                         <!-- Main Card - Reduced size, moved down -->
-                        <div class="relative bg-gradient-to-br from-card/95 to-surface/90 rounded-2xl p-6 border border-gray-light/60 overflow-hidden shadow-xl shadow-black/20 transform translate-y-8 scale-90">
+                        <div class="performance-card relative bg-gradient-to-br from-card/95 to-surface/90 rounded-2xl p-6 border border-gray-light/60 overflow-hidden shadow-xl shadow-black/20 transform translate-y-8 scale-90">
                             <!-- Corner marks -->
                             <div class="corner-mark corner-mark-tl"></div>
                             <div class="corner-mark corner-mark-tr"></div>
