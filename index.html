@@ -532,6 +532,12 @@
             background: rgba(229, 229, 229, 0.03);
             box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.3);
         }
+
+         .logo-box img {
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+        
     </style>
 </head>
 <body class="antialiased dark-bg">
@@ -544,11 +550,7 @@
             <nav class="flex items-center justify-between h-20">
                 <a href="#" class="flex items-center gap-3 group">
                     <div class="logo-box w-11 h-11 rounded-xl flex items-center justify-center">
-                        <svg class="w-5 h-5 text-ink transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
+                        <img src="logo.png" alt="Gros Group Logo" class="w-6 h-6 object-contain">
                     </div>
                     <div>
                         <span class="font-display font-semibold text-lg text-ink block leading-none tracking-wide">Gros Group</span>
