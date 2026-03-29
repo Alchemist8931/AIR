@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ВентПром — Промышленная вентиляция и аспирация</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js and dependencies for ventilation animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Ventilation Animation Module -->
+    <script type="module" src="ventilation-animation.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
@@ -607,12 +614,16 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+
+        <!-- Ventilation Animation Background -->
+        <div id="vent-animation-container" class="absolute inset-0 z-0" style="pointer-events: none;"></div>
+        
         <!-- Ambient Orbs -->
         <div class="ambient-orb" style="width: 500px; height: 500px; top: -150px; right: -100px; background: radial-gradient(circle, rgba(229, 229, 229, 0.02) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 400px; height: 400px; bottom: 5%; left: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         
         <!-- Blueprint Grid -->
-        <div class="absolute inset-0 blueprint-grid"></div>
+        <div class="absolute inset-0 blueprint-grid opacity-50"></div>
         
         <!-- Animated Blueprint SVG -->
         <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -682,78 +693,43 @@
                 <!-- Technical Visual -->
                 <div class="reveal delay-2 relative hidden lg:block">
                     <div class="hero-visual-inner float" id="hero-visual">
-                        <!-- Main Card -->
-                        <div class="relative bg-gradient-to-br from-card/95 to-surface/90 rounded-3xl p-8 border border-gray-light/60 overflow-hidden shadow-xl shadow-black/20">
+                        <!-- Main Card - Reduced size, moved down -->
+                        <div class="relative bg-gradient-to-br from-card/95 to-surface/90 rounded-2xl p-6 border border-gray-light/60 overflow-hidden shadow-xl shadow-black/20 transform translate-y-8 scale-90">
                             <!-- Corner marks -->
                             <div class="corner-mark corner-mark-tl"></div>
                             <div class="corner-mark corner-mark-tr"></div>
                             <div class="corner-mark corner-mark-bl"></div>
                             <div class="corner-mark corner-mark-br"></div>
                             
-                            <!-- Animated ventilation diagram -->
-                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 300" aria-hidden="true">
-                                <!-- Duct system -->
-                                <g stroke="rgba(229, 229, 229, 0.04)" stroke-width="1" fill="none">
-                                    <rect x="30" y="130" width="340" height="40" rx="4"/>
-                                    <rect x="60" y="70" width="50" height="60" rx="3"/>
-                                    <rect x="175" y="50" width="50" height="80" rx="3"/>
-                                    <rect x="290" y="80" width="50" height="50" rx="3"/>
-                                </g>
-                                
-                                <!-- Air flow lines -->
-                                <g stroke="rgba(229, 229, 229, 0.2)" stroke-width="2" fill="none" class="air-flow">
-                                    <path d="M85 100 L85 130"/>
-                                    <path d="M200 90 L200 130"/>
-                                    <path d="M315 105 L315 130"/>
-                                </g>
-                                
-                                <!-- Fans -->
-                                <g class="vent-fan" style="transform-origin: 85px 100px">
-                                    <circle cx="85" cy="100" r="15" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                    <line x1="85" y1="85" x2="85" y2="115" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                    <line x1="70" y1="100" x2="100" y2="100" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                </g>
-                                <g class="vent-fan" style="transform-origin: 200px 90px; animation-delay: -0.8s">
-                                    <circle cx="200" cy="90" r="18" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                    <line x1="200" y1="72" x2="200" y2="108" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                    <line x1="182" y1="90" x2="218" y2="90" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                </g>
-                                <g class="vent-fan" style="transform-origin: 315px 105px; animation-delay: -1.6s">
-                                    <circle cx="315" cy="105" r="12" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                    <line x1="315" y1="93" x2="315" y2="117" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                    <line x1="303" y1="105" x2="327" y2="105" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
-                                </g>
-                            </svg>
-                            
                             <div class="relative z-10">
-                                <div class="flex items-center gap-4 mb-8">
-                                    <div class="w-16 h-16 bg-ink/5 rounded-2xl flex items-center justify-center border border-ink/10">
-                                        <svg class="w-7 h-7 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-12 h-12 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/10">
+                                        <svg class="w-6 h-6 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
                                         </svg>
                                     </div>
                                     <div>
                                         <p class="text-ink-muted text-xs tracking-wider uppercase font-mono">Производительность</p>
-                                        <p class="text-ink font-display text-2xl font-semibold">до 150 000 м³/ч</p>
+                                        <p class="text-ink font-display text-xl font-semibold">до 150 000 м³/ч</p>
                                     </div>
                                 </div>
                                 
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="info-card rounded-xl p-4">
-                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Диаметр</p>
-                                        <p class="text-ink font-medium">100–2000 мм</p>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="info-card rounded-lg p-3">
+                                        <p class="text-ink-muted text-xs mb-0.5 tracking-wide">Диаметр</p>
+                                        <p class="text-ink font-medium text-sm">100–2000 мм</p>
                                     </div>
-                                    <div class="info-card rounded-xl p-4">
-                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Мощность</p>
-                                        <p class="text-ink font-medium">до 500 кВт</p>
+                                    <div class="info-card rounded-lg p-3">
+                                        <p class="text-ink-muted text-xs mb-0.5 tracking-wide">Мощность</p>
+                                        <p class="text-ink font-medium text-sm">до 500 кВт</p>
                                     </div>
-                                    <div class="info-card rounded-xl p-4">
-                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Фильтрация</p>
-                                        <p class="text-ink font-medium">до класса H14</p>
+                                    <div class="info-card rounded-lg p-3">
+                                        <p class="text-ink-muted text-xs mb-0.5 tracking-wide">Фильтрация</p>
+                                        <p class="text-ink font-medium text-sm">до класса H14</p>
                                     </div>
-                                    <div class="info-card rounded-xl p-4">
-                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Гарантия</p>
-                                        <p class="text-ink font-medium">5 лет</p>
+                                    <div class="info-card rounded-lg p-3">
+                                        <p class="text-ink-muted text-xs mb-0.5 tracking-wide">Гарантия</p>
+                                        <p class="text-ink font-medium text-sm">5 лет</p>
                                     </div>
                                 </div>
                             </div>
@@ -1461,6 +1437,127 @@
                 }
             });
         });
+
+         // Ventilation Animation Background
+        let ventAnimation = null;
+
+        function initVentilationBackground() {
+            const container = document.getElementById('vent-animation-container');
+            if (!container || typeof initVentilationAnimation !== 'function') return;
+
+            // Initialize the ventilation animation
+            ventAnimation = initVentilationAnimation('vent-animation-container');
+
+            // Create compact control panel styled to match the site
+            createControlPanel();
+        }
+
+        function createControlPanel() {
+            const container = document.getElementById('vent-animation-container');
+            if (!container) return;
+
+            const panel = document.createElement('div');
+            panel.id = 'vent-control-panel';
+            panel.style.cssText = `
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                z-index: 10;
+                background: rgba(22, 22, 22, 0.95);
+                border: 1px solid rgba(38, 38, 38, 0.8);
+                border-radius: 12px;
+                padding: 16px;
+                width: 200px;
+                backdrop-filter: blur(8px);
+                pointer-events: auto;
+            `;
+
+            panel.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(38, 38, 38, 0.8);">
+                    <span style="font-size: 9px; color: #737373; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'SN Pro', monospace;">Вентиляция</span>
+                    <div style="width: 6px; height: 6px; background: #4CAF50; border-radius: 50%; box-shadow: 0 0 6px #4CAF50; animation: pulse 2s infinite;"></div>
+                </div>
+
+                <div style="margin-bottom: 14px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 8px; margin-bottom: 6px; color: #A3A3A3; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <span>Скорость</span>
+                        <span id="fan-speed-display" style="color: #E5E5E5; font-weight: bold; font-family: monospace;">50%</span>
+                    </div>
+                    <input type="range" id="fan-speed-slider" min="0" max="100" value="50"
+                        style="-webkit-appearance: none; width: 100%; height: 1px; background: #525252; outline: none;"
+                        oninput="updateFanSpeed(this.value)">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <button id="btn-damper-open" onclick="setDamper(true)"
+                        style="background: transparent; border: 1px solid rgba(38, 38, 38, 0.8); color: #A3A3A3; padding: 6px; cursor: pointer; font-size: 8px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s;"
+                        class="active">Открыть</button>
+                    <button id="btn-damper-close" onclick="setDamper(false)"
+                        style="background: transparent; border: 1px solid rgba(38, 38, 38, 0.8); color: #A3A3A3; padding: 6px; cursor: pointer; font-size: 8px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s;">Закрыть</button>
+                </div>
+
+                <style>
+                    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+                    #vent-control-panel input[type=range]::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        width: 12px; height: 12px;
+                        background: #0D0D0D;
+                        border: 1px solid #E5E5E5;
+                        cursor: pointer;
+                        border-radius: 50%;
+                    }
+                    #vent-control-panel button.active {
+                        border-color: #4CAF50;
+                        color: #4CAF50;
+                        background: rgba(76, 175, 80, 0.1);
+                    }
+                    #vent-control-panel button.closed {
+                        border-color: #f44336;
+                        color: #f44336;
+                        background: rgba(244, 67, 54, 0.1);
+                    }
+                </style>
+            `;
+
+            container.appendChild(panel);
+        }
+
+        // Global functions for control panel
+        window.updateFanSpeed = function(value) {
+            document.getElementById('fan-speed-display').innerText = value + '%';
+            if (ventAnimation && ventAnimation.setFanSpeed) {
+                ventAnimation.setFanSpeed(value / 100);
+            }
+        };
+
+        window.setDamper = function(isOpen) {
+            const btnOpen = document.getElementById('btn-damper-open');
+            const btnClose = document.getElementById('btn-damper-close');
+
+            if (isOpen) {
+                btnOpen.classList.add('active');
+                btnOpen.classList.remove('closed');
+                btnClose.classList.remove('active');
+                btnClose.classList.remove('closed');
+            } else {
+                btnClose.classList.add('closed');
+                btnClose.classList.remove('active');
+                btnOpen.classList.remove('active');
+                btnOpen.classList.remove('closed');
+            }
+
+            if (ventAnimation && ventAnimation.setDamperOpen) {
+                ventAnimation.setDamperOpen(isOpen);
+            }
+        };
+
+        // Initialize ventilation animation when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initVentilationBackground);
+        } else {
+            initVentilationBackground();
+        }
+        
     </script>
 </body>
 </html>
