@@ -4,8 +4,8 @@
 // Для сайта ВентПром
 // ============================================
 
-import * as THREE from 'https://cdn.skypack.dev/three@0.160.0';
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.160.0/examples/controls/OrbitControls.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
 export function initVentilationAnimation(containerId) {
     const container = document.getElementById(containerId);
