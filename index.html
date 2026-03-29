@@ -679,25 +679,84 @@
                     </div>
                 </div>
                 
-                <!-- Ventilation Shaft Animation -->
+                <!-- Technical Visual -->
                 <div class="reveal delay-2 relative hidden lg:block">
-                    <div class="hero-visual-inner" id="hero-visual">
-                        <!-- Main Animation Container -->
-                        <div class="relative w-full h-[520px] bg-gradient-to-br from-card/60 to-surface/40 rounded-3xl border border-gray-light/40 overflow-hidden shadow-xl shadow-black/20">
+                    <div class="hero-visual-inner float" id="hero-visual">
+                        <!-- Main Card -->
+                        <div class="relative bg-gradient-to-br from-card/95 to-surface/90 rounded-3xl p-8 border border-gray-light/60 overflow-hidden shadow-xl shadow-black/20">
                             <!-- Corner marks -->
                             <div class="corner-mark corner-mark-tl"></div>
                             <div class="corner-mark corner-mark-tr"></div>
                             <div class="corner-mark corner-mark-bl"></div>
                             <div class="corner-mark corner-mark-br"></div>
                             
-                            <!-- 3D Animation Iframe -->
-                            <iframe
-                                src="ventilation-animation.html"
-                                class="absolute inset-0 w-full h-full border-0"
-                                frameborder="0"
-                                allow="autoplay; fullscreen"
-                                title="Вентиляционная Шахта Анимация">
-                            </iframe>
+                            <!-- Animated ventilation diagram -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 300" aria-hidden="true">
+                                <!-- Duct system -->
+                                <g stroke="rgba(229, 229, 229, 0.04)" stroke-width="1" fill="none">
+                                    <rect x="30" y="130" width="340" height="40" rx="4"/>
+                                    <rect x="60" y="70" width="50" height="60" rx="3"/>
+                                    <rect x="175" y="50" width="50" height="80" rx="3"/>
+                                    <rect x="290" y="80" width="50" height="50" rx="3"/>
+                                </g>
+                                
+                                <!-- Air flow lines -->
+                                <g stroke="rgba(229, 229, 229, 0.2)" stroke-width="2" fill="none" class="air-flow">
+                                    <path d="M85 100 L85 130"/>
+                                    <path d="M200 90 L200 130"/>
+                                    <path d="M315 105 L315 130"/>
+                                </g>
+                                
+                                <!-- Fans -->
+                                <g class="vent-fan" style="transform-origin: 85px 100px">
+                                    <circle cx="85" cy="100" r="15" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                    <line x1="85" y1="85" x2="85" y2="115" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                    <line x1="70" y1="100" x2="100" y2="100" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                </g>
+                                <g class="vent-fan" style="transform-origin: 200px 90px; animation-delay: -0.8s">
+                                    <circle cx="200" cy="90" r="18" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                    <line x1="200" y1="72" x2="200" y2="108" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                    <line x1="182" y1="90" x2="218" y2="90" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                </g>
+                                <g class="vent-fan" style="transform-origin: 315px 105px; animation-delay: -1.6s">
+                                    <circle cx="315" cy="105" r="12" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                    <line x1="315" y1="93" x2="315" y2="117" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                    <line x1="303" y1="105" x2="327" y2="105" stroke="rgba(229, 229, 229, 0.15)" stroke-width="2"/>
+                                </g>
+                            </svg>
+                            
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-4 mb-8">
+                                    <div class="w-16 h-16 bg-ink/5 rounded-2xl flex items-center justify-center border border-ink/10">
+                                        <svg class="w-7 h-7 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-ink-muted text-xs tracking-wider uppercase font-mono">Производительность</p>
+                                        <p class="text-ink font-display text-2xl font-semibold">до 150 000 м³/ч</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Диаметр</p>
+                                        <p class="text-ink font-medium">100–2000 мм</p>
+                                    </div>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Мощность</p>
+                                        <p class="text-ink font-medium">до 500 кВт</p>
+                                    </div>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Фильтрация</p>
+                                        <p class="text-ink font-medium">до класса H14</p>
+                                    </div>
+                                    <div class="info-card rounded-xl p-4">
+                                        <p class="text-ink-muted text-xs mb-1 tracking-wide">Гарантия</p>
+                                        <p class="text-ink font-medium">5 лет</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         <!-- Floating Stats -->
