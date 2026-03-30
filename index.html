@@ -879,72 +879,18 @@
                 
                 <!-- Technical Visual -->
                 <div class="reveal delay-2 relative">
-                    <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20">
+                    <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20 h-full min-h-[500px]">
                         <!-- Corner marks -->
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
                         <div class="corner-mark corner-mark-br"></div>
                         
-                        <div class="aspect-[4/3] relative p-8">
-                            <!-- Blueprint SVG -->
-                            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 300" aria-hidden="true">
-                                <!-- Grid -->
-                                <defs>
-                                    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(229, 229, 229, 0.02)" stroke-width="0.5"/>
-                                    </pattern>
-                                </defs>
-                                <rect width="100%" height="100%" fill="url(#smallGrid)"/>
-                                
-                                <!-- Ventilation system schematic -->
-                                <g>
-                                    <!-- Main duct -->
-                                    <rect x="60" y="120" width="280" height="60" rx="4" fill="none" stroke="rgba(229, 229, 229, 0.1)" stroke-width="1.5"/>
-                                    
-                                    <!-- Branch ducts -->
-                                    <rect x="80" y="80" width="40" height="40" rx="2" fill="none" stroke="rgba(229, 229, 229, 0.08)" stroke-width="1"/>
-                                    <rect x="180" y="60" width="40" height="60" rx="2" fill="none" stroke="rgba(229, 229, 229, 0.08)" stroke-width="1"/>
-                                    <rect x="280" y="90" width="40" height="30" rx="2" fill="none" stroke="rgba(229, 229, 229, 0.08)" stroke-width="1"/>
-                                    
-                                    <!-- Fan circles -->
-                                    <g class="vent-fan" style="transform-origin: 100px 100px">
-                                        <circle cx="100" cy="100" r="12" fill="none" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1.5"/>
-                                        <line x1="100" y1="88" x2="100" y2="112" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1"/>
-                                        <line x1="88" y1="100" x2="112" y2="100" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1"/>
-                                    </g>
-                                    <g class="vent-fan" style="transform-origin: 200px 90px; animation-delay: -1s">
-                                        <circle cx="200" cy="90" r="15" fill="none" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1.5"/>
-                                        <line x1="200" y1="75" x2="200" y2="105" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1"/>
-                                        <line x1="185" y1="90" x2="215" y2="90" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1"/>
-                                    </g>
-                                    <g class="vent-fan" style="transform-origin: 300px 105px; animation-delay: -2s">
-                                        <circle cx="300" cy="105" r="10" fill="none" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1.5"/>
-                                        <line x1="300" y1="95" x2="300" y2="115" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1"/>
-                                        <line x1="290" y1="105" x2="310" y2="105" stroke="rgba(229, 229, 229, 0.18)" stroke-width="1"/>
-                                    </g>
-                                    
-                                    <!-- Air flow arrows -->
-                                    <path d="M95 100 L100 94 L105 100" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="0.8" class="air-flow"/>
-                                    <path d="M195 90 L200 82 L205 90" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="0.8" class="air-flow"/>
-                                    <path d="M295 105 L300 99 L305 105" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="0.8" class="air-flow"/>
-                                    
-                                    <!-- Connection lines -->
-                                    <line x1="100" y1="120" x2="100" y2="140" stroke="rgba(229, 229, 229, 0.06)" stroke-width="1"/>
-                                    <line x1="200" y1="120" x2="200" y2="150" stroke="rgba(229, 229, 229, 0.06)" stroke-width="1"/>
-                                    <line x1="300" y1="120" x2="300" y2="140" stroke="rgba(229, 229, 229, 0.06)" stroke-width="1"/>
-                                </g>
-                                
-                                <!-- Dimension lines -->
-                                <g stroke="rgba(229, 229, 229, 0.05)" stroke-width="0.5">
-                                    <line x1="60" y1="200" x2="340" y2="200" stroke-dasharray="4 2"/>
-                                    <line x1="60" y1="195" x2="60" y2="205"/>
-                                    <line x1="340" y1="195" x2="340" y2="205"/>
-                                </g>
-                                
-                                <!-- Labels -->
-                                <text x="200" y="220" text-anchor="middle" fill="rgba(229, 229, 229, 0.2)" font-size="9" font-family="monospace">2800mm</text>
-                            </svg>
+                        <!-- Modal Container for Image -->
+                        <div class="absolute inset-0 p-8 overflow-hidden">
+                            <img src="kompanii.png" alt="Gros Group"
+                                 class="h-full w-auto object-cover"
+                                 style="transform: translateX(-25%); transform-origin: center;">
                         </div>
                     </div>
                     
