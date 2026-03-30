@@ -67,6 +67,7 @@ export function initVentilationAnimation(containerId) {
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.domElement.style.pointerEvents = 'none';
         container.appendChild(renderer.domElement);
 
         controls = new OrbitControls(camera, renderer.domElement);
@@ -77,6 +78,8 @@ export function initVentilationAnimation(containerId) {
         controls.autoRotate = true;
         controls.autoRotateSpeed = 0.5;
 
+        controls.enabled = false;
+        
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         scene.add(ambientLight);
 
