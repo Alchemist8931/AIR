@@ -1401,6 +1401,20 @@
         }
 
         function createControlPanel() {
+            // Вычисляем точную позицию панели над карточками статистики
+    // Карточки имеют p-6 (24px) + gap-4 (16px между ними)
+    // Размещаем панель на том же расстоянии над карточками
+    const statsCards = document.querySelectorAll('.stats-card');
+    let targetBottom = 'calc(50vh + 140px)'; // Значение по умолчанию
+
+    if (statsCards.length > 0) {
+        const firstCard = statsCards[0];
+        const cardRect = firstCard.getBoundingClientRect();
+        const gapAboveCards = 16; // gap-4 = 16px (такой же отступ как между карточками)
+        const panelHeight = 70; // Примерная высота панели
+        // Позиционируем панель так, чтобы расстояние до карточек было равно gap-4
+        targetBottom = `calc(50vh + 96px + ${gapAboveCards}px)`; // mt-24 (96px) + gap-4 (16px)
+    }
     // Создаем панель как отдельный элемент, а не внутри vent-animation-container
     const panel = document.createElement('div');
     panel.id = 'vent-control-panel';
@@ -1408,7 +1422,7 @@
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(50vh + 120px); /* Позиция над блоками статистики с отступом gap-4 (16px) */
+        bottom: ${targetBottom};
         z-index: 1000;
         background: rgba(22, 22, 22, 0.95);
         border: 1px solid rgba(38, 38, 38, 0.8);
@@ -1422,6 +1436,8 @@
         align-items: center;
         gap: 24px;
         user-select: none;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
     `;
 
     panel.innerHTML = `
