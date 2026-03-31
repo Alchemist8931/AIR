@@ -1611,128 +1611,136 @@
                 });
         }
 
-        function createControlPanel() {
-            // Вычисляем точную позицию панели над карточками статистики
-    // Карточки имеют p-6 (24px) + gap-4 (16px между ними)
-    // Размещаем панель на том же расстоянии над карточками
-    const statsCards = document.querySelectorAll('.stats-card');
-    let targetBottom = 'calc(50vh + 140px)'; // Значение по умолчанию
+function createControlPanel() {
+            // Находим все карточки статистики
+            const statsCards = document.querySelectorAll('.stats-card');
+            let targetBottom = '140px'; // Значение по умолчанию (например, если карточек нет)
 
-    if (statsCards.length > 0) {
-        const firstCard = statsCards[0];
-        const cardRect = firstCard.getBoundingClientRect();
-        const gapAboveCards = 16; // gap-4 = 16px (такой же отступ как между карточками)
-        const panelHeight = 70; // Примерная высота панели
-        // Позиционируем панель так, чтобы расстояние до карточек было равно gap-4
-        targetBottom = `calc(50vh + 96px + ${gapAboveCards}px)`; // mt-24 (96px) + gap-4 (16px)
-    }
-    // Создаем панель как отдельный элемент, а не внутри vent-animation-container
-    const panel = document.createElement('div');
-    panel.id = 'vent-control-panel';
-    panel.style.cssText = `
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: ${targetBottom};
-        z-index: 1000;
-        background: rgba(22, 22, 22, 0.95);
-        border: 1px solid rgba(38, 38, 38, 0.8);
-        border-radius: 12px;
-        padding: 16px 24px;
-        width: calc(62.5% + 250px);
-        max-width: 750px;
-        backdrop-filter: blur(8px);
-        pointer-events: auto !important;
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        user-select: none;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
-    `;
+            // Если карточки есть, рассчитываем позицию над 3-й и 4-й карточками ("70+ специалистов" и "24/7 поддержка")
+            // Индекс 2 соответствует 3-й карточке в массиве (0, 1, 2...)
+            if (statsCards.length > 2) {
+                const targetCard = statsCards[2]; // Карточка "70+ специалистов"
+                const rect = targetCard.getBoundingClientRect();
+                
+                // Вычисляем отступ снизу: (высота экрана - верх карточки) + зазор
+                // Зазор 16px (gap-4) для соответствия отступам между карточками
+                const gapAboveCards = 16; 
+                targetBottom = `${window.innerHeight - rect.top + gapAboveCards}px`;
+            }
 
-    panel.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; min-width: 140px;">
-            <div style="width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; box-shadow: 0 0 8px #4CAF50; animation: pulse 2s infinite;"></div>
-            <span style="font-size: 10px; color: #737373; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'SN Pro', monospace;">Система активна</span>
-        </div>
-
-        <div style="height: 30px; width: 1px; background: rgba(38, 38, 38, 0.8);"></div>
-
-        <div style="display: flex; gap: 8px;">
-            <button id="btn-damper-open"
-                style="background: transparent; border: 1px solid rgba(38, 38, 38, 0.8); color: #A3A3A3; padding: 8px 16px; cursor: pointer; font-size: 9px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s; white-space: nowrap;"
-                class="active">Открыть</button>
-            <button id="btn-damper-close"
-                style="background: transparent; border: 1px solid rgba(38, 38, 38, 0.8); color: #A3A3A3; padding: 8px 16px; cursor: pointer; font-size: 9px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s; white-space: nowrap;">Закрыть</button>
-        </div>
-
-        <div style="height: 30px; width: 1px; background: rgba(38, 38, 38, 0.8);"></div>
-
-        <div style="display: flex; align-items: center; gap: 12px; flex: 1; max-width: 350px;">
-            <span style="font-size: 9px; color: #A3A3A3; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Скорость</span>
-            <input type="range" id="fan-speed-slider" min="0" max="100" value="50"
-               style="-webkit-appearance: none; width: 100%; height: 3px; background: #525252; outline: none; cursor: pointer; border-radius: 2px;">
-            <span id="fan-speed-display" style="color: #E5E5E5; font-weight: bold; font-family: monospace; font-size: 11px; min-width: 35px;">50%</span>
-        </div>
-
-        <style>
-            @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-            #vent-control-panel * {
+            // Создаем панель
+            const panel = document.createElement('div');
+            panel.id = 'vent-control-panel';
+            panel.style.cssText = `
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: ${targetBottom};
+                z-index: 1000;
+                background: rgba(22, 22, 22, 0.95);
+                border: 1px solid rgba(38, 38, 38, 0.8);
+                border-radius: 12px;
+                padding: 10px 24px; /* Уменьшен вертикальный padding (было 16px, стало 10px) */
+                width: calc(62.5% + 250px);
+                max-width: 750px;
+                backdrop-filter: blur(8px);
                 pointer-events: auto !important;
-            }
-            #vent-control-panel input[type=range]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                width: 16px; height: 16px;
-                background: #0D0D0D;
-                border: 2px solid #E5E5E5;
-                cursor: pointer;
-                border-radius: 50%;
-                pointer-events: auto;
-            }
-            #vent-control-panel button {
-                pointer-events: auto !important;
-                cursor: pointer;
-            }
-            #vent-control-panel button:hover {
-                transform: translateY(-1px);
-            }
-            #vent-control-panel button.active {
-                border-color: #4CAF50;
-                color: #4CAF50;
-                background: rgba(76, 175, 80, 0.1);
-            }
-            #vent-control-panel button.closed {
-                border-color: #f44336;
-                color: #f44336;
-                background: rgba(244, 67, 54, 0.1);
-            }
-        </style>
-    `;
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                user-select: none;
+                opacity: 0;
+                transition: opacity 1.5s ease-in-out;
+            `;
 
-    // Добавляем панель прямо в body, чтобы избежать проблем с pointer-events
-    document.body.appendChild(panel);
-    
-    // Attach event listeners to buttons and slider
-    const slider = document.getElementById('fan-speed-slider');
-    if (slider) {
-        slider.addEventListener('input', function(e) {
-            window.updateFanSpeed(e.target.value);
-        });
-    }
+            panel.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px; min-width: 140px;">
+                    <div style="width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; box-shadow: 0 0 8px #4CAF50; animation: pulse 2s infinite;"></div>
+                    <span style="font-size: 10px; color: #737373; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'SN Pro', monospace;">Система активна</span>
+                </div>
 
-    const btnOpen = document.getElementById('btn-damper-open');
-    const btnClose = document.getElementById('btn-damper-close');
-    if (btnOpen) {
-        btnOpen.addEventListener('click', function() {
-            window.setDamper(true);
-        });
-    }
-    if (btnClose) {
-        btnClose.addEventListener('click', function() {
-            window.setDamper(false);
-        });
-    }
+                <div style="height: 30px; width: 1px; background: rgba(38, 38, 38, 0.8);"></div>
+
+                <div style="display: flex; gap: 8px;">
+                    <button id="btn-damper-open"
+                        style="background: transparent; border: 1px solid rgba(38, 38, 38, 0.8); color: #A3A3A3; padding: 8px 16px; cursor: pointer; font-size: 9px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s; white-space: nowrap;"
+                        class="active">Открыть</button>
+                    <button id="btn-damper-close"
+                        style="background: transparent; border: 1px solid rgba(38, 38, 38, 0.8); color: #A3A3A3; padding: 8px 16px; cursor: pointer; font-size: 9px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s; white-space: nowrap;">Закрыть</button>
+                </div>
+
+                <div style="height: 30px; width: 1px; background: rgba(38, 38, 38, 0.8);"></div>
+
+                <div style="display: flex; align-items: center; gap: 12px; flex: 1; max-width: 350px;">
+                    <span style="font-size: 9px; color: #A3A3A3; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Скорость</span>
+                    <input type="range" id="fan-speed-slider" min="0" max="100" value="50"
+                       style="-webkit-appearance: none; width: 100%; height: 3px; background: #525252; outline: none; cursor: pointer; border-radius: 2px;">
+                    <span id="fan-speed-display" style="color: #E5E5E5; font-weight: bold; font-family: monospace; font-size: 11px; min-width: 35px;">50%</span>
+                </div>
+
+                <style>
+                    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+                    #vent-control-panel * {
+                        pointer-events: auto !important;
+                    }
+                    #vent-control-panel input[type=range]::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        width: 16px; height: 16px;
+                        background: #0D0D0D;
+                        border: 2px solid #E5E5E5;
+                        cursor: pointer;
+                        border-radius: 50%;
+                        pointer-events: auto;
+                    }
+                    #vent-control-panel button {
+                        pointer-events: auto !important;
+                        cursor: pointer;
+                    }
+                    #vent-control-panel button:hover {
+                        transform: translateY(-1px);
+                    }
+                    #vent-control-panel button.active {
+                        border-color: #4CAF50;
+                        color: #4CAF50;
+                        background: rgba(76, 175, 80, 0.1);
+                    }
+                    #vent-control-panel button.closed {
+                        border-color: #f44336;
+                        color: #f44336;
+                        background: rgba(244, 67, 54, 0.1);
+                    }
+                </style>
+            `;
+
+            // Добавляем панель в body
+            document.body.appendChild(panel);
+            
+            // *** ВАЖНОЕ ИСПРАВЛЕНИЕ: Делаем панель видимой ***
+            // Небольшая задержка для плавного появления
+            requestAnimationFrame(() => {
+                 panel.style.opacity = '1';
+            });
+
+            // Attach event listeners
+            const slider = document.getElementById('fan-speed-slider');
+            if (slider) {
+                slider.addEventListener('input', function(e) {
+                    window.updateFanSpeed(e.target.value);
+                });
+            }
+
+            const btnOpen = document.getElementById('btn-damper-open');
+            const btnClose = document.getElementById('btn-damper-close');
+            if (btnOpen) {
+                btnOpen.addEventListener('click', function() {
+                    window.setDamper(true);
+                });
+            }
+            if (btnClose) {
+                btnClose.addEventListener('click', function() {
+                    window.setDamper(false);
+                });
+            }
 }
 
         // Global functions for control panel (expose to window for inline handlers)
