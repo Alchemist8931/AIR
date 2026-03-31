@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -1814,6 +1815,105 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
     })();
+</script>
+
+    <script>
+    // P5.js Ash Animation for Stats Cards
+    let particles = [];
+    let layers = [
+        { color: "#B0B0B0", size: 1, height: 125, speed: 1.2, frequency: 30 },
+        { color: "#FFFFFF", size: 2, height: 100, speed: 1.1, frequency: 30 },
+        { color: "#B0B0B0", size: 3, height: 75, speed: 0.9, frequency: 30 },
+        { color: "#757575", size: 3, height: 50, speed: 0.8, frequency: 30 }
+    ];
+
+    function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.style('z-index', '998'); // Под слоем модальных окон, но над контентом
+        canvas.style('position', 'fixed');
+        canvas.style('top', '0');
+        canvas.style('left', '0');
+        canvas.style('pointer-events', 'none'); // Чтобы не блокировать клики
+    }
+
+    function draw() {
+        clear(); // Прозрачный фон
+        
+        // Получаем все карточки статистики
+        let cards = document.querySelectorAll('.stats-card');
+        
+        cards.forEach(card => {
+            let rect = card.getBoundingClientRect();
+            let cardX = rect.left;
+            let cardY = rect.top;
+            let cardW = rect.width;
+            let cardH = rect.height;
+
+            layers.forEach((layer) => {
+                if (frameCount % layer.frequency == 0) {
+                    // Начальная позиция X: случайная точка в пределах ширины карточки
+                    let x = cardX + random(cardW * 0.1, cardW * 0.9);
+                    // Начальная позиция Y: нижняя граница карточки
+                    let y = cardY + cardH;
+                    
+                    // Создаем частицу (движение вниз)
+                    particles.push(new Particle(x, y, layer.color, layer.size, layer.height, layer.speed));
+                }
+            });
+        });
+        
+        for (let i = particles.length - 1; i >= 0; i--) {
+            let p = particles[i];
+            p.update();
+            p.display();
+            if (p.isFinished()) {
+                particles.splice(i, 1);
+            }
+        }
+    }
+
+    class Particle {
+        constructor(x, y, color, size, maxHeight, speed) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.size = size;
+            this.maxHeight = maxHeight;
+            this.speed = speed;
+            this.alpha = 255;
+            // Случайное движение по X (дрейф) и положительное по Y (вниз)
+            this.vx = random(-1, 1) * speed * 0.5;
+            this.vy = random(0.5, 1.5) * speed; // Положительная скорость = вниз
+            this.startY = y;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            // Расстояние, пройденное вниз
+            let deltaY = this.y - this.startY;
+            
+            // Затухание после прохождения максимальной высоты
+            if (deltaY > this.maxHeight) {
+                this.alpha -= 10;
+            }
+        }
+
+        display() {
+            noStroke();
+            fill(this.color + hex(this.alpha, 2));
+            ellipse(this.x, this.y, this.size);
+        }
+
+        isFinished() {
+            return this.alpha < 0;
+        }
+    }
+
+    function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+    }
 </script>
     
 </body>
