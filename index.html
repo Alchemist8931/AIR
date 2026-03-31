@@ -565,8 +565,8 @@
 .modal-a4 {
     position: relative;
     height: 90vh;
-    max-width: 85vw;    /* Уменьшена максимальная ширина окна (было 95vw) */
-    width: fit-content; /* Ширина определяется содержимым, но не больше max-width */
+    max-width: 65vw;    /* Уменьшена максимальная ширина окна с 85vw до 65vw */
+    width: fit-content;
     background: var(--card);
     border: 1px solid rgba(38, 38, 38, 0.8);
     border-radius: 12px;
@@ -1120,7 +1120,7 @@
                              <!-- Слой с изображением sert.jpeg -->
                              <div id="sert-trigger" class="sert-trigger w-full h-full cursor-pointer">
                                 <img src="sert.jpeg" alt="Сертификат официального партнера СовПлим" 
-                                     class="h-full w-full object-cover"
+                                     class="h-full w-auto object-contain mx-auto"
                                      style="transform-origin: center;">
                                 <!-- Затемнение при наведении для вызова модального окна -->
                                 <div class="sert-trigger-overlay rounded-none">
