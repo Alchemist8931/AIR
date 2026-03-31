@@ -1612,35 +1612,17 @@
         }
 
 function createControlPanel() {
-            // Находим все карточки статистики
-            const statsCards = document.querySelectorAll('.stats-card');
-            let targetBottom = '140px'; // Значение по умолчанию (например, если карточек нет)
-
-            // Если карточки есть, рассчитываем позицию над 3-й и 4-й карточками ("70+ специалистов" и "24/7 поддержка")
-            // Индекс 2 соответствует 3-й карточке в массиве (0, 1, 2...)
-            if (statsCards.length > 2) {
-                const targetCard = statsCards[2]; // Карточка "70+ специалистов"
-                const rect = targetCard.getBoundingClientRect();
-                
-                // Вычисляем отступ снизу: (высота экрана - верх карточки) + зазор
-                // Зазор 16px (gap-4) для соответствия отступам между карточками
-                const gapAboveCards = 16; 
-                targetBottom = `${window.innerHeight - rect.top + gapAboveCards}px`;
-            }
-
-            // Создаем панель
             const panel = document.createElement('div');
             panel.id = 'vent-control-panel';
+            
+            // Базовые стили. Позиционирование будет задано функцией updatePosition
             panel.style.cssText = `
-                position: fixed;
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: ${targetBottom};
+                position: absolute; /* Changed from fixed to absolute to allow scrolling */
                 z-index: 1000;
                 background: rgba(22, 22, 22, 0.95);
                 border: 1px solid rgba(38, 38, 38, 0.8);
                 border-radius: 12px;
-                padding: 10px 24px; /* Уменьшен вертикальный padding (было 16px, стало 10px) */
+                padding: 10px 24px; /* Уменьшена высота (было 16px, стало 10px) */
                 width: calc(62.5% + 250px);
                 max-width: 750px;
                 backdrop-filter: blur(8px);
@@ -1651,6 +1633,8 @@ function createControlPanel() {
                 user-select: none;
                 opacity: 0;
                 transition: opacity 1.5s ease-in-out;
+                left: 50%;
+                transform: translateX(-50%);
             `;
 
             panel.innerHTML = `
@@ -1714,14 +1698,50 @@ function createControlPanel() {
 
             // Добавляем панель в body
             document.body.appendChild(panel);
-            
-            // *** ВАЖНОЕ ИСПРАВЛЕНИЕ: Делаем панель видимой ***
-            // Небольшая задержка для плавного появления
-            requestAnimationFrame(() => {
-                 panel.style.opacity = '1';
+
+            // Функция для расчета позиции панели
+            function updatePosition() {
+                const statsCards = document.querySelectorAll('.stats-card');
+                // Если карточек нет, скрываем панель или ставим дефолт
+                if (statsCards.length < 3) {
+                    panel.style.display = 'none';
+                    return;
+                }
+                
+                panel.style.display = 'flex';
+
+                // Берем 3-ю карточку (70+ специалистов, индекс 2)
+                const targetCard = statsCards[2];
+                const rect = targetCard.getBoundingClientRect();
+                
+                // Вычисляем абсолютную позицию от верха документа
+                // scrollY добавляем, чтобы учесть прокрутку
+                const cardTopAbsolute = rect.top + window.scrollY;
+                
+                // Высота панели примерно 40-50px. Поднимаем панель над карточкой
+                const gap = 50; 
+                const topPosition = cardTopAbsolute - gap;
+
+                panel.style.top = `${topPosition}px`;
+                // left и transform уже заданы в cssText
+            }
+
+            // Обновляем позицию при загрузке и изменении размера окна
+            updatePosition();
+            window.addEventListener('resize', updatePosition);
+            window.addEventListener('scroll', () => {
+                // Так как position: absolute, пересчитывать top при скролле не нужно,
+                // панель сама "едет" вместе со страницей.
+                // Но если нужно зафиксировать её в какой-то момент (sticky), логика была бы сложнее.
+                // Сейчас оставляем как есть - панель статична относительно документа.
             });
 
-            // Attach event listeners
+            // Делаем панель видимой (запускаем transition)
+            requestAnimationFrame(() => {
+                panel.style.opacity = '1';
+            });
+
+            // Слушатели событий
             const slider = document.getElementById('fan-speed-slider');
             if (slider) {
                 slider.addEventListener('input', function(e) {
@@ -1742,7 +1762,7 @@ function createControlPanel() {
                 });
             }
 }
-
+        
         // Global functions for control panel (expose to window for inline handlers)
         window.updateFanSpeed = function(value) {
             document.getElementById('fan-speed-display').innerText = value + '%';
