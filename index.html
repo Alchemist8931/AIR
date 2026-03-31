@@ -1108,19 +1108,21 @@
                 
                 <!-- Right Column: Certificate Image -->
                 <div class="reveal delay-2 relative">
-                    <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20 min-h-[600px]">
+                    <!-- Контейнер: w-fit подстраивает ширину под контент (изображение), mx-auto центрирует его -->
+                    <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20 h-[600px] w-fit mx-auto">
                         <!-- Corner marks -->
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
                         <div class="corner-mark corner-mark-br"></div>
                         
-                        <!-- Image Container (аналогично About Section) -->
-                        <div class="absolute inset-0 flex items-center justify-center overflow-hidden">
+                        <!-- Image Container -->
+                        <!-- Убрали absolute inset-0, теперь блок следует за размером изображения -->
+                        <div class="w-full h-full flex items-center justify-center overflow-hidden">
                              <!-- Слой с изображением sert.jpeg -->
                              <div id="sert-trigger" class="sert-trigger w-full h-full cursor-pointer">
                                 <img src="sert.jpeg" alt="Сертификат официального партнера СовПлим" 
-                                     class="h-full w-auto object-contain mx-auto"
+                                     class="h-full w-auto object-contain"
                                      style="transform-origin: center;">
                                 <!-- Затемнение при наведении для вызова модального окна -->
                                 <div class="sert-trigger-overlay rounded-none">
@@ -1820,10 +1822,10 @@
     // P5.js Ash Animation for Stats Cards
     let particles = [];
     let layers = [
-        { color: "E3E3E3", size: 1, height: 100, speed: 1.2, frequency: 20 },
-        { color: "#FFFFFF", size: 2, height: 80, speed: 1.1, frequency: 20 },
-        { color: "#FFC805", size: 3, height: 60, speed: 0.9, frequency: 20 },
-        { color: "#FFBF00", size: 3, height: 40, speed: 0.8, frequency: 20 }
+        { color: "E3E3E3", size: 1, height: 50, speed: 1.2, frequency: 20 },
+        { color: "#FFFFFF", size: 2, height: 40, speed: 1.1, frequency: 20 },
+        { color: "#FFC805", size: 3, height: 30, speed: 0.9, frequency: 20 },
+        { color: "#FFBF00", size: 3, height: 20, speed: 0.8, frequency: 20 }
     ];
 
     function setup() {
