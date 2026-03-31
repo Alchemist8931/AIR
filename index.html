@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GROSGROUP</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROSGROUP — Промышленная вентиляция и аспирация в Калуге | Проектирование и монтаж</title>
+    <meta name="description" content="GROSGROUP: проектирование, монтаж и сервис систем промышленной вентиляции и аспирации. Официальный партнер СовПлим. Работаем в Калуге и области. Гарантия 5 лет. Звоните: +7 (961) 125-55-50.">
+    <meta name="keywords" content="промышленная вентиляция, аспирация, монтаж вентиляции Калуга, пылеудаление, вытяжная вентиляция, GROSGROUP, СовПлим">
+    <meta name="robots" content="index, follow">
+    
+    <!-- СКОРРЕКТИРОВАТЬ КАК БУДЕТ ЗАПУЩЕНО НА ДОМЕНЕ -->
+    <link rel="canonical" href="https://САЙТ.RU/" />
+    <meta property="og:image" content="https://САЙТ.RU/og-preview.jpg">
+    <meta property="og:url" content="https://САЙТ.RU/">
+    <!-- СКОРРЕКТИРОВАТЬ КАК БУДЕТ ЗАПУЩЕНО НА ДОМЕНЕ -->
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GROSGROUP — Промышленная вентиляция и аспирация">
+    <meta property="og:description" content="Комплексные решения для чистого воздуха на производстве. Монтаж, сервис, проектирование.">
+    <img src="kompanii.png" alt="О компании GROSGROUP" loading="lazy" ...>
+    
     <script src="https://cdn.tailwindcss.com"></script>   
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +85,6 @@
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-        /* Dark Theme Background with Subtle Gradients */
         .dark-bg {
             background: 
                 radial-gradient(ellipse 100% 60% at 50% -30%, rgba(229, 229, 229, 0.03) 0%, transparent 50%),
@@ -75,7 +93,6 @@
                 linear-gradient(180deg, #0D0D0D 0%, #0A0A0A 50%, #0D0D0D 100%);
         }
 
-        /* CSS Particles */
         .particle {
             position: fixed;
             width: 2px;
@@ -99,7 +116,6 @@
             75% { transform: translate(25px, 10px); opacity: 0.12; }
         }
 
-        /* Ambient Orbs - Dark Theme */
         .ambient-orb {
             position: absolute;
             border-radius: 50%;
@@ -116,7 +132,6 @@
             filter: blur(100px);
         }
 
-        /* Blueprint Grid - Dark */
         .blueprint-grid {
             background-image: 
                 linear-gradient(rgba(229, 229, 229, 0.03) 1px, transparent 1px),
@@ -126,7 +141,6 @@
             background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
         }
 
-        /* Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -145,7 +159,6 @@
         .delay-4 { transition-delay: 0.4s; }
         .delay-5 { transition-delay: 0.5s; }
 
-        /* Service Card - Dark Theme */
         .service-card {
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.95) 0%, rgba(22, 22, 22, 0.98) 100%);
             border: 1px solid rgba(38, 38, 38, 0.8);
@@ -199,7 +212,6 @@
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Button - Dark Theme */
         .btn-primary {
             position: relative;
             background: linear-gradient(135deg, rgba(229, 229, 229, 0.95) 0%, rgba(200, 200, 200, 1) 100%);
@@ -228,7 +240,6 @@
 
         .btn-primary:hover::before { left: 100%; }
 
-        /* Secondary Button */
         .btn-secondary {
             background: rgba(26, 26, 26, 0.9);
             border: 1px solid rgba(38, 38, 38, 0.8);
@@ -242,7 +253,6 @@
             box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
         }
 
-        /* Project Card - Dark Theme */
         .project-card {
             position: relative;
             overflow: hidden;
@@ -281,7 +291,6 @@
             opacity: 1;
         }
 
-        /* Header - Dark Theme */
         .header-solid {
             background: rgba(13, 13, 13, 0.92);
             border-bottom: 1px solid rgba(38, 38, 38, 0.6);
@@ -289,7 +298,6 @@
             backdrop-filter: blur(12px);
         }
 
-        /* Stats Card - Dark Theme */
         .stats-card {
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.9) 0%, rgba(22, 22, 22, 0.95) 100%);
             border: 1px solid rgba(38, 38, 38, 0.7);
@@ -322,7 +330,6 @@
 
         .stats-card:hover::after { width: 70%; }
 
-        /* Mobile Menu - Dark Theme */
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
@@ -331,13 +338,11 @@
 
         .mobile-menu.open { transform: translateX(0); }
 
-        /* Focus */
         button:focus-visible, a:focus-visible {
             outline: 2px solid var(--fg);
             outline-offset: 3px;
         }
 
-        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -346,7 +351,6 @@
             }
         }
 
-        /* Form - Dark Theme */
         .form-input {
             background: rgba(26, 26, 26, 0.95);
             border: 1px solid rgba(38, 38, 38, 0.9);
@@ -362,7 +366,6 @@
 
         .form-input::placeholder { color: rgba(115, 115, 115, 0.8); }
 
-        /* Tech Line Animation */
         .tech-line-animated {
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
@@ -374,7 +377,6 @@
             30%, 70% { stroke-dashoffset: 0; opacity: 0.25; }
         }
 
-        /* Corner Marks */
         .corner-mark {
             position: absolute;
             width: 20px;
@@ -388,13 +390,11 @@
         .corner-mark-bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
         .corner-mark-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
 
-        /* Hero Visual */
         .hero-visual-inner {
             transition: transform 0.15s ease-out;
             will-change: transform;
         }
 
-        /* Vent Fan Animation */
         .vent-fan {
             animation: fanRotate 3s linear infinite;
             transform-origin: center;
@@ -405,7 +405,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Air Flow */
         .air-flow {
             stroke-dasharray: 8 4;
             animation: airFlow 1.5s linear infinite;
@@ -416,7 +415,6 @@
             to { stroke-dashoffset: -24; }
         }
 
-        /* Pulse */
         .pulse-soft {
             animation: pulseSoft 3s ease-in-out infinite;
         }
@@ -426,7 +424,6 @@
             50% { opacity: 0.25; }
         }
 
-        /* Float */
         .float {
             animation: float 5s ease-in-out infinite;
         }
@@ -436,13 +433,11 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* Section Divider */
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(229, 229, 229, 0.06) 50%, transparent 100%);
         }
 
-        /* Status Indicator */
         .status-pulse {
             animation: statusPulse 2.5s ease-in-out infinite;
         }
@@ -452,7 +447,6 @@
             50% { opacity: 1; transform: scale(1.15); }
         }
 
-        /* Scan Line */
         .scan-line {
             position: absolute;
             width: 100%;
@@ -468,7 +462,6 @@
             100% { top: 100%; opacity: 0; }
         }
 
-        /* Process Step */
         .process-step {
             position: relative;
         }
@@ -485,7 +478,6 @@
 
         .process-step:last-child::after { display: none; }
 
-        /* Link Underline */
         .nav-link {
             position: relative;
         }
@@ -503,7 +495,6 @@
 
         .nav-link:hover::after { width: 100%; }
 
-        /* Feature Icon Container */
         .feature-icon {
             background: rgba(229, 229, 229, 0.03);
             border: 1px solid rgba(229, 229, 229, 0.06);
@@ -515,7 +506,6 @@
             border-color: rgba(229, 229, 229, 0.12);
         }
 
-        /* Info Card */
         .info-card {
             background: rgba(26, 26, 26, 0.6);
             border: 1px solid rgba(38, 38, 38, 0.5);
@@ -526,7 +516,6 @@
             border-color: rgba(229, 229, 229, 0.12);
         }
 
-        /* Logo Container */
         .logo-box {
             border: 1px solid rgba(229, 229, 229, 0.1);
             transition: all 0.3s ease;
@@ -543,7 +532,6 @@
             transition: filter 0.3s ease;
         }
 
-        /* Modal A4 — Certificate */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -582,10 +570,10 @@
 
 .modal-a4 img {
     display: block;
-    height: 100%;       /* Изображение занимает 100% высоты модального окна */
-    max-width: 100%;    /* Ограничение ширины: не шире модального окна */
-    width: auto;        /* Ширина вычисляется пропорционально высоте */
-    object-fit: contain;/* Гарантирует, что изображение вписывается без обрезки */
+    height: 100%; 
+    max-width: 100%;  
+    width: auto; 
+    object-fit: contain;
 }
 
 .modal-close {
@@ -610,7 +598,6 @@
     border-color: rgba(229, 229, 229, 0.25);
 }
 
-/* Sert trigger hover */
 .sert-trigger {
     cursor: pointer;
     position: relative;
@@ -643,7 +630,6 @@
     font-family: 'SN Pro', monospace;
 }
 
-                /* Badge Stats Style */
         .badge-stats {
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.9) 0%, rgba(22, 22, 22, 0.95) 100%);
             border: 1px solid rgba(38, 38, 38, 0.7);
@@ -652,10 +638,8 @@
     </style>
 </head>
 <body class="antialiased dark-bg">
-    <!-- CSS Particles -->
     <div id="particles-container" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></div>
 
-    <!-- Header -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400">
         <div class="max-w-7xl mx-auto px-6">
             <nav class="flex items-center justify-between h-20">
@@ -695,7 +679,6 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 lg:hidden">
         <div class="flex flex-col h-full pt-24 px-6 pb-8">
             <button id="close-menu" class="absolute top-6 right-6 w-11 h-11 flex items-center justify-center border border-gray-light rounded-xl hover:border-ink/20 transition-colors" aria-label="Закрыть">
@@ -718,22 +701,13 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
-
-        <!-- Ventilation Animation Background -->
         <div id="vent-animation-container" class="absolute inset-0 z-0" style="pointer-events: none;"></div>
-        
-        <!-- Ambient Orbs -->
         <div class="ambient-orb" style="width: 500px; height: 500px; top: -150px; right: -100px; background: radial-gradient(circle, rgba(229, 229, 229, 0.02) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 400px; height: 400px; bottom: 5%; left: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
-        
-        <!-- Blueprint Grid -->
         <div class="absolute inset-0 blueprint-grid opacity-50"></div>
         
-        <!-- Animated Blueprint SVG -->
         <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <!-- Technical lines -->
             <g stroke="rgba(229, 229, 229, 0.04)" stroke-width="1" fill="none">
                 <line x1="100" y1="200" x2="550" y2="200"/>
                 <line x1="1370" y1="150" x2="1820" y2="150"/>
@@ -742,24 +716,20 @@
                 <line x1="1770" y1="100" x2="1770" y2="480"/>
             </g>
             
-            <!-- Animated paths -->
             <path class="tech-line-animated" d="M100 300 L280 300 L280 480 L460 480" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="1"/>
             <path class="tech-line-animated" style="animation-delay: 1.5s" d="M1460 200 L1640 200 L1640 380 L1820 380" fill="none" stroke="rgba(229, 229, 229, 0.15)" stroke-width="1"/>
             
-            <!-- Corner markers -->
             <g stroke="rgba(229, 229, 229, 0.06)" stroke-width="1" fill="none">
                 <path d="M80 180 L80 150 L110 150"/>
                 <path d="M1840 120 L1840 150 L1810 150"/>
                 <path d="M80 900 L80 930 L110 930"/>
             </g>
             
-            <!-- Technical circles -->
             <circle cx="380" cy="380" r="50" fill="none" stroke="rgba(229, 229, 229, 0.03)" stroke-width="1" class="pulse-soft"/>
             <circle cx="380" cy="380" r="70" fill="none" stroke="rgba(229, 229, 229, 0.02)" stroke-width="1"/>
             <circle cx="1540" cy="280" r="35" fill="none" stroke="rgba(229, 229, 229, 0.03)" stroke-width="1" class="pulse-soft" style="animation-delay: -1s"/>
         </svg>
         
-        <!-- Scan Line -->
         <div class="scan-line"></div>
         
         <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-0">
@@ -796,12 +766,9 @@
                     </div>
                 </div>
                 
-                <!-- Technical Visual -->
                 <div class="reveal delay-2 relative hidden lg:block" style="margin-top: -280px; margin-left: 190px;">
                     <div class="hero-visual-inner float" id="hero-visual">
-                        <!-- Main Card - Reduced size, moved down -->
                         <div class="relative bg-gradient-to-br from-card/95 to-surface/90 rounded-2xl p-6 border overflow-hidden shadow-xl shadow-black/20 transform translate-y-8 scale-90" style="border-color: #FFBF00;">
-                            <!-- Corner marks -->
                             <div class="corner-mark corner-mark-tl"></div>
                             <div class="corner-mark corner-mark-tr"></div>
                             <div class="corner-mark corner-mark-bl"></div>
@@ -845,7 +812,6 @@
                 </div>
             </div>
             
-            <!-- Stats -->
             <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 reveal delay-3">
                 <div class="stats-card rounded-2xl p-6 text-center">
                     <p class="font-display text-4xl lg:text-5xl font-bold text-ink counter" data-target="17">0</p>
@@ -869,9 +835,7 @@
 
     <div class="section-divider"></div>
 
-    <!-- Services Section -->
     <section id="services" class="py-24 lg:py-32 relative overflow-hidden">
-        <!-- Ambient orb -->
         <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; right: -120px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -891,15 +855,10 @@
 
     <div class="section-divider"></div>
 
-    <!-- About Section -->
     <section id="about" class="py-24 lg:py-32 relative overflow-hidden">
-        <!-- Ambient orbs -->
         <div class="ambient-orb" style="width: 450px; height: 450px; top: 0; left: -200px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; right: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
-        
-        <!-- Blueprint grid -->
         <div class="absolute inset-0 blueprint-grid opacity-40"></div>
-        
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
@@ -975,24 +934,21 @@
                     
                 </div>
                 
-                <!-- Technical Visual -->
                 <div class="reveal delay-2 relative">
                     <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20 h-full min-h-[900px]">
-                        <!-- Corner marks -->
+
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
                         <div class="corner-mark corner-mark-br"></div>
-                        
-                        <!-- Image Container -->
+
                         <div class="absolute inset-0 flex items-center justify-center overflow-hidden">
                             <img src="kompanii.png" alt="GROSGROUP"
                                  class="h-full w-full object-cover"
                                  style="transform: translateX(0%); transform-origin: center;">
                         </div>
                     </div>
-                    
-                    <!-- ISO Badge -->
+
                     <div class="absolute -bottom-4 -right-4 badge-stats rounded-xl p-4 shadow-lg shadow-black/20">
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1008,7 +964,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="ambient-orb" style="width: 400px; height: 400px; top: 50%; right: -200px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
         
@@ -1029,18 +984,14 @@
 
     <div class="section-divider"></div>
 
-        <!-- Partnership Section -->
     <section id="process" class="py-24 lg:py-32 relative overflow-hidden">
-        <!-- Ambient orbs -->
         <div class="ambient-orb" style="width: 350px; height: 350px; top: 0; right: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; left: -120px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
         
-        <!-- Blueprint grid -->
         <div class="absolute inset-0 blueprint-grid opacity-40"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <!-- Left Column: Text -->
                 <div class="reveal">
                     <span class="inline-block text-ink-muted text-xs tracking-widest uppercase mb-4 font-mono" style="color: #FFBF00;">Partnership</span>
                     <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-ink mb-6">
@@ -1056,7 +1007,6 @@
                         Наше сотрудничество обеспечивает заказчикам доступ к полному спектру инжиниринговых услуг: от проектирования и поставки оборудования до монтажа и сервисного обслуживания систем местного отсоса, аспирации и вакуумной пылеуборки.
                     </p>
 
-                    <!-- Features Grid -->
                     <div class="grid grid-cols-2 gap-5 mt-10">
                         <div class="flex items-start gap-4 group">
                             <div class="feature-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -1106,25 +1056,18 @@
                     </div>
                 </div>
                 
-                <!-- Right Column: Certificate Image -->
                 <div class="reveal delay-2 relative">
-                    <!-- Контейнер: w-fit подстраивает ширину под контент (изображение), mx-auto центрирует его -->
                     <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20 h-[600px] w-fit mx-auto">
-                        <!-- Corner marks -->
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
                         <div class="corner-mark corner-mark-br"></div>
                         
-                        <!-- Image Container -->
-                        <!-- Убрали absolute inset-0, теперь блок следует за размером изображения -->
                         <div class="w-full h-full flex items-center justify-center overflow-hidden">
-                             <!-- Слой с изображением sert.jpeg -->
                              <div id="sert-trigger" class="sert-trigger w-full h-full cursor-pointer">
                                 <img src="sert.jpeg" alt="Сертификат официального партнера СовПлим" 
                                      class="h-full w-auto object-contain"
                                      style="transform-origin: center;">
-                                <!-- Затемнение при наведении для вызова модального окна -->
                                 <div class="sert-trigger-overlay rounded-none">
                                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
@@ -1135,7 +1078,6 @@
                         </div>
                     </div>
                     
-                    <!-- Badge -->
                     <div class="absolute -bottom-4 -left-4 badge-stats rounded-xl p-4 shadow-lg shadow-black/20" style="margin-left: 50px;">
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1153,9 +1095,7 @@
 
     <div class="section-divider"></div>
 
-    <!-- Contact Section -->
     <section id="contacts" class="py-24 lg:py-32 relative overflow-hidden">
-        <!-- Ambient orbs -->
         <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; left: -120px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 20%; right: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
         
@@ -1213,10 +1153,8 @@
                     </div>
                 </div>
                 
-                <!-- Form -->
                 <div class="reveal delay-2">
                     <form id="contact-form" class="relative bg-gradient-to-br from-card/90 to-surface/80 rounded-3xl p-8 border overflow-hidden shadow-xl shadow-black/20" style="border-color: #FFBF00;">
-                        <!-- Corner marks -->
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
@@ -1267,7 +1205,6 @@
         </div>
     </section>
 
-        <!-- Footer -->
     <footer class="py-12 border-t border-gray-light/40 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -1284,31 +1221,25 @@
                 
                 <p class="text-ink-muted text-sm">2026 GROSGROUP. Все права защищены.</p>
                 
-                <!-- Обновленный блок с текстом и соц. сетями -->
                 <div class="flex flex-col md:flex-row items-center gap-4">
                     <span class="text-sm text-ink-muted text-center md:text-right" style="color: #FFBF00;">Наше присутствие в социальных сетях и мессенджерах</span>
                     
                     <div class="flex gap-3">
-                        <!-- Telegram -->
                         <a href="https://www.grosgroup.ru/t.me/grosgroup" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/8 hover:border-ink/15 hover:bg-ink/8 transition-all" aria-label="Telegram">
                             <svg class="w-5 h-5 text-ink" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
                             </svg>
                         </a>
                         
-                        <!-- VK (Вместо WhatsApp) -->
                         <a href="https://vk.com/grosgrup40" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/8 hover:border-ink/15 hover:bg-ink/8 transition-all" aria-label="VKontakte">
                             <svg class="w-5 h-5 text-ink" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.189 1.366 1.26 2.18 1.817.616.422 1.084.33 1.084.33l2.178-.03s1.14-.071.599-.972c-.044-.074-.314-.665-1.616-1.883-1.363-1.276-1.18-1.069.461-3.275.999-1.341 1.399-2.16 1.274-2.51-.119-.333-.856-.245-.856-.245l-2.45.015s-.182-.025-.317.056c-.131.079-.216.262-.216.262s-.387 1.03-.903 1.907c-1.088 1.848-1.523 1.946-1.7 1.832-.413-.267-.31-1.075-.31-1.648 0-1.793.272-2.54-.532-2.733-.267-.064-.463-.106-1.146-.113-.876-.009-1.618.003-2.037.208-.279.137-.494.442-.363.46.162.022.529.099.724.363.251.342.243 1.105.243 1.105s.145 2.108-.337 2.37c-.331.18-.785-.187-1.76-1.865-.5-.86-.878-1.81-.878-1.81s-.073-.178-.203-.274c-.158-.116-.378-.153-.378-.153l-2.327.015s-.349.01-.477.162c-.114.135-.009.414-.009.414s1.82 4.258 3.88 6.403c1.889 1.967 4.032 1.838 4.032 1.838h.971z"/>
                             </svg>
                         </a>
                         
-                        <!-- Max (Новая иконка) -->
                         <a href="https://max.ru/join/CXsaFGn4NrFD9Ebry1iMa3-oOtvx5XYMrUsFmnDbKF0" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-ink/5 rounded-xl flex items-center justify-center border border-ink/8 hover:border-ink/15 hover:bg-ink/8 transition-all" aria-label="Max Messenger">
                             <svg class="w-5 h-5 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <!-- Окружность буквы Q -->
                                 <circle cx="12" cy="12" r="9" />
-                                <!-- "Хвостик" буквы Q слева (зеркально отражен) -->
                                 <path d="M8 17l-3 3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
@@ -1319,7 +1250,6 @@
     </footer>
 
     <script type="module">
-        // Data
         const services = [
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 12.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L2.293 6.707A1 1 0 012 6V4z"/></svg>`, 
@@ -1362,7 +1292,6 @@
             { title: 'Химический завод', category: 'Промышленная', description: 'Взрывозащищённое исполнение', image: '6.jpg' }
         ];
 
-        // Initialize CSS Particles
         function initParticles() {
             const container = document.getElementById('particles-container');
             if (!container) return;
@@ -1382,7 +1311,6 @@
             }
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             initParticles();
             renderServices();
@@ -1396,7 +1324,6 @@
             initParallax();
         });
 
-        // Render Services
         function renderServices() {
             const grid = document.getElementById('services-grid');
             if (!grid) return;
@@ -1412,7 +1339,6 @@
             `).join('');
         }
 
-        // Render Projects
         function renderProjects() {
             const grid = document.getElementById('projects-grid');
             if (!grid) return;
@@ -1433,8 +1359,7 @@
                 </div>
             `).join('');
         }
-
-        // Reveal Animations
+        
         function initRevealAnimations() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1447,7 +1372,6 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
-        // Header
         function initHeader() {
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
@@ -1459,7 +1383,6 @@
             }, { passive: true });
         }
 
-        // Mobile Menu
         function initMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const openBtn = document.getElementById('menu-btn');
@@ -1484,7 +1407,6 @@
             });
         }
 
-        // Counters
         function initCounters() {
             const counters = document.querySelectorAll('.counter');
             
@@ -1519,7 +1441,6 @@
             }, step);
         }
 
-        // Form
         function initForm() {
             const form = document.getElementById('contact-form');
             if (!form) return;
@@ -1547,8 +1468,7 @@
                 }, 1500);
             });
         }
-
-        // Card Hover Effect (Spotlight)
+        
         function initCardHover() {
             const cards = document.querySelectorAll('.service-card');
             
@@ -1563,7 +1483,6 @@
             });
         }
 
-        // Parallax for hero visual
         function initParallax() {
             const heroVisual = document.getElementById('hero-visual');
             if (!heroVisual) return;
@@ -1584,7 +1503,6 @@
             }, { passive: true });
         }
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1595,18 +1513,14 @@
             });
         });
 
-       // Ventilation Animation Background
         let ventAnimation = null;
 
         function initVentilationBackground() {
             const container = document.getElementById('vent-animation-container');
             if (!container) return;
 
-            // Initialize the ventilation animation
             import('./ventilation-animation.js').then(({ initVentilationAnimation }) => {
                 ventAnimation = initVentilationAnimation('vent-animation-container');
-
-            // Create compact control panel styled to match the site
                 createControlPanel();
                 });
         }
@@ -1614,8 +1528,6 @@
 function createControlPanel() {
             const panel = document.createElement('div');
             panel.id = 'vent-control-panel';
-            
-            // Базовые стили. Позиционирование будет задано функцией updatePosition
             panel.style.cssText = `
                 position: absolute; /* Changed from fixed to absolute to allow scrolling */
                 z-index: 1000;
@@ -1697,52 +1609,33 @@ function createControlPanel() {
                 </style>
             `;
 
-            // Добавляем панель в body
             document.body.appendChild(panel);
 
-            // Функция для расчета позиции панели
             function updatePosition() {
                 const statsCards = document.querySelectorAll('.stats-card');
-                // Если карточек нет, скрываем панель или ставим дефолт
                 if (statsCards.length < 3) {
                     panel.style.display = 'none';
                     return;
                 }
                 
                 panel.style.display = 'flex';
-
-                // Берем 3-ю карточку (70+ специалистов, индекс 2)
                 const targetCard = statsCards[2];
                 const rect = targetCard.getBoundingClientRect();
-                
-                // Вычисляем абсолютную позицию от верха документа
-                // scrollY добавляем, чтобы учесть прокрутку
                 const cardTopAbsolute = rect.top + window.scrollY;
-                
-                // Высота панели примерно 40-50px. Поднимаем панель над карточкой
                 const gap = 50; 
                 const topPosition = cardTopAbsolute - gap;
-
                 panel.style.top = `${topPosition}px`;
-                // left и transform уже заданы в cssText
             }
 
-            // Обновляем позицию при загрузке и изменении размера окна
             updatePosition();
             window.addEventListener('resize', updatePosition);
             window.addEventListener('scroll', () => {
-                // Так как position: absolute, пересчитывать top при скролле не нужно,
-                // панель сама "едет" вместе со страницей.
-                // Но если нужно зафиксировать её в какой-то момент (sticky), логика была бы сложнее.
-                // Сейчас оставляем как есть - панель статична относительно документа.
             });
 
-            // Делаем панель видимой (запускаем transition)
             requestAnimationFrame(() => {
                 panel.style.opacity = '1';
             });
 
-            // Слушатели событий
             const slider = document.getElementById('fan-speed-slider');
             if (slider) {
                 slider.addEventListener('input', function(e) {
@@ -1764,7 +1657,6 @@ function createControlPanel() {
             }
 }
         
-        // Global functions for control panel (expose to window for inline handlers)
         window.updateFanSpeed = function(value) {
             document.getElementById('fan-speed-display').innerText = value + '%';
             if (ventAnimation && ventAnimation.setFanSpeed) {
@@ -1793,7 +1685,6 @@ function createControlPanel() {
             }
         };
 
-        // Initialize ventilation animation when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initVentilationBackground);
         } else {
@@ -1802,7 +1693,6 @@ function createControlPanel() {
         
     </script>
 
-    <!-- Certificate Modal (A4 proportions) -->
 <div id="sert-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Сертификат">
     <div class="modal-a4">
         <button class="modal-close" id="sert-modal-close" aria-label="Закрыть">
@@ -1815,7 +1705,6 @@ function createControlPanel() {
 </div>
 
 <script>
-    // Certificate Modal Logic
     (function() {
         const modal = document.getElementById('sert-modal');
         const closeBtn = document.getElementById('sert-modal-close');
@@ -1848,7 +1737,6 @@ function createControlPanel() {
 </script>
 
    <script>
-    // P5.js Ash Animation for Stats Cards
     let particles = [];
     let layers = [
         { color: "E3E3E3", size: 1, height: 25, speed: 1.2, frequency: 20 },
@@ -1867,42 +1755,32 @@ function createControlPanel() {
     }
 
     function draw() {
-        clear(); // Очищаем экран каждый кадр
+        clear();
         
-        // Смещаем систему координат на величину прокрутки
         push();
         translate(-window.scrollX, -window.scrollY);
         
-        // Получаем все карточки статистики
         let cards = document.querySelectorAll('.stats-card');
         
         cards.forEach(card => {
             let rect = card.getBoundingClientRect();
-            
-            // Проверяем, видна ли карточка на экране (оптимизация)
             let isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-            
             if (isVisible) {
-                // Вычисляем координаты относительно ВСЕЙ страницы (document)
                 let pageX = rect.left + window.scrollX;
                 let pageY = rect.top + window.scrollY;
                 let cardW = rect.width;
                 let cardH = rect.height;
-
                 layers.forEach((layer) => {
                     if (frameCount % layer.frequency == 0) {
-                        // Начальная позиция X: случайная точка в пределах ширины карточки
                         let x = pageX + random(cardW * 0.1, cardW * 0.9);
-                        // Начальная позиция Y: нижняя граница карточки (в координатах страницы)
                         let y = pageY + cardH;
-                        
                         particles.push(new Particle(x, y, layer.color, layer.size, layer.height, layer.speed));
                     }
                 });
             }
         });
         
-        // Обновляем и рисуем частицы
+
         for (let i = particles.length - 1; i >= 0; i--) {
             let p = particles[i];
             p.update();
@@ -1912,7 +1790,6 @@ function createControlPanel() {
             }
         }
         
-        // Возвращаем систему координат обратно
         pop();
     }
 
@@ -1955,6 +1832,42 @@ function createControlPanel() {
     function windowResized() {
         resizeCanvas(windowWidth, windowHeight);
     }
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "GROSGROUP",
+  "alternateName": "ГРОСГРУПП",
+  "url": "https://ваш-сайт.ru",
+  "logo": "https://ваш-сайт.ru/logo.png",
+  "description": "Проектирование, монтаж и сервис систем промышленной вентиляции и аспирации.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Калуга",
+    "streetAddress": "пер. Окружной, д. 4",
+    "addressCountry": "RU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "54.5137", <!-- Примерные координаты, лучше уточнить -->
+    "longitude": "36.2613"
+  },
+  "telephone": "+79611255550",
+  "email": "info@grosgroup.ru",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "sameAs": [
+    "https://vk.com/grosgrup40",
+    "https://t.me/grosgroup"
+  ]
+}
 </script>
     
 </body>
