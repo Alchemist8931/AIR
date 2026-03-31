@@ -1817,7 +1817,7 @@
     })();
 </script>
 
-    <script>
+   <script>
     // P5.js Ash Animation for Stats Cards
     let particles = [];
     let layers = [
@@ -1829,39 +1829,50 @@
 
     function setup() {
         let canvas = createCanvas(windowWidth, windowHeight);
-        canvas.style('z-index', '998'); // Под слоем модальных окон, но над контентом
+        canvas.style('z-index', '998'); 
         canvas.style('position', 'fixed');
         canvas.style('top', '0');
         canvas.style('left', '0');
-        canvas.style('pointer-events', 'none'); // Чтобы не блокировать клики
+        canvas.style('pointer-events', 'none');
     }
 
     function draw() {
-        clear(); // Прозрачный фон
+        clear(); // Очищаем экран каждый кадр
+        
+        // Смещаем систему координат на величину прокрутки
+        push();
+        translate(-window.scrollX, -window.scrollY);
         
         // Получаем все карточки статистики
         let cards = document.querySelectorAll('.stats-card');
         
         cards.forEach(card => {
             let rect = card.getBoundingClientRect();
-            let cardX = rect.left;
-            let cardY = rect.top;
-            let cardW = rect.width;
-            let cardH = rect.height;
+            
+            // Проверяем, видна ли карточка на экране (оптимизация)
+            let isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+            
+            if (isVisible) {
+                // Вычисляем координаты относительно ВСЕЙ страницы (document)
+                let pageX = rect.left + window.scrollX;
+                let pageY = rect.top + window.scrollY;
+                let cardW = rect.width;
+                let cardH = rect.height;
 
-            layers.forEach((layer) => {
-                if (frameCount % layer.frequency == 0) {
-                    // Начальная позиция X: случайная точка в пределах ширины карточки
-                    let x = cardX + random(cardW * 0.1, cardW * 0.9);
-                    // Начальная позиция Y: нижняя граница карточки
-                    let y = cardY + cardH;
-                    
-                    // Создаем частицу (движение вниз)
-                    particles.push(new Particle(x, y, layer.color, layer.size, layer.height, layer.speed));
-                }
-            });
+                layers.forEach((layer) => {
+                    if (frameCount % layer.frequency == 0) {
+                        // Начальная позиция X: случайная точка в пределах ширины карточки
+                        let x = pageX + random(cardW * 0.1, cardW * 0.9);
+                        // Начальная позиция Y: нижняя граница карточки (в координатах страницы)
+                        let y = pageY + cardH;
+                        
+                        particles.push(new Particle(x, y, layer.color, layer.size, layer.height, layer.speed));
+                    }
+                });
+            }
         });
         
+        // Обновляем и рисуем частицы
         for (let i = particles.length - 1; i >= 0; i--) {
             let p = particles[i];
             p.update();
@@ -1870,6 +1881,9 @@
                 particles.splice(i, 1);
             }
         }
+        
+        // Возвращаем систему координат обратно
+        pop();
     }
 
     class Particle {
@@ -1881,9 +1895,8 @@
             this.maxHeight = maxHeight;
             this.speed = speed;
             this.alpha = 255;
-            // Случайное движение по X (дрейф) и положительное по Y (вниз)
             this.vx = random(-1, 1) * speed * 0.5;
-            this.vy = random(0.5, 1.5) * speed; // Положительная скорость = вниз
+            this.vy = random(0.5, 1.5) * speed;
             this.startY = y;
         }
 
@@ -1891,10 +1904,8 @@
             this.x += this.vx;
             this.y += this.vy;
             
-            // Расстояние, пройденное вниз
             let deltaY = this.y - this.startY;
             
-            // Затухание после прохождения максимальной высоты
             if (deltaY > this.maxHeight) {
                 this.alpha -= 10;
             }
