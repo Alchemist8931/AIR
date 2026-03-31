@@ -38,10 +38,10 @@ export function initVentilationAnimation(containerId) {
     };
 
     const layers = [
-        { color: 0xB0B0B0, size: 0.05, maxLife: 250, speed: 1, frequency: 5 },
-        { color: 0xFFFFFF, size: 0.15, maxLife: 200, speed: 0.9, frequency: 7 },
-        { color: 0xB0B0B0, size: 0.25, maxLife: 150, speed: 0.7, frequency: 7 },
-        { color: 0x757575, size: 0.3, maxLife: 100, speed: 0.5, frequency: 8 }
+        { color: 0xFFBF00, size: 0.05, maxLife: 250, speed: 1, frequency: 5 },
+        { color: 0xFDDA0D, size: 0.15, maxLife: 200, speed: 0.9, frequency: 7 },
+        { color: 0xFFC805, size: 0.25, maxLife: 150, speed: 0.7, frequency: 7 },
+        { color: 0xED8900, size: 0.3, maxLife: 100, speed: 0.5, frequency: 8 }
     ];
 
     let scene, camera, renderer, controls;
