@@ -564,10 +564,10 @@
 
 .modal-a4 {
     position: relative;
-    /* A4: 210×297 mm → соотношение сторон */
+    /* Высота фиксирована, ширина подстраивается под контент */
     height: 90vh;
-    aspect-ratio: 210 / 297;
-    max-width: 90vw;
+    width: fit-content; /* Ширина определяется содержимым (изображением) */
+    max-width: 95vw;    /* Ограничение ширины для мобильных устройств */
     background: var(--card);
     border: 1px solid rgba(38, 38, 38, 0.8);
     border-radius: 12px;
@@ -583,9 +583,9 @@
 
 .modal-a4 img {
     display: block;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+    height: 100%;       /* Изображение занимает 100% высоты модального окна */
+    width: auto;        /* Ширина вычисляется автоматически с сохранением пропорций */
+    object-fit: contain;/* Гарантирует, что изображение вписывается в контейнер без обрезки */
 }
 
 .modal-close {
