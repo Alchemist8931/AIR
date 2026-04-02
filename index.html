@@ -1662,12 +1662,12 @@ function createControlPanel() {
             const panel = document.createElement('div');
             panel.id = 'vent-control-panel';
             panel.style.cssText = `
-                position: absolute; /* Абсолютное позиционирование относительно документа */
+                position: absolute; 
                 z-index: 1000;
                 background: rgba(22, 22, 22, 0.95);
                 border: 1px solid rgba(38, 38, 38, 0.8);
                 border-radius: 12px;
-                padding: 10px 24px;
+                padding: 10px 24px; 
                 width: calc(62.5% + 250px);
                 max-width: 750px;
                 backdrop-filter: blur(8px);
@@ -1678,7 +1678,6 @@ function createControlPanel() {
                 user-select: none;
                 opacity: 0;
                 transition: opacity 1.5s ease-in-out;
-                /* Убираем старые привязки left/transform */
             `;
 
             panel.innerHTML = `
@@ -1737,14 +1736,26 @@ function createControlPanel() {
                         color: #f44336;
                         background: rgba(244, 67, 54, 0.1);
                     }
+                    
+                    /* Скрытие панели на мобильных устройствах (ширина < 768px) */
+                    @media (max-width: 768px) {
+                        #vent-control-panel {
+                            display: none !important;
+                        }
+                    }
                 </style>
             `;
 
             document.body.appendChild(panel);
 
-            // === НОВОЕ ПОЗИЦИОНИРОВАНИЕ ===
             function updatePosition() {
-                // Ищем кнопку "Проекты" в хедере (секция #hero)
+                // Проверка ширины экрана для мобильных устройств
+                if (window.innerWidth < 768) {
+                    panel.style.display = 'none';
+                    return;
+                }
+
+                // Ищем кнопку "Проекты"
                 const projectBtn = document.querySelector('#hero a[href="#projects"]');
                 
                 if (!projectBtn) {
@@ -1760,25 +1771,19 @@ function createControlPanel() {
                 const topPosition = rect.bottom + window.scrollY + 20;
                 
                 // 2. Горизонтальная позиция: выравнивание правых границ
-                // Правый край кнопки (в документе)
                 const buttonRight = rect.right + window.scrollX;
-                // Ширина панели
                 const panelWidth = panel.offsetWidth;
-                // Левая координата панели = Правый край кнопки - Ширина панели
-                const leftPosition = buttonRight - panelWidth;
+                
+                // 3. Добавляем смещение margin-left: 100px
+                const marginLeftOffset = 200;
+                const leftPosition = buttonRight - panelWidth + marginLeftOffset;
 
                 panel.style.top = `${topPosition}px`;
                 panel.style.left = `${leftPosition}px`;
             }
 
-            // Запускаем расчет позиции
             updatePosition();
-            
-            // Обновляем при изменении размера окна
             window.addEventListener('resize', updatePosition);
-            
-            // Примечание: Слушатель scroll здесь не нужен, так как position: absolute 
-            // заставляет панель двигаться вместе со страницей автоматически.
 
             requestAnimationFrame(() => {
                 panel.style.opacity = '1';
