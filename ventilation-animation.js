@@ -1,9 +1,7 @@
-
 // ============================================
 // Вентиляционная шахта - фоновая анимация
 // Для сайта ВентПром
 // ============================================
-// Стало:
 import * as THREE from 'https://esm.sh/three@0.160.0';
 import { OrbitControls } from 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
@@ -54,6 +52,18 @@ export function initVentilationAnimation(containerId) {
         damperOpen: true
     };
 
+    // Переменные для управления вращением камеры
+    let autoRotateSpeed = 0.25; // Было 0.5, уменьшили в 2 раза
+    let rotationDirection = 1; // 1 или -1 (туда-обратно)
+    // Диапазон углов (в радианах). 
+    // "От 5 до 3 часов" = 60 градусов.
+    // Центрируем диапазон вокруг текущего положения камеры для лучшего вида.
+    // Текущее положение ~-60 градусов (-1.05 рад). 
+    // Установим диапазон от -90 гр (3 часа) до -30 гр (1 час).
+    // Это даст красивый разлет "туда-обратно" на 60 градусов.
+    const minAzimuthAngle = -Math.PI / 2; // -90 градусов (3 часа)
+    const maxAzimuthAngle = -Math.PI / 6; // -30 градусов (1 час)
+
     // ==========================================
     // 2. ИНИЦИАЛИЗАЦИЯ
     // ==========================================
@@ -62,6 +72,7 @@ export function initVentilationAnimation(containerId) {
         scene.background = new THREE.Color(CONFIG.scene.bgColor);
 
         camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+        // Позиция камеры оставлена той же, как требовалось
         camera.position.set(-14, 6, 8);
 
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -75,10 +86,9 @@ export function initVentilationAnimation(containerId) {
         controls.target.set(0, 2, 0);
         controls.enableZoom = false;
         controls.enablePan = false;
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.5;
-
-        controls.enabled = false;
+        
+        // ОТКЛЮЧАЕМ стандартный autoRotate, будем вращать вручную
+        controls.autoRotate = false; 
         
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         scene.add(ambientLight);
@@ -100,7 +110,7 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 3. ФАБРИКА ОБЪЕКТОВ
+    // 3. ФАБРИКА ОБЪЕКТОВ (Без изменений)
     // ==========================================
     function createGhostMaterial(opacity = 0.05) {
         return new THREE.MeshBasicMaterial({
@@ -139,7 +149,7 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 4. ПОСТРОЕНИЕ ВОЗДУХОВОДА
+    // 4. ПОСТРОЕНИЕ ВОЗДУХОВОДА (Без изменений)
     // ==========================================
     function createDuctSystem() {
         const mainGroup = new THREE.Group();
@@ -164,7 +174,6 @@ export function initVentilationAnimation(containerId) {
             mainGroup.add(ring);
         }
 
-        // --- ИЗГИБ ---
         const shape = new THREE.Shape();
         shape.moveTo(-W/2, -H/2);
         shape.lineTo(W/2, -H/2);
@@ -189,7 +198,6 @@ export function initVentilationAnimation(containerId) {
         const linesBend = new THREE.LineSegments(edgesBend, new THREE.LineBasicMaterial({ color: CONFIG.colors.line, transparent: true, opacity: 0.5 }));
         mainGroup.add(linesBend);
 
-        // --- ВЕРТИКАЛЬНЫЙ УЧАСТОК ---
         const vertStartX = R;
         const vertStartY = startY + R;
         const vertLength = CONFIG.duct.verticalLength;
@@ -225,7 +233,6 @@ export function initVentilationAnimation(containerId) {
         const H = CONFIG.duct.height;
         const Y = H/2 + 0.5;
 
-        // --- ШЛЮЗ ---
         const damperGroup = new THREE.Group();
         damperGroup.position.set(CONFIG.components.damperX, Y, 0);
 
@@ -264,7 +271,6 @@ export function initVentilationAnimation(containerId) {
         damperGroup.add(damperBlades);
         scene.add(damperGroup);
 
-        // --- ВЕНТИЛЯТОР ---
         const fanGroup = new THREE.Group();
         fanGroup.position.set(CONFIG.components.fanX, Y, 0);
         const fanSectionGeo = new THREE.BoxGeometry(0.3, H, W);
@@ -323,7 +329,7 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 5. СИСТЕМА ЧАСТИЦ
+    // 5. СИСТЕМА ЧАСТИЦ (Без изменений)
     // ==========================================
     let particles = [];
 
@@ -579,12 +585,33 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 7. ОСНОВНОЙ ЦИКЛ
+    // 7. ОСНОВНОЙ ЦИКЛ (ИЗМЕНЕНО)
     // ==========================================
     function animate() {
         requestAnimationFrame(animate);
         frameCount++;
         const delta = clock.getDelta();
+
+        // --- ВРАЩЕНИЕ КАМЕРЫ (Туда-обратно) ---
+        // Получаем текущий азимутальный угол
+        let currentAzimuth = controls.getAzimuthalAngle();
+
+        // Применяем вращение
+        // rotateLeft принимает угол в радианах.
+        // Умножаем скорость на дельту и направление.
+        // 2 * PI - полный круг. 0.25 - скорость.
+        // rotateLeft(-angle) поворачивает вправо (уменьшает azimuth)
+        controls.rotateLeft(-autoRotateSpeed * rotationDirection * delta * 2 * Math.PI);
+
+        // Проверка границ и смена направления
+        // Если вышли за Min (3 часа) -> меняем направление на 1 (влево/возрастание)
+        if (currentAzimuth < minAzimuthAngle) {
+            rotationDirection = 1;
+        }
+        // Если вышли за Max (1 час) -> меняем направление на -1 (вправо/убывание)
+        else if (currentAzimuth > maxAzimuthAngle) {
+            rotationDirection = -1;
+        }
 
         if (fanRotor) {
             fanRotor.rotation.x += delta * 15 * systemState.fanSpeed;
