@@ -70,7 +70,7 @@ export function initVentilationAnimation(containerId) {
         scene.background = new THREE.Color(CONFIG.scene.bgColor);
 
         camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.set(-14, 6, 8); // Позиция камеры оставлена без изменений
+        camera.position.set(14, 6, 8); // Позиция камеры оставлена без изменений
 
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
