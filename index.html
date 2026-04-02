@@ -713,6 +713,31 @@
                 max-width: none;
             }
         }
+
+                /* --- Анимация для подписи разработчика --- */
+        @keyframes neon-blink {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 
+                    0 0 4px #FFBF00,
+                    0 0 11px #FFBF00,
+                    0 0 19px #FFBF00;
+                color: #FFBF00;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                color: #737373; /* ink-muted */
+            }
+        }
+        
+        .neon-active {
+            animation: neon-blink 1.2s ease-in-out forwards;
+        }
+        
+        /* Стили для tooltip (если нужно доработать) */
+        #dev-tooltip a {
+            display: flex;
+            align-items: center;
+        }
         
     </style>
 </head>
@@ -1298,7 +1323,30 @@
                     </a>
                 </div>
                 
-                <p class="text-ink-muted text-sm">2026 GROSGROUP. Все права защищены.</p>
+            
+                 <div class="flex flex-col items-center gap-0.5">
+                    <p class="text-ink-muted text-sm">2026 GROSGROUP. Все права защищены.</p>
+                    
+                    <!-- Подпись разработчика -->
+                    <div class="relative inline-block">
+                        <span id="dev-credit" class="text-[10px] text-ink-muted/60 cursor-default select-none transition-colors duration-300">
+                            разработчик Alchemist_TEAM
+                        </span>
+                        
+                        <!-- Tooltip -->
+                        <div id="dev-tooltip" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-surface-bright border border-gray-light/70 rounded-lg shadow-xl opacity-0 invisible transition-all duration-300 whitespace-nowrap z-50 group">
+                            <a href="https://t.me/Alchemist_TEAM" target="_blank" class="flex items-center gap-2 text-ink hover:text-[#FFBF00] transition-colors">
+                                <!-- Иконка Telegram -->
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                                </svg>
+                                <span class="text-xs font-medium">@Alchemist_TEAM</span>
+                            </a>
+                            <!-- Маленький треугольник снизу -->
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-surface-bright"></div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="flex flex-col md:flex-row items-center gap-4">
                     <span class="text-sm text-ink-muted text-center md:text-right" style="color: #FFBF00;">Наше присутствие в социальных сетях и мессенджерах</span>
@@ -2021,6 +2069,42 @@ function createControlPanel() {
     "https://t.me/grosgroup"
   ]
 }
+</script>
+
+    <script>
+    // Логика для подписи разработчика
+    const devCredit = document.getElementById('dev-credit');
+    const devTooltip = document.getElementById('dev-tooltip');
+    let devTimer = null;
+
+    if (devCredit && devTooltip) {
+        devCredit.addEventListener('mouseenter', () => {
+            // 1. Запускаем неоновую анимацию
+            devCredit.classList.add('neon-active');
+            
+            // 2. Запускаем таймер на 1 секунду для появления tooltip
+            devTimer = setTimeout(() => {
+                devTooltip.style.opacity = '1';
+                devTooltip.style.visibility = 'visible';
+                devTooltip.style.transform = 'translate(-50%, 0)';
+            }, 1000);
+        });
+
+        devCredit.addEventListener('mouseleave', () => {
+            // 1. Очищаем таймер
+            clearTimeout(devTimer);
+            
+            // 2. Скрываем tooltip
+            devTooltip.style.opacity = '0';
+            devTooltip.style.visibility = 'hidden';
+            devTooltip.style.transform = 'translate(-50%, 10px)';
+            
+            // 3. Убираем класс анимации и принудительно сбрасываем стиль, чтобы вернуть серый цвет
+            devCredit.classList.remove('neon-active');
+            // Форсируем reflow, чтобы анимация могла перезапуститься при следующем наведении
+            void devCredit.offsetWidth; 
+        });
+    }
 </script>
     
 </body>
