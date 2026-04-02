@@ -1182,7 +1182,7 @@
                 </div>
                 
                 <div class="reveal delay-2">
-                    <form id="contact-form" class="relative bg-gradient-to-br from-card/90 to-surface/80 rounded-3xl p-8 border overflow-hidden shadow-xl shadow-black/20" style="border-color: #FFBF00;">
+                    <form id="contact-form" action="https://formsubmit.co/rosatomicalchemist@gmail.com" method="POST" class="relative bg-gradient-to-br from-card/90 to-surface/80 rounded-3xl p-8 border overflow-hidden shadow-xl shadow-black/20" style="border-color: #FFBF00;">
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
@@ -1501,7 +1501,8 @@
                 const formData = new FormData(form);
 
                 // Отправка на сервер
-                fetch('mail.php', {
+                // Для Formsubmit (если используете их)
+                fetch('https://formsubmit.co/ajax/info@grosgroup.ru', {
                     method: 'POST',
                     body: formData
                 })
