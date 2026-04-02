@@ -662,6 +662,57 @@
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.9) 0%, rgba(22, 22, 22, 0.95) 100%);
             border: 1px solid rgba(38, 38, 38, 0.7);
         }
+
+                /* --- Стили для всплывающего уведомления (Toast) --- */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+            background: rgba(22, 22, 22, 0.98);
+            border: 1px solid #FFBF00; /* Желтая рамка */
+            border-radius: 12px;
+            padding: 20px 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            max-width: 360px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transform: translateX(120%); /* Скрыто за пределами экрана */
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none; /* Чтобы не мешало кликам, когда скрыто */
+        }
+
+        .toast-notification.show {
+            transform: translateX(0); /* Появилось */
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            color: #FFBF00; /* Цвет иконки */
+        }
+
+        .toast-content {
+            color: #E5E5E5;
+            font-size: 14px;
+            line-height: 1.5;
+            font-family: 'SN Pro', sans-serif;
+        }
+        
+        /* Адаптив для мобильных */
+        @media (max-width: 480px) {
+            .toast-notification {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                max-width: none;
+            }
+        }
         
     </style>
 </head>
@@ -1484,7 +1535,7 @@
             }, step);
         }
 
-        function initForm() {
+                function initForm() {
             const form = document.getElementById('contact-form');
             if (!form) return;
 
@@ -1493,50 +1544,72 @@
                 const btn = form.querySelector('button[type="submit"]');
                 const original = btn.innerHTML;
 
-                // Визуальная загрузка (спиннер)
+                // Визуальная загрузка
                 btn.innerHTML = `<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
                 btn.disabled = true;
 
-                // Сбор данных формы
                 const formData = new FormData(form);
 
-                // Отправка на сервер
-                // Для Formsubmit (если используете их)
-                fetch('https://formsubmit.co/ajax/rosatomicalchemist@gmail.com', {
+                fetch('mail.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка сервера: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 'success') {
-                        // Успешная отправка
-                        btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Отправлено`;
-                        btn.style.borderColor = 'rgba(74, 222, 128, 0.3)';
-                        btn.style.background = 'rgba(74, 222, 128, 0.1)';
+                        // Вызываем наше красивое уведомление
+                        showToast('Благодарим Вас за обращение! Наши специалисты уже получили его и в ближайшее время с вами свяжутся.');
                         
-                        // Сброс формы через 2.5 секунды
-                        setTimeout(() => {
-                            btn.innerHTML = original;
-                            btn.disabled = false;
-                            btn.style.borderColor = '';
-                            btn.style.background = '';
-                            form.reset();
-                        }, 2500);
+                        // Сбрасываем поля формы
+                        form.reset(); 
                     } else {
-                        // Ошибка валидации или сервера
-                        btn.innerHTML = original;
-                        btn.disabled = false;
-                        alert(data.message || 'Произошла ошибка. Попробуйте снова.');
+                        throw new Error(data.message || 'Ошибка отправки');
                     }
                 })
                 .catch(error => {
-                    // Ошибка сети
                     console.error('Error:', error);
+                    alert('Не удалось отправить форму.\n' + error.message);
+                })
+                .finally(() => {
+                    // В любом случае возвращаем кнопку в исходное состояние
                     btn.innerHTML = original;
                     btn.disabled = false;
-                    alert('Ошибка соединения. Проверьте интернет.');
                 });
             });
+
+            // --- Функция показа уведомления ---
+            function showToast(message) {
+                // Удаляем старое уведомление, если есть
+                const existingToast = document.querySelector('.toast-notification');
+                if (existingToast) existingToast.remove();
+
+                // Создаем элемент
+                const toast = document.createElement('div');
+                toast.className = 'toast-notification';
+                toast.innerHTML = `
+                    <svg class="toast-icon" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div class="toast-content">${message}</div>
+                `;
+
+                document.body.appendChild(toast);
+
+                // Небольшая задержка, чтобы анимация сработала
+                setTimeout(() => toast.classList.add('show'), 100);
+
+                // Автоматическое скрытие через 5 секунд
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    // Удаляем из DOM после завершения анимации исчезновения
+                    setTimeout(() => toast.remove(), 600);
+                }, 5000);
+            }
         }
         
         function initCardHover() {
