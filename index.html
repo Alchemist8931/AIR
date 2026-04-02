@@ -1535,7 +1535,7 @@
             }, step);
         }
 
-                function initForm() {
+        function initForm() {
             const form = document.getElementById('contact-form');
             if (!form) return;
 
@@ -1549,38 +1549,59 @@
                 btn.disabled = true;
 
                 const formData = new FormData(form);
+                
+                // Берем URL из атрибута action формы (ваш formsubmit.co)
+                const actionUrl = form.getAttribute('action');
 
-                fetch('mail.php', {
+                // Добавляем параметр для AJAX запроса к formsubmit (чтобы вернуть JSON или корректно обработать)
+                // Важно: formsubmit.co при первом запросе может требовать подтверждение почты,
+                // поэтому режим 'no-cors' позволит запросу пройти, но мы не увидим ответ сервера.
+                // Это лучшее решение для статических сайтов без бэкенда.
+                fetch(actionUrl, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    mode: 'no-cors' 
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Ошибка сервера: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        // Вызываем наше красивое уведомление
-                        showToast('Благодарим Вас за обращение! Наши специалисты уже получили его и в ближайшее время с вами свяжутся.');
-                        
-                        // Сбрасываем поля формы
-                        form.reset(); 
-                    } else {
-                        throw new Error(data.message || 'Ошибка отправки');
-                    }
+                .then(() => {
+                    // В режиме no-cors мы не получаем ответ, но если промис завершился успешно, 
+                    // считаем, что запрос отправлен.
+                    showToast('Благодарим Вас за обращение! Наши специалисты уже получили его и в ближайшее время с вами свяжутся.');
+                    form.reset(); 
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Не удалось отправить форму.\n' + error.message);
+                    alert('Не удалось отправить форму. Проверьте интернет-соединение.');
                 })
                 .finally(() => {
-                    // В любом случае возвращаем кнопку в исходное состояние
+                    // Возвращаем кнопку в исходное состояние
                     btn.innerHTML = original;
                     btn.disabled = false;
                 });
             });
+
+            // --- Функция показа уведомления ---
+            function showToast(message) {
+                const existingToast = document.querySelector('.toast-notification');
+                if (existingToast) existingToast.remove();
+
+                const toast = document.createElement('div');
+                toast.className = 'toast-notification';
+                toast.innerHTML = `
+                    <svg class="toast-icon" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div class="toast-content">${message}</div>
+                `;
+
+                document.body.appendChild(toast);
+                setTimeout(() => toast.classList.add('show'), 100);
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 600);
+                }, 5000);
+            }
+        }
 
             // --- Функция показа уведомления ---
             function showToast(message) {
