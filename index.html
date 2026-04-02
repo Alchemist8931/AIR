@@ -220,6 +220,35 @@
             overflow: hidden;
         }
 
+        .service-card-bg-img {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .service-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(165deg, rgba(26, 26, 26, 0.85) 0%, rgba(22, 22, 22, 0.75) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .service-card-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .service-card::after {
+            z-index: 2;
+        }
+
         .btn-primary::before {
             content: '';
             position: absolute;
@@ -1249,36 +1278,42 @@
     </footer>
 
     <script type="module">
-        const services = [
+         const services = [
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 12.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L2.293 6.707A1 1 0 012 6V4z"/></svg>`, 
                 title: 'Местная вытяжная вентиляция', 
-                description: 'Стационарные фильтры<br>Мобильные фильтры<br>Вытяжные устройства<br>Столы сварщиков<br>Фильтровентиляционные системы<br>Вытяжные зонты' 
+                description: 'Стационарные фильтры<br>Мобильные фильтры<br>Вытяжные устройства<br>Столы сварщиков<br>Фильтровентиляционные системы<br>Вытяжные зонты',
+                image: '11.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>`, 
                 title: 'Удаление выхлопных газов', 
-                description: 'Вытяжные катушки<br>Вытяжные устройства<br>Рельсовые системы<br>Газоприемные насадки<br>Вентиляторы<br>Автоматика' 
+                description: 'Вытяжные катушки<br>Вытяжные устройства<br>Рельсовые системы<br>Газоприемные насадки<br>Вентиляторы<br>Автоматика',
+                image: '22.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`, 
                 title: 'Вакуумная аспирация и пылеуборка', 
-                description: 'Стационарные системы<br>Мобильные промышленные пылесосы<br>Серия AL для сбора СОЖ и масла<br>Элементы системы и аксессуары' 
+                description: 'Стационарные системы<br>Мобильные промышленные пылесосы<br>Серия AL для сбора СОЖ и масла<br>Элементы системы и аксессуары',
+                image: '33.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a8 8 0 008-8c0-4.418-8-12-8-12S4 8.582 4 13a8 8 0 008 8z"/></svg>`, 
                 title: 'Фильтры масляного тумана', 
-                description: 'Мы предлагаем механические, электростатические и центробежные фильтры для очистки воздуха от масляных аэрозолей, туманов, дымов, а также мельчайших частиц металлов и абразива.' 
+                description: 'Мы предлагаем механические, электростатические и центробежные фильтры для очистки воздуха от масляных аэрозолей, туманов, дымов, а также мельчайших частиц металлов и абразива.',
+                image: '44.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`, 
                 title: 'Промышленные системы аспирации', 
-                description: 'Промышленные фильтры<br>Взрывозащищенные промышленные фильтры' 
+                description: 'Промышленные фильтры<br>Взрывозащищенные промышленные фильтры',
+                image: '55.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`, 
                 title: 'Защитные ограждения', 
-                description: 'Защита от сварочного излучения<br>Защита от пыли, дыма, влаги<br>Защита от производственного шума<br>Защита от высоких температур' 
+                description: 'Защита от сварочного излучения<br>Защита от пыли, дыма, влаги<br>Защита от производственного шума<br>Защита от высоких температур',
+                image: '66.png' 
             }
         ];
 
@@ -1329,11 +1364,20 @@
             
             grid.innerHTML = services.map((s, i) => `
                 <div class="service-card rounded-2xl p-7 reveal delay-${(i % 4) + 1}">
-                    <div class="icon-box w-14 h-14 bg-ink/4 rounded-xl flex items-center justify-center text-ink mb-5 border border-ink/8">
-                        ${s.icon}
+                    <!-- Слой 2: Изображение -->
+                    <img src="${s.image}" alt="" class="service-card-bg-img">
+                    
+                    <!-- Слой 3: Затемнение (overlay) -->
+                    <div class="service-card-overlay"></div>
+                    
+                    <!-- Слой 4: Контент -->
+                    <div class="service-card-content">
+                        <div class="icon-box w-14 h-14 bg-ink/4 rounded-xl flex items-center justify-center text-ink mb-5 border border-ink/8">
+                            ${s.icon}
+                        </div>
+                        <h3 class="font-display text-lg font-semibold mb-3" style="color: #FFBF00;">${s.title}</h3>
+                        <p class="text-ink-light text-sm leading-relaxed">${s.description}</p>
                     </div>
-                    <h3 class="font-display text-lg font-semibold text-ink mb-3">${s.title}</h3>
-                    <p class="text-ink-light text-sm leading-relaxed">${s.description}</p>
                 </div>
             `).join('');
         }
