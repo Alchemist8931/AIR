@@ -1535,7 +1535,7 @@
             }, step);
         }
 
-        function initForm() {
+                function initForm() {
             const form = document.getElementById('contact-form');
             if (!form) return;
 
@@ -1549,22 +1549,14 @@
                 btn.disabled = true;
 
                 const formData = new FormData(form);
-                
-                // Берем URL из атрибута action формы (ваш formsubmit.co)
                 const actionUrl = form.getAttribute('action');
 
-                // Добавляем параметр для AJAX запроса к formsubmit (чтобы вернуть JSON или корректно обработать)
-                // Важно: formsubmit.co при первом запросе может требовать подтверждение почты,
-                // поэтому режим 'no-cors' позволит запросу пройти, но мы не увидим ответ сервера.
-                // Это лучшее решение для статических сайтов без бэкенда.
                 fetch(actionUrl, {
                     method: 'POST',
                     body: formData,
                     mode: 'no-cors' 
                 })
                 .then(() => {
-                    // В режиме no-cors мы не получаем ответ, но если промис завершился успешно, 
-                    // считаем, что запрос отправлен.
                     showToast('Благодарим Вас за обращение! Наши специалисты уже получили его и в ближайшее время с вами свяжутся.');
                     form.reset(); 
                 })
@@ -1573,13 +1565,12 @@
                     alert('Не удалось отправить форму. Проверьте интернет-соединение.');
                 })
                 .finally(() => {
-                    // Возвращаем кнопку в исходное состояние
                     btn.innerHTML = original;
                     btn.disabled = false;
                 });
             });
 
-            // --- Функция показа уведомления ---
+            // --- Функция показа уведомления (Внутри initForm) ---
             function showToast(message) {
                 const existingToast = document.querySelector('.toast-notification');
                 if (existingToast) existingToast.remove();
@@ -1602,36 +1593,21 @@
                 }, 5000);
             }
         }
-
-            // --- Функция показа уведомления ---
-            function showToast(message) {
-                // Удаляем старое уведомление, если есть
-                const existingToast = document.querySelector('.toast-notification');
-                if (existingToast) existingToast.remove();
-
-                // Создаем элемент
-                const toast = document.createElement('div');
-                toast.className = 'toast-notification';
-                toast.innerHTML = `
-                    <svg class="toast-icon" fill="none" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <div class="toast-content">${message}</div>
-                `;
-
-                document.body.appendChild(toast);
-
-                // Небольшая задержка, чтобы анимация сработала
-                setTimeout(() => toast.classList.add('show'), 100);
-
-                // Автоматическое скрытие через 5 секунд
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    // Удаляем из DOM после завершения анимации исчезновения
-                    setTimeout(() => toast.remove(), 600);
-                }, 5000);
-            }
+        
+        function initCardHover() {
+            const cards = document.querySelectorAll('.service-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    card.style.setProperty('--mouse-x', x + '%');
+                    card.style.setProperty('--mouse-y', y + '%');
+                });
+            });
         }
+
         
         function initCardHover() {
             const cards = document.querySelectorAll('.service-card');
