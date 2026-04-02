@@ -52,17 +52,15 @@ export function initVentilationAnimation(containerId) {
         damperOpen: true
     };
 
-    // Переменные для управления вращением камеры
-    let autoRotateSpeed = 0.25; // Было 0.5, уменьшили в 2 раза
-    let rotationDirection = 1; // 1 или -1 (туда-обратно)
-    // Диапазон углов (в радианах). 
-    // "От 5 до 3 часов" = 60 градусов.
-    // Центрируем диапазон вокруг текущего положения камеры для лучшего вида.
-    // Текущее положение ~-60 градусов (-1.05 рад). 
-    // Установим диапазон от -90 гр (3 часа) до -30 гр (1 час).
-    // Это даст красивый разлет "туда-обратно" на 60 градусов.
-    const minAzimuthAngle = -Math.PI / 2; // -90 градусов (3 часа)
-    const maxAzimuthAngle = -Math.PI / 6; // -30 градусов (1 час)
+    // --- Переменные для анимации камеры ---
+    let currentAngle = 0;         // Текущий азимутальный угол
+    let orbitSpeed = 0.025;       // Скорость (рад/сек). ~1.5 град/сек (в 2 раза медленнее)
+    let rotationDirection = 1;    // 1 или -1
+    let minAngle = 0;
+    let maxAngle = 0;
+    let radius = 0;               // Радиус орбиты
+    let phi = 0;                  // Угол возвышения (высота)
+    // -------------------------------------
 
     // ==========================================
     // 2. ИНИЦИАЛИЗАЦИЯ
@@ -72,8 +70,7 @@ export function initVentilationAnimation(containerId) {
         scene.background = new THREE.Color(CONFIG.scene.bgColor);
 
         camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-        // Позиция камеры оставлена той же, как требовалось
-        camera.position.set(-14, 6, 8);
+        camera.position.set(-14, 6, 8); // Позиция камеры оставлена без изменений
 
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -87,8 +84,9 @@ export function initVentilationAnimation(containerId) {
         controls.enableZoom = false;
         controls.enablePan = false;
         
-        // ОТКЛЮЧАЕМ стандартный autoRotate, будем вращать вручную
-        controls.autoRotate = false; 
+        // ОТКЛЮЧАЕМ стандартное авто-вращение, управляем позицией вручную
+        controls.autoRotate = false;
+        controls.enabled = false; // Блокируем управление пользователем, если нужно
         
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         scene.add(ambientLight);
@@ -97,10 +95,34 @@ export function initVentilationAnimation(containerId) {
         createDuctSystem();
         createInternalComponents();
         initParticleSystem();
+        
+        // Инициализация параметров вращения
+        setupCameraOrbit();
 
         animate();
 
         window.addEventListener('resize', onWindowResize);
+    }
+
+    // Вычисляем начальные углы и границы вращения
+    function setupCameraOrbit() {
+        const target = controls.target;
+        const offset = new THREE.Vector3().subVectors(camera.position, target);
+        
+        radius = offset.length();
+        
+        // Вычисляем начальный азимут (угол в плоскости XZ)
+        // Используем atan2(x, z) для удобства (0 = впереди)
+        currentAngle = Math.atan2(offset.x, offset.z);
+        
+        // Угол возвышения (от оси Y)
+        phi = Math.acos(offset.y / radius);
+
+        // Диапазон вращения: +/- 30 градусов (PI/6) от начальной позиции
+        // Это соответствует диапазону "от 5 до 3 часов" (60 градусов)
+        const sweepRange = Math.PI / 6; 
+        minAngle = currentAngle - sweepRange;
+        maxAngle = currentAngle + sweepRange;
     }
 
     function onWindowResize() {
@@ -110,7 +132,7 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 3. ФАБРИКА ОБЪЕКТОВ (Без изменений)
+    // 3. ФАБРИКА ОБЪЕКТОВ
     // ==========================================
     function createGhostMaterial(opacity = 0.05) {
         return new THREE.MeshBasicMaterial({
@@ -149,7 +171,7 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 4. ПОСТРОЕНИЕ ВОЗДУХОВОДА (Без изменений)
+    // 4. ПОСТРОЕНИЕ ВОЗДУХОВОДА
     // ==========================================
     function createDuctSystem() {
         const mainGroup = new THREE.Group();
@@ -174,6 +196,7 @@ export function initVentilationAnimation(containerId) {
             mainGroup.add(ring);
         }
 
+        // --- ИЗГИБ ---
         const shape = new THREE.Shape();
         shape.moveTo(-W/2, -H/2);
         shape.lineTo(W/2, -H/2);
@@ -198,6 +221,7 @@ export function initVentilationAnimation(containerId) {
         const linesBend = new THREE.LineSegments(edgesBend, new THREE.LineBasicMaterial({ color: CONFIG.colors.line, transparent: true, opacity: 0.5 }));
         mainGroup.add(linesBend);
 
+        // --- ВЕРТИКАЛЬНЫЙ УЧАСТОК ---
         const vertStartX = R;
         const vertStartY = startY + R;
         const vertLength = CONFIG.duct.verticalLength;
@@ -233,6 +257,7 @@ export function initVentilationAnimation(containerId) {
         const H = CONFIG.duct.height;
         const Y = H/2 + 0.5;
 
+        // --- ШЛЮЗ ---
         const damperGroup = new THREE.Group();
         damperGroup.position.set(CONFIG.components.damperX, Y, 0);
 
@@ -271,6 +296,7 @@ export function initVentilationAnimation(containerId) {
         damperGroup.add(damperBlades);
         scene.add(damperGroup);
 
+        // --- ВЕНТИЛЯТОР ---
         const fanGroup = new THREE.Group();
         fanGroup.position.set(CONFIG.components.fanX, Y, 0);
         const fanSectionGeo = new THREE.BoxGeometry(0.3, H, W);
@@ -329,7 +355,7 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 5. СИСТЕМА ЧАСТИЦ (Без изменений)
+    // 5. СИСТЕМА ЧАСТИЦ
     // ==========================================
     let particles = [];
 
@@ -585,38 +611,44 @@ export function initVentilationAnimation(containerId) {
     }
 
     // ==========================================
-    // 7. ОСНОВНОЙ ЦИКЛ (ИЗМЕНЕНО)
+    // 7. ОСНОВНОЙ ЦИКЛ (ИСПРАВЛЕНО)
     // ==========================================
     function animate() {
         requestAnimationFrame(animate);
         frameCount++;
         const delta = clock.getDelta();
 
-        // --- ВРАЩЕНИЕ КАМЕРЫ (Туда-обратно) ---
-        // Получаем текущий азимутальный угол
-        let currentAzimuth = controls.getAzimuthalAngle();
+        // --- РУЧНОЕ ВРАЩЕНИЕ КАМЕРЫ ---
+        // Обновляем угол
+        currentAngle += orbitSpeed * rotationDirection * delta;
 
-        // Применяем вращение
-        // rotateLeft принимает угол в радианах.
-        // Умножаем скорость на дельту и направление.
-        // 2 * PI - полный круг. 0.25 - скорость.
-        // rotateLeft(-angle) поворачивает вправо (уменьшает azimuth)
-        controls.rotateLeft(-autoRotateSpeed * rotationDirection * delta * 2 * Math.PI);
-
-        // Проверка границ и смена направления
-        // Если вышли за Min (3 часа) -> меняем направление на 1 (влево/возрастание)
-        if (currentAzimuth < minAzimuthAngle) {
+        // Проверка границ (пинг-понг)
+        if (currentAngle > maxAngle) {
+            currentAngle = maxAngle;
+            rotationDirection = -1;
+        } else if (currentAngle < minAngle) {
+            currentAngle = minAngle;
             rotationDirection = 1;
         }
-        // Если вышли за Max (1 час) -> меняем направление на -1 (вправо/убывание)
-        else if (currentAzimuth > maxAzimuthAngle) {
-            rotationDirection = -1;
-        }
 
+        // Вычисляем новую позицию камеры
+        // x = r * sin(phi) * sin(theta)
+        // z = r * sin(phi) * cos(theta)
+        // y = r * cos(phi)
+        const target = controls.target;
+        camera.position.x = target.x + radius * Math.sin(phi) * Math.sin(currentAngle);
+        camera.position.z = target.z + radius * Math.sin(phi) * Math.cos(currentAngle);
+        camera.position.y = target.y + radius * Math.cos(phi);
+
+        // Так как controls отключены, обновляем lookAt вручную
+        camera.lookAt(target);
+
+        // --- Анимация вентилятора ---
         if (fanRotor) {
             fanRotor.rotation.x += delta * 15 * systemState.fanSpeed;
         }
 
+        // --- Анимация заслонки ---
         if (damperBlades) {
             const targetAngle = systemState.damperOpen ? Math.PI / 2 : 0;
 
@@ -628,7 +660,7 @@ export function initVentilationAnimation(containerId) {
         }
 
         updateParticles();
-        controls.update();
+        // controls.update(); // Не нужен, так как enabled=false и позицию задаем вручную
         renderer.render(scene, camera);
     }
 
