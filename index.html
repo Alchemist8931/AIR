@@ -2098,12 +2098,12 @@ function createControlPanel() {
 
         devCredit.addEventListener('mouseenter', () => {
             clearTimeout(hideTimeout);
-            showTimeout = setTimeout(showTooltip, 1000);
+            showTimeout = setTimeout(showTooltip, 100);
         });
 
         devCredit.addEventListener('mouseleave', () => {
             clearTimeout(showTimeout);
-            hideTimeout = setTimeout(hideTooltip, 100);
+            hideTimeout = setTimeout(hideTooltip, 1000);
         });
 
         devTooltip.addEventListener('mouseenter', () => {
@@ -2111,7 +2111,7 @@ function createControlPanel() {
         });
 
         devTooltip.addEventListener('mouseleave', () => {
-            hideTimeout = setTimeout(hideTooltip, 300);
+            hideTimeout = setTimeout(hideTooltip, 700);
         });
     }
 </script>
