@@ -854,10 +854,11 @@
             accent-color: #FFBF00;
         }
 
-                /* Обертка для текста и кнопок */
+        /* Обертка для текста и кнопок */
         .consent-text-wrapper {
             flex: 1;
-            display: contents; /* Позволяет элементам внутри вести себя правильно */
+            /* Убираем display: contents, возвращаем обычный блок */
+            display: block; 
             cursor: default;
             user-select: none;
         }
@@ -866,7 +867,7 @@
         .consent-text-wrapper label {
             cursor: default;
             user-select: none;
-            display: inline;
+            display: inline; /* Гарантирует, что текст идет в строку */
         }
 
         /* Стили для кнопок-чипов */
