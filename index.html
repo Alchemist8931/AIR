@@ -833,22 +833,51 @@
             margin-bottom: 12px;
         }
 
-                /* --- Стили для кнопок-чипов в форме --- */
-        .consent-label-text {
-            display: inline;
-            cursor: pointer; /* Сохраняем курсор руки для текста */
+                 /* --- Стили для согласия и модальных окон с текстом --- */
+        .consent-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #A3A3A3;
+            line-height: 1.5;
+            text-align: left;
         }
 
+        .consent-container input[type="checkbox"] {
+            margin-top: 3px;
+            flex-shrink: 0;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            accent-color: #FFBF00;
+        }
+
+        /* Обертка для текста и кнопок */
+        .consent-text-wrapper {
+            flex: 1;
+            display: inline;
+        }
+
+        /* Текст становится простой оберткой, курсор остается обычным */
+        .consent-text-wrapper label {
+            cursor: default;
+            user-select: none;
+            display: inline;
+        }
+
+        /* Стили для кнопок-чипов */
         .consent-chip {
             display: inline-flex;
             align-items: center;
             padding: 2px 10px;
             border: 1px solid #FFBF00;
-            border-radius: 999px; /* Форма чипа */
+            border-radius: 999px;
             background: transparent;
             color: #FFBF00;
             cursor: pointer;
-            font-size: inherit; /* Наследуем размер текста */
+            font-size: inherit;
             font-family: inherit;
             font-weight: 500;
             margin: 0 4px;
@@ -863,10 +892,16 @@
             box-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
             transform: translateY(-1px);
         }
-        
-        /* Убираем нижнее подчеркивание при наведении, если останется от старых стилей */
-        .consent-chip:hover {
-            text-decoration: none;
+
+        /* Стиль отключенной кнопки отправки */
+        .btn-primary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed !important;
+            transform: none !important;
+            box-shadow: none !important;
+            pointer-events: none;
+            background: #525252;
+            border-color: #525252;
         }
         
     </style>
@@ -1424,17 +1459,17 @@
                                     class="form-input w-full px-5 py-4 rounded-xl text-ink text-sm resize-none"
                                     placeholder="Опишите ваш проект"></textarea>
                             </div>
-                            
-                            <!-- Добавленный блок согласия -->
+
+                                                        <!-- Добавленный блок согласия -->
                             <div class="consent-container">
                                 <input type="checkbox" id="privacy-consent">
-                                <label for="privacy-consent" class="consent-label-text">
-                                    Я принимаю 
-                                    <button type="button" id="link-policy" class="consent-chip" style="border-radius: 8px; padding: 6px;">положение</button> 
-                                    и даю 
-                                    <button type="button" id="link-consent" class="consent-chip" style="border-radius: 8px; padding: 6px;">согласие</button> 
-                                    на обработку персональных данных.
-                                </label>
+                                <div class="consent-text-wrapper">
+                                    <label for="privacy-consent">Я принимаю</label>
+                                    <button type="button" id="link-policy" class="consent-chip" style="border-radius: 4px; padding: 4px 6px;">положение</button>
+                                    <label for="privacy-consent">и даю</label>
+                                    <button type="button" id="link-consent" class="consent-chip" style="border-radius: 4px; padding: 4px 6px;">согласие</button>
+                                    <label for="privacy-consent">на обработку персональных данных.</label>
+                                </div>
                             </div>
                         
                             <!-- Кнопка с добавленным атрибутом disabled -->
@@ -2265,7 +2300,7 @@ function createControlPanel() {
     }
 </script>
 
-        <script>
+         <script>
     // === Логика согласия и модальных окон ===
     const consentCheckbox = document.getElementById('privacy-consent');
     const submitBtn = document.querySelector('#contact-form button[type="submit"]');
@@ -2295,10 +2330,10 @@ function createControlPanel() {
         document.body.style.overflow = '';
     }
 
-    // Используем одну функцию для обработки кликов по чипам
+    // Обработчик клика по чипам
     function handleChipClick(e, modal) {
-        e.preventDefault(); // Предотвращаем стандартное действие (если вдруг осталось)
-        e.stopPropagation(); // Останавливаем всплытие, чтобы клик не влиял на label/input
+        e.preventDefault();     // Отменяем стандартное действие (на всякий случай)
+        e.stopPropagation();    // Останавливаем всплытие, чтобы не задеть другие элементы
         openModal(modal);
     }
 
