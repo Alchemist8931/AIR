@@ -2221,6 +2221,69 @@ function createControlPanel() {
     }
 </script>
 
+    <script>
+    // === Логика согласия и модальных окон ===
+    const consentCheckbox = document.getElementById('privacy-consent');
+    const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+    
+    // 1. Управление активностью кнопки
+    if (consentCheckbox && submitBtn) {
+        consentCheckbox.addEventListener('change', function() {
+            submitBtn.disabled = !this.checked;
+        });
+    }
+
+    // 2. Открытие модальных окон
+    const modalPolicy = document.getElementById('modal-policy');
+    const modalConsent = document.getElementById('modal-consent');
+    const linkPolicy = document.getElementById('link-policy');
+    const linkConsent = document.getElementById('link-consent');
+
+    function openModal(modal) {
+        if(!modal) return;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modal) {
+        if(!modal) return;
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (linkPolicy) {
+        linkPolicy.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(modalPolicy);
+        });
+    }
+
+    if (linkConsent) {
+        linkConsent.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(modalConsent);
+        });
+    }
+
+    // Закрытие по клику на оверлей или крестик
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            // Если клик по оверлею (а не по контенту) или по кнопке с классом modal-close
+            if (e.target === modal || e.target.closest('.modal-close')) {
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Закрытие по Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal(modalPolicy);
+            closeModal(modalConsent);
+        }
+    });
+</script>
+
     <!-- Модальное окно: Положение -->
 <div id="modal-policy" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-a4" style="background: #1A1A1A;">
