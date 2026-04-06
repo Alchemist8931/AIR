@@ -854,13 +854,15 @@
             accent-color: #FFBF00;
         }
 
-        /* Обертка для текста и кнопок */
+                /* Обертка для текста и кнопок */
         .consent-text-wrapper {
             flex: 1;
-            display: inline;
+            display: contents; /* Позволяет элементам внутри вести себя правильно */
+            cursor: default;
+            user-select: none;
         }
 
-        /* Текст становится простой оберткой, курсор остается обычным */
+        /* Текст становится простой оберткой */
         .consent-text-wrapper label {
             cursor: default;
             user-select: none;
@@ -2300,7 +2302,7 @@ function createControlPanel() {
     }
 </script>
 
-         <script>
+                <script>
     // === Логика согласия и модальных окон ===
     const consentCheckbox = document.getElementById('privacy-consent');
     const submitBtn = document.querySelector('#contact-form button[type="submit"]');
@@ -2318,8 +2320,15 @@ function createControlPanel() {
     const linkPolicy = document.getElementById('link-policy');
     const linkConsent = document.getElementById('link-consent');
 
+    // Проверка, нашли ли мы элементы (посмотрите консоль F12, если там ошибки - значит проблемы с ID в HTML)
+    console.log('Policy Button:', linkPolicy);
+    console.log('Policy Modal:', modalPolicy);
+
     function openModal(modal) {
-        if(!modal) return;
+        if(!modal) {
+            console.error('Модальное окно не найдено!');
+            return;
+        }
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -2332,17 +2341,23 @@ function createControlPanel() {
 
     // Обработчик клика по чипам
     function handleChipClick(e, modal) {
-        e.preventDefault();     // Отменяем стандартное действие (на всякий случай)
-        e.stopPropagation();    // Останавливаем всплытие, чтобы не задеть другие элементы
+        e.preventDefault();     
+        e.stopPropagation();   
+        e.stopImmediatePropagation(); // Полная остановка всех обработчиков
+        console.log('Клик по кнопке, открываем окно'); // Для отладки
         openModal(modal);
     }
 
     if (linkPolicy) {
         linkPolicy.addEventListener('click', (e) => handleChipClick(e, modalPolicy));
+    } else {
+        console.error('Кнопка #link-policy не найдена!');
     }
 
     if (linkConsent) {
         linkConsent.addEventListener('click', (e) => handleChipClick(e, modalConsent));
+    } else {
+        console.error('Кнопка #link-consent не найдена!');
     }
 
     // Закрытие по клику на оверлей или крестик
