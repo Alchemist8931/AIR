@@ -1,10 +1,7 @@
 // ============================================
 // Вентиляционная шахта - фоновая анимация
-// Для сайта ВентПром
 // ============================================
 
-// import * as THREE from 'https://esm.sh/three@0.160.0';
-// import { OrbitControls } from 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 import * as THREE from './three.module.min.js';
 import { OrbitControls } from './OrbitControls.js';
 
@@ -12,9 +9,6 @@ export function initVentilationAnimation(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return null;
 
-    // ==========================================
-    // 1. КОНФИГУРАЦИЯ
-    // ==========================================
     const CONFIG = {
         scene: {
             bgColor: 0x0D0D0D,
@@ -55,19 +49,14 @@ export function initVentilationAnimation(containerId) {
         damperOpen: true
     };
 
-    // --- Переменные для анимации камеры ---
-    let currentAngle = 0;         // Текущий азимутальный угол
-    let orbitSpeed = 0.025;       // Скорость (рад/сек). ~1.5 град/сек (в 2 раза медленнее)
-    let rotationDirection = 1;    // 1 или -1
+    let currentAngle = 0;         
+    let orbitSpeed = 0.025;      
+    let rotationDirection = 1;    
     let minAngle = 0;
     let maxAngle = 0;
-    let radius = 0;               // Радиус орбиты
-    let phi = 0;                  // Угол возвышения (высота)
-    // -------------------------------------
+    let radius = 0;             
+    let phi = 0;                 
 
-    // ==========================================
-    // 2. ИНИЦИАЛИЗАЦИЯ
-    // ==========================================
     function init() {
         scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.scene.bgColor);
@@ -87,9 +76,8 @@ export function initVentilationAnimation(containerId) {
         controls.enableZoom = false;
         controls.enablePan = false;
         
-        // ОТКЛЮЧАЕМ стандартное авто-вращение, управляем позицией вручную
         controls.autoRotate = false;
-        controls.enabled = false; // Блокируем управление пользователем, если нужно
+        controls.enabled = false;
         
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         scene.add(ambientLight);
@@ -99,7 +87,6 @@ export function initVentilationAnimation(containerId) {
         createInternalComponents();
         initParticleSystem();
         
-        // Инициализация параметров вращения
         setupCameraOrbit();
 
         animate();
@@ -107,22 +94,16 @@ export function initVentilationAnimation(containerId) {
         window.addEventListener('resize', onWindowResize);
     }
 
-    // Вычисляем начальные углы и границы вращения
     function setupCameraOrbit() {
         const target = controls.target;
         const offset = new THREE.Vector3().subVectors(camera.position, target);
         
         radius = offset.length();
         
-        // Вычисляем начальный азимут (угол в плоскости XZ)
-        // Используем atan2(x, z) для удобства (0 = впереди)
         currentAngle = Math.atan2(offset.x, offset.z);
-        
-        // Угол возвышения (от оси Y)
+
         phi = Math.acos(offset.y / radius);
 
-        // Диапазон вращения: +/- 30 градусов (PI/6) от начальной позиции
-        // Это соответствует диапазону "от 5 до 3 часов" (60 градусов)
         const sweepRange = Math.PI / 6; 
         minAngle = currentAngle - sweepRange;
         maxAngle = currentAngle + sweepRange;
@@ -134,9 +115,6 @@ export function initVentilationAnimation(containerId) {
         renderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-    // ==========================================
-    // 3. ФАБРИКА ОБЪЕКТОВ
-    // ==========================================
     function createGhostMaterial(opacity = 0.05) {
         return new THREE.MeshBasicMaterial({
             color: CONFIG.colors.fill,
@@ -173,9 +151,6 @@ export function initVentilationAnimation(containerId) {
         return group;
     }
 
-    // ==========================================
-    // 4. ПОСТРОЕНИЕ ВОЗДУХОВОДА
-    // ==========================================
     function createDuctSystem() {
         const mainGroup = new THREE.Group();
         const W = CONFIG.duct.width;
@@ -199,7 +174,6 @@ export function initVentilationAnimation(containerId) {
             mainGroup.add(ring);
         }
 
-        // --- ИЗГИБ ---
         const shape = new THREE.Shape();
         shape.moveTo(-W/2, -H/2);
         shape.lineTo(W/2, -H/2);
@@ -224,7 +198,6 @@ export function initVentilationAnimation(containerId) {
         const linesBend = new THREE.LineSegments(edgesBend, new THREE.LineBasicMaterial({ color: CONFIG.colors.line, transparent: true, opacity: 0.5 }));
         mainGroup.add(linesBend);
 
-        // --- ВЕРТИКАЛЬНЫЙ УЧАСТОК ---
         const vertStartX = R;
         const vertStartY = startY + R;
         const vertLength = CONFIG.duct.verticalLength;
@@ -260,7 +233,6 @@ export function initVentilationAnimation(containerId) {
         const H = CONFIG.duct.height;
         const Y = H/2 + 0.5;
 
-        // --- ШЛЮЗ ---
         const damperGroup = new THREE.Group();
         damperGroup.position.set(CONFIG.components.damperX, Y, 0);
 
@@ -299,7 +271,6 @@ export function initVentilationAnimation(containerId) {
         damperGroup.add(damperBlades);
         scene.add(damperGroup);
 
-        // --- ВЕНТИЛЯТОР ---
         const fanGroup = new THREE.Group();
         fanGroup.position.set(CONFIG.components.fanX, Y, 0);
         const fanSectionGeo = new THREE.BoxGeometry(0.3, H, W);
@@ -357,9 +328,6 @@ export function initVentilationAnimation(containerId) {
         scene.add(grid);
     }
 
-    // ==========================================
-    // 5. СИСТЕМА ЧАСТИЦ
-    // ==========================================
     let particles = [];
 
     function initParticleSystem() {
@@ -598,9 +566,6 @@ export function initVentilationAnimation(containerId) {
         particleSystem.geometry.attributes.color.needsUpdate = true;
     }
 
-    // ==========================================
-    // 6. ПУБЛИЧНЫЙ API
-    // ==========================================
     function setFanSpeed(speed) {
         systemState.fanSpeed = speed;
     }
@@ -613,19 +578,13 @@ export function initVentilationAnimation(containerId) {
         return { ...systemState };
     }
 
-    // ==========================================
-    // 7. ОСНОВНОЙ ЦИКЛ (ИСПРАВЛЕНО)
-    // ==========================================
     function animate() {
         requestAnimationFrame(animate);
         frameCount++;
         const delta = clock.getDelta();
 
-        // --- РУЧНОЕ ВРАЩЕНИЕ КАМЕРЫ ---
-        // Обновляем угол
         currentAngle += orbitSpeed * rotationDirection * delta;
 
-        // Проверка границ (пинг-понг)
         if (currentAngle > maxAngle) {
             currentAngle = maxAngle;
             rotationDirection = -1;
@@ -634,24 +593,17 @@ export function initVentilationAnimation(containerId) {
             rotationDirection = 1;
         }
 
-        // Вычисляем новую позицию камеры
-        // x = r * sin(phi) * sin(theta)
-        // z = r * sin(phi) * cos(theta)
-        // y = r * cos(phi)
         const target = controls.target;
         camera.position.x = target.x + radius * Math.sin(phi) * Math.sin(currentAngle);
         camera.position.z = target.z + radius * Math.sin(phi) * Math.cos(currentAngle);
         camera.position.y = target.y + radius * Math.cos(phi);
 
-        // Так как controls отключены, обновляем lookAt вручную
         camera.lookAt(target);
 
-        // --- Анимация вентилятора ---
         if (fanRotor) {
             fanRotor.rotation.x += delta * 15 * systemState.fanSpeed;
         }
 
-        // --- Анимация заслонки ---
         if (damperBlades) {
             const targetAngle = systemState.damperOpen ? Math.PI / 2 : 0;
 
@@ -663,14 +615,11 @@ export function initVentilationAnimation(containerId) {
         }
 
         updateParticles();
-        // controls.update(); // Не нужен, так как enabled=false и позицию задаем вручную
         renderer.render(scene, camera);
     }
 
-    // Запуск
     init();
 
-    // Возвращаем API для управления извне
     return {
         setFanSpeed,
         setDamperOpen,
