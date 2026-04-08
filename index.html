@@ -12,11 +12,9 @@
     <meta name="keywords" content="промышленная вентиляция, аспирация, монтаж вентиляции, Калуга, пылеудаление, вытяжная вентиляция, GROSGROUP, СовПлим">
     <meta name="robots" content="index, follow">
     
-    <!-- СКОРРЕКТИРОВАТЬ КАК БУДЕТ ЗАПУЩЕНО НА ДОМЕНЕ -->
-    <link rel="canonical" href="https://САЙТ.RU/" />
-    <meta property="og:image" content="https://САЙТ.RU/og-preview.jpg">
-    <meta property="og:url" content="https://САЙТ.RU/">
-    <!-- СКОРРЕКТИРОВАТЬ КАК БУДЕТ ЗАПУЩЕНО   НА ДОМЕНЕ -->
+    <link rel="canonical" href="https://gros-group.ru/" />
+    <meta property="og:image" content="https://gros-group.ru/og-preview.png">
+    <meta property="og:url" content="https://gros-group.ru/">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="GROSGROUP — Промышленная вентиляция и аспирация">
@@ -663,14 +661,13 @@
             border: 1px solid rgba(38, 38, 38, 0.7);
         }
 
-                /* --- Стили для всплывающего уведомления (Toast) --- */
         .toast-notification {
             position: fixed;
             bottom: 30px;
             right: 30px;
             z-index: 10000;
             background: rgba(22, 22, 22, 0.98);
-            border: 1px solid #FFBF00; /* Желтая рамка */
+            border: 1px solid #FFBF00; 
             border-radius: 12px;
             padding: 20px 25px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
@@ -678,14 +675,14 @@
             display: flex;
             align-items: flex-start;
             gap: 15px;
-            transform: translateX(120%); /* Скрыто за пределами экрана */
+            transform: translateX(120%); 
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none; /* Чтобы не мешало кликам, когда скрыто */
+            pointer-events: none;
         }
 
         .toast-notification.show {
-            transform: translateX(0); /* Появилось */
+            transform: translateX(0);
             opacity: 1;
             pointer-events: auto;
         }
@@ -694,7 +691,7 @@
             flex-shrink: 0;
             width: 24px;
             height: 24px;
-            color: #FFBF00; /* Цвет иконки */
+            color: #FFBF00; 
         }
 
         .toast-content {
@@ -704,7 +701,6 @@
             font-family: 'SN Pro', sans-serif;
         }
         
-        /* Адаптив для мобильных */
         @media (max-width: 480px) {
             .toast-notification {
                 left: 15px;
@@ -713,8 +709,6 @@
                 max-width: none;
             }
         }
-
-               /* --- Анимация для подписи разработчика --- */
         @keyframes neon-blink {
             0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
                 text-shadow: 
@@ -725,7 +719,7 @@
             }
             20%, 24%, 55% {
                 text-shadow: none;
-                color: #737373; /* ink-muted */
+                color: #737373;
             }
         }
         
@@ -733,28 +727,22 @@
             animation: neon-blink 1.2s ease-in-out forwards;
         }
         
-        /* Стили для tooltip (если нужно доработать) */
         #dev-tooltip a {
             display: flex;
             align-items: center;
         }
 
-                /* === ИЗМЕНЕНИЯ ДЛЯ АНИМАЦИИ === */
-        
-        /* 1. Сдвигаем сцену с анимацией на 250px вправо */
         #vent-animation-container {
             left: 300px !important;
             right: 0;
         }
 
-        /* 2. Скрываем анимацию на мобильных устройствах */
         @media (max-width: 768px) {
             #vent-animation-container {
                 display: none !important;
             }
         }
 
-                /* --- Стили для согласия и модальных окон с текстом --- */
         .consent-container {
             display: flex;
             align-items: flex-start;
@@ -790,7 +778,6 @@
             opacity: 0.8;
         }
 
-        /* Стиль отключенной кнопки */
         .btn-primary:disabled {
             opacity: 0.4;
             cursor: not-allowed !important;
@@ -801,7 +788,6 @@
             border-color: #525252;
         }
 
-        /* Контейнер для текста в модальном окне */
         .modal-text-content {
             height: 100%;
             width: 100%;
@@ -833,7 +819,6 @@
             margin-bottom: 12px;
         }
 
-                 /* --- Стили для согласия и модальных окон с текстом --- */
         .consent-container {
             display: flex;
             align-items: flex-start;
@@ -854,23 +839,19 @@
             accent-color: #FFBF00;
         }
 
-        /* Обертка для текста и кнопок */
         .consent-text-wrapper {
             flex: 1;
-            /* Убираем display: contents, возвращаем обычный блок */
             display: block; 
             cursor: default;
             user-select: none;
         }
 
-        /* Текст становится простой оберткой */
         .consent-text-wrapper label {
             cursor: default;
             user-select: none;
-            display: inline; /* Гарантирует, что текст идет в строку */
+            display: inline;
         }
 
-        /* Стили для кнопок-чипов */
         .consent-chip {
             display: inline-flex;
             align-items: center;
@@ -896,7 +877,6 @@
             transform: translateY(-1px);
         }
 
-        /* Стиль отключенной кнопки отправки */
         .btn-primary:disabled {
             opacity: 0.4;
             cursor: not-allowed !important;
@@ -1463,7 +1443,6 @@
                                     placeholder="Опишите ваш проект"></textarea>
                             </div>
 
-                                                        <!-- Добавленный блок согласия -->
                             <div class="consent-container">
                                 <input type="checkbox" id="privacy-consent">
                                 <div class="consent-text-wrapper">
@@ -1475,7 +1454,6 @@
                                 </div>
                             </div>
                         
-                            <!-- Кнопка с добавленным атрибутом disabled -->
                             <button type="submit" 
                                 disabled
                                 class="btn-primary w-full py-4 rounded-xl font-medium text-surface-bright flex items-center justify-center gap-3 text-base">
@@ -1495,7 +1473,6 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 
-                <!-- Левая часть: Логотип + Копирайт (аналогично шапке) -->
                 <div class="flex items-center gap-3">
                     <a href="#" class="flex items-center gap-3 group">
                         <div class="logo-box w-11 h-11 rounded-xl flex items-center justify-center">
@@ -1507,28 +1484,23 @@
                         </div>
                     </a>
                 </div>
-                
-                <!-- Центральная часть: Подпись разработчика -->
+                 
                 <div class="relative inline-block text-center order-last md:order-none">
                     <span id="dev-credit" class="text-ink-muted text-sm cursor-default select-none transition-colors duration-300">
                         разработчик Alchemist_TEAM
                     </span>
-                    
-                    <!-- Tooltip -->
+
                     <div id="dev-tooltip" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-2.5 bg-surface-bright border border-gray-light/70 rounded-xl shadow-xl opacity-0 invisible transition-all duration-300 whitespace-nowrap z-50">
                         <a href="https://t.me/Alchemist_TEAM" target="_blank" class="flex items-center gap-2 text-ink hover:text-[#FFBF00] transition-colors group">
-                            <!-- Иконка Telegram -->
                             <svg class="w-4 h-4 text-ink-muted group-hover:text-[#FFBF00] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
                             </svg>
                             <span class="text-sm font-medium text-ink group-hover:text-[#FFBF00]">@Alchemist_TEAM</span>
                         </a>
-                        <!-- Треугольник внизу -->
                         <div class="absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-surface-bright"></div>
                     </div>
                 </div>
 
-                <!-- Правая часть: Соцсети -->
                 <div class="flex flex-col md:flex-row items-center gap-4">
                     <span class="text-sm text-ink-muted text-center md:text-right hidden md:block" style="color: #FFBF00;">Наше присутствие в социальных сетях и мессенджерах</span>
                     
@@ -1773,14 +1745,11 @@
                 const btn = form.querySelector('button[type="submit"]');
                 const original = btn.innerHTML;
 
-                // Визуальная загрузка
                 btn.innerHTML = `<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
                 btn.disabled = true;
 
                 const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyLC4_sF9L6LyQA58v1FNmXAqUXuWhqq9BigRhVjNeMOrxz9b_eLhOY-J1hjjiajHKN/exec';
 
-                // === ВАЖНОЕ ИЗМЕНЕНИЕ: Используем URLSearchParams вместо FormData ===
-                // Это отправляет данные как application/x-www-form-urlencoded, который понимает Google Script
                 const formData = new URLSearchParams();
                 formData.append('name', form.querySelector('[name="name"]').value);
                 formData.append('phone', form.querySelector('[name="phone"]').value);
@@ -1790,10 +1759,9 @@
                 fetch(googleScriptUrl, {
                     method: 'POST',
                     body: formData,
-                    mode: 'no-cors' // Обязательно для Google Script
+                    mode: 'no-cors'
                 })
                 .then(() => {
-                    // В режиме no-cors мы не видим ответ, но если нет ошибки сети — считаем успехом
                     showToast('Благодарим Вас за обращение! Наши специалисты уже получили его и в ближайшее время с вами свяжутся.');
                     form.reset(); 
                 })
@@ -1807,7 +1775,6 @@
                 });
             });
 
-            // --- Функция показа уведомления ---
             function showToast(message) {
                 const existingToast = document.querySelector('.toast-notification');
                 if (existingToast) existingToast.remove();
@@ -1868,7 +1835,7 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                // Если ссылка просто "#" или пустая, ничего не делаем (это заглушки)
+ 
                 if (href === '#' || !href) return;
                 
                 e.preventDefault();
@@ -1983,13 +1950,11 @@ function createControlPanel() {
             document.body.appendChild(panel);
 
             function updatePosition() {
-                // Проверка ширины экрана для мобильных устройств
                 if (window.innerWidth < 768) {
                     panel.style.display = 'none';
                     return;
                 }
 
-                // Ищем кнопку "Проекты"
                 const projectBtn = document.querySelector('#hero a[href="#projects"]');
                 
                 if (!projectBtn) {
@@ -2000,15 +1965,12 @@ function createControlPanel() {
                 panel.style.display = 'flex';
                 
                 const rect = projectBtn.getBoundingClientRect();
-                
-                // 1. Вертикальная позиция: низ кнопки + прокрутка + отступ 20px
+
                 const topPosition = rect.bottom + window.scrollY + 20;
-                
-                // 2. Горизонтальная позиция: выравнивание правых границ
+  
                 const buttonRight = rect.right + window.scrollX;
                 const panelWidth = panel.offsetWidth;
                 
-                // 3. Добавляем смещение margin-left: 100px
                 const marginLeftOffset = 200;
                 const leftPosition = buttonRight - panelWidth + marginLeftOffset;
 
@@ -2228,8 +2190,8 @@ function createControlPanel() {
   "@type": "Organization",
   "name": "GROSGROUP",
   "alternateName": "ГРОСГРУПП",
-  "url": "https://ваш-сайт.ru",
-  "logo": "https://ваш-сайт.ru/logo.png",
+  "url": "https://gros-group.ru",
+  "logo": "https://gros-group.ru/logo.png",
   "description": "Проектирование, монтаж и сервис систем промышленной вентиляции и аспирации.",
   "address": {
     "@type": "PostalAddress",
@@ -2303,7 +2265,6 @@ function createControlPanel() {
     }
 </script>
 
-       <!-- Модальное окно: Положение -->
 <div id="modal-policy" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-a4" style="background: #1A1A1A;">
         <button class="modal-close" aria-label="Закрыть">
@@ -2359,7 +2320,7 @@ function createControlPanel() {
     </div>
 </div>
 
-<!-- Модальное окно: Согласие -->
+
 <div id="modal-consent" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-a4" style="background: #1A1A1A;">
         <button class="modal-close" aria-label="Закрыить">
@@ -2369,7 +2330,7 @@ function createControlPanel() {
         </button>
         <div class="modal-text-content">
             <h2>Согласие на обработку персональных данных</h2>
-            
+        
             <p>Пользователь, оставляя обращение, заявку на сайте http://grosgroup (далее также – сайт), создавая аккаунт и/или соглашаясь с офертой на сайте, принимает настоящее Согласие на обработку персональных данных.</p>
             
             <p>Пользователь, действуя свободно, своей волей и в своём интересе, подтверждая свою дееспособность, даёт своё согласие ООО "ГРОСГРУПП" (ИНН 4028071432, КПП 402801001, 248021, г. Калуга, пер. Окружной, д. 4) на обработку своих персональных данных как с использованием, так и без использования средств автоматизации для целей обработки входящих запросов физических лиц (пользователей) с целью консультирования, направления комментариев физическим лицам (пользователям); аналитики действий физического лица (пользователя) на сайте и функционирования сайта; выполнения обязательств по договору оферты, принятому пользователем на сайте. При этом:</p>
@@ -2390,24 +2351,20 @@ function createControlPanel() {
 </div>
 
 <script>
-    // === Логика согласия и модальных окон ===
     const consentCheckbox = document.getElementById('privacy-consent');
     const submitBtn = document.querySelector('#contact-form button[type="submit"]');
-    
-    // 1. Управление активностью кнопки
+
     if (consentCheckbox && submitBtn) {
         consentCheckbox.addEventListener('change', function() {
             submitBtn.disabled = !this.checked;
         });
     }
 
-    // 2. Открытие модальных окон
     const modalPolicy = document.getElementById('modal-policy');
     const modalConsent = document.getElementById('modal-consent');
     const linkPolicy = document.getElementById('link-policy');
     const linkConsent = document.getElementById('link-consent');
 
-    // Проверка, нашли ли мы элементы (посмотрите консоль F12, если там ошибки - значит проблемы с ID в HTML)
     console.log('Policy Button:', linkPolicy);
     console.log('Policy Modal:', modalPolicy);
 
@@ -2425,13 +2382,12 @@ function createControlPanel() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
-
-    // Обработчик клика по чипам
+    
     function handleChipClick(e, modal) {
         e.preventDefault();     
         e.stopPropagation();   
-        e.stopImmediatePropagation(); // Полная остановка всех обработчиков
-        console.log('Клик по кнопке, открываем окно'); // Для отладки
+        e.stopImmediatePropagation();
+        console.log('Клик по кнопке, открываем окно');
         openModal(modal);
     }
 
@@ -2446,8 +2402,6 @@ function createControlPanel() {
     } else {
         console.error('Кнопка #link-consent не найдена!');
     }
-
-    // Закрытие по клику на оверлей или крестик
     document.querySelectorAll('.modal-overlay').forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal || e.target.closest('.modal-close')) {
@@ -2456,7 +2410,6 @@ function createControlPanel() {
         });
     });
 
-    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal(modalPolicy);
