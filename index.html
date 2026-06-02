@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+ 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109561110', 'ym');
+ 
+        ym(109561110, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/109561110" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+ 
     <title>GROSGROUP — Промышленная вентиляция и аспирация в Калуге | Проектирование и монтаж</title>
     <meta name="description" content="GROSGROUP: проектирование, монтаж и сервис систем промышленной вентиляции и аспирации. Официальный партнер СовПлим. Работаем в Калуге и области. Гарантия 5 лет. Звоните: +7 (961) 125-55-50.">
     <meta name="keywords" content="промышленная вентиляция, аспирация, монтаж вентиляции, Калуга, пылеудаление, вытяжная вентиляция, GROSGROUP, СовПлим">
@@ -19,7 +34,7 @@
     
     <meta property="og:image" content="https://gros-group.ru/og-preview.png">
     <meta property="og:url" content="https://gros-group.ru/">
-
+ 
     <meta property="og:type" content="website">
     <meta property="og:title" content="GROSGROUP — Промышленная вентиляция и аспирация">
     <meta property="og:description" content="Комплексные решения для чистого воздуха на производстве. Монтаж, сервис, проектирование.">
@@ -70,7 +85,7 @@
             --glow: rgba(229, 229, 229, 0.04);
             --glow-strong: rgba(229, 229, 229, 0.08);
         }
-
+ 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
@@ -80,12 +95,12 @@
             color: var(--fg);
             overflow-x: hidden;
         }
-
+ 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-secondary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-
+ 
         .dark-bg {
             background: 
                 radial-gradient(ellipse 100% 60% at 50% -30%, rgba(229, 229, 229, 0.03) 0%, transparent 50%),
@@ -93,7 +108,7 @@
                 radial-gradient(ellipse 50% 50% at 0% 80%, rgba(229, 229, 229, 0.015) 0%, transparent 40%),
                 linear-gradient(180deg, #0D0D0D 0%, #0A0A0A 50%, #0D0D0D 100%);
         }
-
+ 
         .particle {
             position: fixed;
             width: 2px;
@@ -104,26 +119,26 @@
             opacity: 0;
             z-index: 0;
         }
-
+ 
         .particle.animate {
             animation: particleFloat 20s ease-in-out infinite;
             opacity: 0.12;
         }
-
+ 
         @keyframes particleFloat {
             0%, 100% { transform: translate(0, 0); opacity: 0.06; }
             25% { transform: translate(30px, -20px); opacity: 0.15; }
             50% { transform: translate(-20px, 30px); opacity: 0.1; }
             75% { transform: translate(25px, 10px); opacity: 0.12; }
         }
-
+ 
         .ambient-orb {
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
             will-change: transform;
         }
-
+ 
         .ambient-orb::after {
             content: '';
             position: absolute;
@@ -132,7 +147,7 @@
             background: inherit;
             filter: blur(100px);
         }
-
+ 
         .blueprint-grid {
             background-image: 
                 linear-gradient(rgba(229, 229, 229, 0.03) 1px, transparent 1px),
@@ -141,25 +156,25 @@
                 linear-gradient(90deg, rgba(229, 229, 229, 0.015) 1px, transparent 1px);
             background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
         }
-
+ 
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
+ 
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
+ 
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; }
         .delay-5 { transition-delay: 0.5s; }
-
+ 
         .service-card {
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.95) 0%, rgba(22, 22, 22, 0.98) 100%);
             border: 1px solid rgba(38, 38, 38, 0.8);
@@ -169,7 +184,7 @@
                         border-color 0.4s ease,
                         box-shadow 0.4s ease;
         }
-
+ 
         .service-card::before {
             content: '';
             position: absolute;
@@ -181,7 +196,7 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-
+ 
         .service-card::after {
             content: '';
             position: absolute;
@@ -191,7 +206,7 @@
             transition: opacity 0.3s ease;
             pointer-events: none;
         }
-
+ 
         .service-card:hover {
             transform: translateY(-6px);
             border-color: rgba(229, 229, 229, 0.15);
@@ -199,20 +214,20 @@
                 0 20px 40px -15px rgba(0, 0, 0, 0.5),
                 0 0 60px -20px rgba(229, 229, 229, 0.03);
         }
-
+ 
         .service-card:hover::before { opacity: 0.3; }
         .service-card:hover::after { opacity: 1; }
-
+ 
         .service-card:hover .icon-box {
             background: rgba(229, 229, 229, 0.08);
             border-color: rgba(229, 229, 229, 0.2);
             transform: scale(1.08);
         }
-
+ 
         .icon-box {
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
+ 
         .btn-primary {
             position: relative;
             background: linear-gradient(135deg, rgba(229, 229, 229, 0.95) 0%, rgba(200, 200, 200, 1) 100%);
@@ -221,7 +236,7 @@
             transition: all 0.35s ease;
             overflow: hidden;
         }
-
+ 
         .service-card-bg-img {
             position: absolute;
             top: 0;
@@ -233,7 +248,7 @@
             z-index: 0;
             opacity: 1;
         }
-
+ 
         .service-card-overlay {
             position: absolute;
             inset: 0;
@@ -241,16 +256,16 @@
             pointer-events: none;
             z-index: 1;
         }
-
+ 
         .service-card-content {
             position: relative;
             z-index: 3;
         }
-
+ 
         .service-card::after {
             z-index: 2;
         }
-
+ 
         .btn-primary::before {
             content: '';
             position: absolute;
@@ -261,28 +276,28 @@
             background: linear-gradient(90deg, transparent, rgba(13, 13, 13, 0.15), transparent);
             transition: left 0.5s ease;
         }
-
+ 
         .btn-primary:hover {
             background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%);
             box-shadow: 0 8px 25px -8px rgba(229, 229, 229, 0.2);
             transform: translateY(-2px);
         }
-
+ 
         .btn-primary:hover::before { left: 100%; }
-
+ 
         .btn-secondary {
             background: rgba(26, 26, 26, 0.9);
             border: 1px solid rgba(38, 38, 38, 0.8);
             color: var(--fg);
             transition: all 0.35s ease;
         }
-
+ 
         .btn-secondary:hover {
             border-color: rgba(229, 229, 229, 0.2);
             background: rgba(38, 38, 38, 1);
             box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
         }
-
+ 
         .project-card {
             position: relative;
             overflow: hidden;
@@ -290,7 +305,7 @@
             border: 1px solid rgba(38, 38, 38, 0.6);
             transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
-
+ 
         .project-card .overlay {
             position: absolute;
             inset: 0;
@@ -301,33 +316,33 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-
+ 
         .project-card:hover {
             transform: translateY(-4px);
             border-color: rgba(229, 229, 229, 0.12);
             box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.5);
         }
-
+ 
         .project-card:hover .overlay { opacity: 1; }
-
+ 
         .project-card .content {
             transform: translateY(20px);
             opacity: 0;
             transition: all 0.4s ease 0.05s;
         }
-
+ 
         .project-card:hover .content {
             transform: translateY(0);
             opacity: 1;
         }
-
+ 
         .header-solid {
             background: rgba(13, 13, 13, 0.92);
             border-bottom: 1px solid rgba(38, 38, 38, 0.6);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(12px);
         }
-
+ 
         .stats-card {
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.9) 0%, rgba(22, 22, 22, 0.95) 100%);
             border: 1px solid rgba(38, 38, 38, 0.7);
@@ -339,7 +354,7 @@
             flex-direction: column;
             justify-content: center;
         }
-
+ 
         .stats-card::after {
             content: '';
             position: absolute;
@@ -351,28 +366,28 @@
             background: linear-gradient(90deg, transparent, var(--fg), transparent);
             transition: width 0.4s ease;
         }
-
+ 
         .stats-card:hover {
             border-color: rgba(229, 229, 229, 0.12);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
         }
-
+ 
         .stats-card:hover::after { width: 70%; }
-
+ 
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
             background: rgba(13, 13, 13, 0.98);
         }
-
+ 
         .mobile-menu.open { transform: translateX(0); }
-
+ 
         button:focus-visible, a:focus-visible {
             outline: 2px solid var(--fg);
             outline-offset: 3px;
         }
-
+ 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -380,33 +395,33 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
+ 
         .form-input {
             background: rgba(26, 26, 26, 0.95);
             border: 1px solid rgba(38, 38, 38, 0.9);
             color: var(--fg);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
+ 
         .form-input:focus {
             outline: none;
             border-color: rgba(229, 229, 229, 0.3);
             box-shadow: 0 0 0 3px rgba(229, 229, 229, 0.05);
         }
-
+ 
         .form-input::placeholder { color: rgba(115, 115, 115, 0.8); }
-
+ 
         .tech-line-animated {
             stroke-dasharray: 200;
             stroke-dashoffset: 200;
             animation: drawLine 5s ease-in-out infinite;
         }
-
+ 
         @keyframes drawLine {
             0%, 100% { stroke-dashoffset: 200; opacity: 0; }
             30%, 70% { stroke-dashoffset: 0; opacity: 0.25; }
         }
-
+ 
         .corner-mark {
             position: absolute;
             width: 20px;
@@ -414,69 +429,69 @@
             border-color: rgba(229, 229, 229, 0.12);
             border-style: solid;
         }
-
+ 
         .corner-mark-tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
         .corner-mark-tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
         .corner-mark-bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
         .corner-mark-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
-
+ 
         .hero-visual-inner {
             transition: transform 0.15s ease-out;
             will-change: transform;
         }
-
+ 
         .vent-fan {
             animation: fanRotate 3s linear infinite;
             transform-origin: center;
         }
-
+ 
         @keyframes fanRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-
+ 
         .air-flow {
             stroke-dasharray: 8 4;
             animation: airFlow 1.5s linear infinite;
         }
-
+ 
         @keyframes airFlow {
             from { stroke-dashoffset: 0; }
             to { stroke-dashoffset: -24; }
         }
-
+ 
         .pulse-soft {
             animation: pulseSoft 3s ease-in-out infinite;
         }
-
+ 
         @keyframes pulseSoft {
             0%, 100% { opacity: 0.1; }
             50% { opacity: 0.25; }
         }
-
+ 
         .float {
             animation: float 5s ease-in-out infinite;
         }
-
+ 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-12px); }
         }
-
+ 
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(229, 229, 229, 0.06) 50%, transparent 100%);
         }
-
+ 
         .status-pulse {
             animation: statusPulse 2.5s ease-in-out infinite;
         }
-
+ 
         @keyframes statusPulse {
             0%, 100% { opacity: 0.4; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.15); }
         }
-
+ 
         .scan-line {
             position: absolute;
             width: 100%;
@@ -484,18 +499,18 @@
             background: linear-gradient(90deg, transparent, rgba(229, 229, 229, 0.1), transparent);
             animation: scanMove 8s linear infinite;
         }
-
+ 
         @keyframes scanMove {
             0% { top: 0; opacity: 0; }
             5% { opacity: 1; }
             95% { opacity: 1; }
             100% { top: 100%; opacity: 0; }
         }
-
+ 
         .process-step {
             position: relative;
         }
-
+ 
         .process-step::after {
             content: '';
             position: absolute;
@@ -505,13 +520,13 @@
             height: 1px;
             background: linear-gradient(90deg, rgba(229, 229, 229, 0.06), transparent);
         }
-
+ 
         .process-step:last-child::after { display: none; }
-
+ 
         .nav-link {
             position: relative;
         }
-
+ 
         .nav-link::after {
             content: '';
             position: absolute;
@@ -522,46 +537,46 @@
             background: var(--fg);
             transition: width 0.3s ease;
         }
-
+ 
         .nav-link:hover::after { width: 100%; }
-
+ 
         .feature-icon {
             background: rgba(229, 229, 229, 0.03);
             border: 1px solid rgba(229, 229, 229, 0.06);
             transition: all 0.35s ease;
         }
-
+ 
         .feature-icon:hover {
             background: rgba(229, 229, 229, 0.06);
             border-color: rgba(229, 229, 229, 0.12);
         }
-
+ 
         .info-card {
             background: rgba(26, 26, 26, 0.6);
             border: 1px solid rgba(38, 38, 38, 0.5);
             transition: border-color 0.3s ease;
         }
-
+ 
         .info-card:hover {
             border-color: rgba(229, 229, 229, 0.12);
         }
-
+ 
         .logo-box {
             border: 1px solid rgba(229, 229, 229, 0.1);
             transition: all 0.3s ease;
         }
-
+ 
         .logo-box:hover {
             border-color: rgba(229, 229, 229, 0.2);
             background: rgba(229, 229, 229, 0.03);
             box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.3);
         }
-
+ 
          .logo-box img {
             filter: brightness(0) invert(1);
             transition: filter 0.3s ease;
         }
-
+ 
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -575,12 +590,12 @@
     visibility: hidden;
     transition: opacity 0.35s ease, visibility 0.35s ease;
 }
-
+ 
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
 }
-
+ 
 .modal-a4 {
     position: relative;
     height: 90vh;
@@ -593,11 +608,11 @@
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
 }
-
+ 
 .modal-overlay.active .modal-a4 {
     transform: scale(1);
 }
-
+ 
 .modal-a4 img {
     display: block;
     height: 100%; 
@@ -605,7 +620,7 @@
     width: auto; 
     object-fit: contain;
 }
-
+ 
 .modal-close {
     position: absolute;
     top: 14px;
@@ -622,17 +637,17 @@
     z-index: 10;
     transition: background 0.3s ease, border-color 0.3s ease;
 }
-
+ 
 .modal-close:hover {
     background: rgba(38, 38, 38, 1);
     border-color: rgba(229, 229, 229, 0.25);
 }
-
+ 
 .sert-trigger {
     cursor: pointer;
     position: relative;
 }
-
+ 
 .sert-trigger-overlay {
     position: absolute;
     inset: 16px;
@@ -648,23 +663,23 @@
     color: var(--fg);
     pointer-events: none;
 }
-
+ 
 .sert-trigger:hover .sert-trigger-overlay {
     opacity: 1;
 }
-
+ 
 .sert-trigger-overlay span {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-family: 'SN Pro', monospace;
 }
-
+ 
         .badge-stats {
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.9) 0%, rgba(22, 22, 22, 0.95) 100%);
             border: 1px solid rgba(38, 38, 38, 0.7);
         }
-
+ 
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -684,20 +699,20 @@
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
-
+ 
         .toast-notification.show {
             transform: translateX(0);
             opacity: 1;
             pointer-events: auto;
         }
-
+ 
         .toast-icon {
             flex-shrink: 0;
             width: 24px;
             height: 24px;
             color: #FFBF00; 
         }
-
+ 
         .toast-content {
             color: #E5E5E5;
             font-size: 14px;
@@ -735,18 +750,18 @@
             display: flex;
             align-items: center;
         }
-
+ 
         #vent-animation-container {
             left: 300px !important;
             right: 0;
         }
-
+ 
         @media (max-width: 768px) {
             #vent-animation-container {
                 display: none !important;
             }
         }
-
+ 
         .consent-container {
             display: flex;
             align-items: flex-start;
@@ -757,7 +772,7 @@
             line-height: 1.5;
             text-align: left;
         }
-
+ 
         .consent-container input[type="checkbox"] {
             margin-top: 3px;
             flex-shrink: 0;
@@ -766,22 +781,22 @@
             height: 16px;
             accent-color: #FFBF00;
         }
-
+ 
         .consent-container label {
             cursor: pointer;
             user-select: none;
         }
-
+ 
         .consent-container a {
             color: #FFBF00;
             text-decoration: underline;
             transition: opacity 0.2s;
         }
-
+ 
         .consent-container a:hover {
             opacity: 0.8;
         }
-
+ 
         .btn-primary:disabled {
             opacity: 0.4;
             cursor: not-allowed !important;
@@ -791,7 +806,7 @@
             background: #525252;
             border-color: #525252;
         }
-
+ 
         .modal-text-content {
             height: 100%;
             width: 100%;
@@ -801,7 +816,7 @@
             font-size: 14px;
             line-height: 1.7;
         }
-
+ 
         .modal-text-content h2 {
             font-size: 22px;
             color: #FFBF00;
@@ -818,11 +833,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
+ 
         .modal-text-content p {
             margin-bottom: 12px;
         }
-
+ 
         .consent-container {
             display: flex;
             align-items: flex-start;
@@ -833,7 +848,7 @@
             line-height: 1.5;
             text-align: left;
         }
-
+ 
         .consent-container input[type="checkbox"] {
             margin-top: 3px;
             flex-shrink: 0;
@@ -842,20 +857,20 @@
             height: 16px;
             accent-color: #FFBF00;
         }
-
+ 
         .consent-text-wrapper {
             flex: 1;
             display: block; 
             cursor: default;
             user-select: none;
         }
-
+ 
         .consent-text-wrapper label {
             cursor: default;
             user-select: none;
             display: inline;
         }
-
+ 
         .consent-chip {
             display: inline-flex;
             align-items: center;
@@ -874,13 +889,13 @@
             text-decoration: none;
             line-height: 1.4;
         }
-
+ 
         .consent-chip:hover {
             background: rgba(255, 191, 0, 0.15);
             box-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
             transform: translateY(-1px);
         }
-
+ 
         .btn-primary:disabled {
             opacity: 0.4;
             cursor: not-allowed !important;
@@ -895,7 +910,7 @@
 </head>
 <body class="antialiased dark-bg">
     <div id="particles-container" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></div>
-
+ 
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-400">
         <div class="max-w-7xl mx-auto px-6">
             <nav class="flex items-center justify-between h-20">
@@ -908,7 +923,7 @@
                         <span class="text-[10px] text-ink-muted tracking-widest uppercase font-mono" style="color: #FFBF00;">ПОСТАВКА И МОНТАЖ ОБОРУДОВАНИЯ</span>
                     </div>
                 </a>
-
+ 
                 <div class="hidden lg:flex items-center gap-10">
                     <a href="#services" class="nav-link text-sm text-ink-light hover:text-ink transition-colors tracking-wide">Услуги</a>
                     <a href="#about" class="nav-link text-sm text-ink-light hover:text-ink transition-colors tracking-wide">О компании</a>
@@ -916,7 +931,7 @@
                     <a href="#process" class="nav-link text-sm text-ink-light hover:text-ink transition-colors tracking-wide">Партнеры</a>
                     <a href="#contacts" class="nav-link text-sm text-ink-light hover:text-ink transition-colors tracking-wide">Контакты</a>
                 </div>
-
+ 
                 <div class="hidden lg:flex items-center gap-4">
                     <a href="#contacts" class="btn-primary px-6 py-3 rounded-xl text-sm font-medium text-surface-bright flex items-center gap-2">
                         Расчёт проекта
@@ -925,7 +940,7 @@
                         </svg>
                     </a>
                 </div>
-
+ 
                 <button id="menu-btn" class="lg:hidden w-11 h-11 flex items-center justify-center border border-gray-light rounded-xl hover:border-ink/20 transition-colors" aria-label="Меню">
                     <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
@@ -934,7 +949,7 @@
             </nav>
         </div>
     </header>
-
+ 
     <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 lg:hidden">
         <div class="flex flex-col h-full pt-24 px-6 pb-8">
             <button id="close-menu" class="absolute top-6 right-6 w-11 h-11 flex items-center justify-center border border-gray-light rounded-xl hover:border-ink/20 transition-colors" aria-label="Закрыть">
@@ -956,7 +971,7 @@
             </div>
         </div>
     </div>
-
+ 
     <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <div id="vent-animation-container" class="absolute inset-0 z-0" style="pointer-events: none;"></div>
         <div class="ambient-orb" style="width: 500px; height: 500px; top: -150px; right: -100px; background: radial-gradient(circle, rgba(229, 229, 229, 0.02) 0%, transparent 60%);"></div>
@@ -1088,9 +1103,9 @@
             </div>
         </div>
     </section>
-
+ 
     <div class="section-divider"></div>
-
+ 
     <section id="services" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; right: -120px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         
@@ -1108,9 +1123,9 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="services-grid"></div>
         </div>
     </section>
-
+ 
     <div class="section-divider"></div>
-
+ 
     <section id="about" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="ambient-orb" style="width: 450px; height: 450px; top: 0; left: -200px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; right: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
@@ -1128,11 +1143,11 @@
                     <p class="text-ink-light mb-6 leading-relaxed">
                         Наша специализация — создание безопасной воздушной среды на сложных производствах. Мы работаем с отраслями повышенной ответственности: металлургия, машиностроение, химическая и фармацевтическая промышленность, деревообработка и пищепром.
                     </p>
-
+ 
                     <p class="text-ink-light mb-6 leading-relaxed">
                         Наша миссия — гарантировать соответствие производственных процессов строгим нормам СанПиН, ГОСТ, ТР ТС и требованиям ПДК. Мы снижаем профессиональные риски и обеспечиваем технологическую безопасность предприятий.
                     </p>
-
+ 
                     <p class="text-ink-light mb-6 leading-relaxed" style="margin-bottom: 30px;">
                         Технологический суверенитет — мы реализуем политику полного импортозамещения. Собственное производство и конструкторское бюро в РФ позволяют нам внедрять лучшие мировые инженерные практики, сохраняя независимость от зарубежных поставок и гарантируя сервисную поддержку на всем жизненном цикле оборудования.
                     </p>
@@ -1183,7 +1198,7 @@
                             </div>
                         </div>
                     </div>
-
+ 
                     <p class="text-ink-light mb-22 leading-relaxed" style="margin-top: 30px;">
                         GROSGROUP — это не просто поставщик оборудования. Мы берем на себя ответственность за чистый воздух на вашем производстве: от идеи до подписания актов ввода в эксплуатацию.
                     </p>
@@ -1192,19 +1207,19 @@
                 
                 <div class="reveal delay-2 relative">
                     <div class="relative bg-gradient-to-br from-card/80 to-surface/70 rounded-3xl border border-gray-light/50 overflow-hidden shadow-xl shadow-black/20 h-full min-h-[900px]">
-
+ 
                         <div class="corner-mark corner-mark-tl"></div>
                         <div class="corner-mark corner-mark-tr"></div>
                         <div class="corner-mark corner-mark-bl"></div>
                         <div class="corner-mark corner-mark-br"></div>
-
+ 
                         <div class="absolute inset-0 flex items-center justify-center overflow-hidden">
                             <img src="kompanii.png" alt="GROSGROUP"
                                  class="h-full w-full object-cover"
                                  style="transform: translateX(0%); transform-origin: center;">
                         </div>
                     </div>
-
+ 
                     <div class="absolute -bottom-4 -right-4 badge-stats rounded-xl p-4 shadow-lg shadow-black/20">
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1217,9 +1232,9 @@
             </div>
         </div>
     </section>
-
+ 
     <div class="section-divider"></div>
-
+ 
     <section id="projects" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="ambient-orb" style="width: 400px; height: 400px; top: 50%; right: -200px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
         
@@ -1237,9 +1252,9 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5" id="projects-grid"></div>
         </div>
     </section>
-
+ 
     <div class="section-divider"></div>
-
+ 
     <section id="process" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="ambient-orb" style="width: 350px; height: 350px; top: 0; right: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 0; left: -120px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
@@ -1262,7 +1277,7 @@
                     <p class="text-ink-light mb-6 leading-relaxed">
                         Наше сотрудничество обеспечивает заказчикам доступ к полному спектру инжиниринговых услуг: от проектирования и поставки оборудования до монтажа и сервисного обслуживания систем местного отсоса, аспирации и вакуумной пылеуборки.
                     </p>
-
+ 
                     <div class="grid grid-cols-2 gap-5 mt-10">
                         <div class="flex items-start gap-4 group">
                             <div class="feature-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -1343,14 +1358,14 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 
             </div>
         </div>
     </section>
-
+ 
     <div class="section-divider"></div>
-
+ 
     <section id="contacts" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="ambient-orb" style="width: 400px; height: 400px; top: 20%; left: -120px; background: radial-gradient(circle, rgba(229, 229, 229, 0.015) 0%, transparent 60%);"></div>
         <div class="ambient-orb" style="width: 350px; height: 350px; bottom: 20%; right: -150px; background: radial-gradient(circle, rgba(229, 229, 229, 0.01) 0%, transparent 60%);"></div>
@@ -1446,7 +1461,7 @@
                                     class="form-input w-full px-5 py-4 rounded-xl text-ink text-sm resize-none"
                                     placeholder="Опишите ваш проект"></textarea>
                             </div>
-
+ 
                             <div class="consent-container">
                                 <input type="checkbox" id="privacy-consent">
                                 <div class="consent-text-wrapper">
@@ -1472,7 +1487,7 @@
             </div>
         </div>
     </section>
-
+ 
         <footer class="py-12 border-t border-gray-light/40 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -1493,7 +1508,7 @@
                     <span id="dev-credit" class="text-ink-muted text-sm cursor-default select-none transition-colors duration-300">
                         разработчик Alchemist_TEAM
                     </span>
-
+ 
                     <div id="dev-tooltip" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-2.5 bg-surface-bright border border-gray-light/70 rounded-xl shadow-xl opacity-0 invisible transition-all duration-300 whitespace-nowrap z-50">
                         <a href="https://t.me/Alchemist_TEAM" target="_blank" class="flex items-center gap-2 text-ink hover:text-[#FFBF00] transition-colors group">
                             <svg class="w-4 h-4 text-ink-muted group-hover:text-[#FFBF00] transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -1504,7 +1519,7 @@
                         <div class="absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-surface-bright"></div>
                     </div>
                 </div>
-
+ 
                 <div class="flex flex-col md:flex-row items-center gap-4">
                     <span class="text-sm text-ink-muted text-center md:text-right hidden md:block" style="color: #FFBF00;">Наше присутствие в социальных сетях и мессенджерах</span>
                     
@@ -1532,7 +1547,7 @@
             </div>
         </div>
     </footer>
-
+ 
     <script type="module">
          const services = [
             { 
@@ -1572,7 +1587,7 @@
                 image: '66.png' 
             }
         ];
-
+ 
         const projects = [
             { title: 'Мебельная фабрика', category: 'Аспирация', description: '45 000 м³/ч, удаление древесной пыли', image: '1.jpg' },
             { title: 'Пищевой комбинат', category: 'Вентиляция', description: 'Комплексная система, соответствует СанПиН', image: '2.jpg' },
@@ -1581,7 +1596,7 @@
             { title: 'Логистический центр', category: 'Вентиляция склада', description: 'Площадь 15 000 м²', image: '5.jpg' },
             { title: 'Химический завод', category: 'Промышленная', description: 'Взрывозащищённое исполнение', image: '6.jpg' }
         ];
-
+ 
         function initParticles() {
             const container = document.getElementById('particles-container');
             if (!container) return;
@@ -1600,7 +1615,7 @@
                 setTimeout(() => particle.classList.add('animate'), 100);
             }
         }
-
+ 
         document.addEventListener('DOMContentLoaded', () => {
             initParticles();
             renderServices();
@@ -1613,7 +1628,7 @@
             initCardHover();
             initParallax();
         });
-
+ 
         function renderServices() {
             const grid = document.getElementById('services-grid');
             if (!grid) return;
@@ -1637,7 +1652,7 @@
                 </div>
             `).join('');
         }
-
+ 
         function renderProjects() {
             const grid = document.getElementById('projects-grid');
             if (!grid) return;
@@ -1667,10 +1682,10 @@
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
+ 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
-
+ 
         function initHeader() {
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
@@ -1681,23 +1696,23 @@
                 }
             }, { passive: true });
         }
-
+ 
         function initMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const openBtn = document.getElementById('menu-btn');
             const closeBtn = document.getElementById('close-menu');
             const links = menu.querySelectorAll('.mobile-link');
-
+ 
             openBtn.addEventListener('click', () => {
                 menu.classList.add('open');
                 document.body.style.overflow = 'hidden';
             });
-
+ 
             closeBtn.addEventListener('click', () => {
                 menu.classList.remove('open');
                 document.body.style.overflow = '';
             });
-
+ 
             links.forEach(link => {
                 link.addEventListener('click', () => {
                     menu.classList.remove('open');
@@ -1705,7 +1720,7 @@
                 });
             });
         }
-
+ 
         function initCounters() {
             const counters = document.querySelectorAll('.counter');
             
@@ -1719,16 +1734,16 @@
                     }
                 });
             }, { threshold: 0.5 });
-
+ 
             counters.forEach(c => observer.observe(c));
         }
-
+ 
         function animateCounter(el, target) {
             let current = 0;
             const increment = target / 60;
             const duration = 1800;
             const step = duration / 60;
-
+ 
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
@@ -1739,27 +1754,27 @@
                 }
             }, step);
         }
-
+ 
         function initForm() {
             const form = document.getElementById('contact-form');
             if (!form) return;
-
+ 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const btn = form.querySelector('button[type="submit"]');
                 const original = btn.innerHTML;
-
+ 
                 btn.innerHTML = `<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
                 btn.disabled = true;
-
+ 
                 const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbwoMw5zxYR1DssThxGa6rhu8nxtto8qq9C3yultLOjbLa1qicxNgNqknfUCM0SoqpM-/exec';
-
+ 
                 const formData = new URLSearchParams();
                 formData.append('name', form.querySelector('[name="name"]').value);
                 formData.append('phone', form.querySelector('[name="phone"]').value);
                 formData.append('email', form.querySelector('[name="email"]').value);
                 formData.append('message', form.querySelector('[name="message"]').value);
-
+ 
                 fetch(googleScriptUrl, {
                     method: 'POST',
                     body: formData,
@@ -1778,11 +1793,11 @@
                     btn.disabled = false;
                 });
             });
-
+ 
             function showToast(message) {
                 const existingToast = document.querySelector('.toast-notification');
                 if (existingToast) existingToast.remove();
-
+ 
                 const toast = document.createElement('div');
                 toast.className = 'toast-notification';
                 toast.innerHTML = `
@@ -1791,10 +1806,10 @@
                     </svg>
                     <div class="toast-content">${message}</div>
                 `;
-
+ 
                 document.body.appendChild(toast);
                 setTimeout(() => toast.classList.add('show'), 100);
-
+ 
                 setTimeout(() => {
                     toast.classList.remove('show');
                     setTimeout(() => toast.remove(), 600);
@@ -1815,11 +1830,11 @@
                 });
             });
         }
-
+ 
         function initParallax() {
             const heroVisual = document.getElementById('hero-visual');
             if (!heroVisual) return;
-
+ 
             let rafId = null;
             
             document.addEventListener('mousemove', (e) => {
@@ -1849,19 +1864,19 @@
                 }
             });
         });
-
+ 
         let ventAnimation = null;
-
+ 
         function initVentilationBackground() {
             const container = document.getElementById('vent-animation-container');
             if (!container) return;
-
+ 
             import('./ventilation-animation.js').then(({ initVentilationAnimation }) => {
                 ventAnimation = initVentilationAnimation('vent-animation-container');
                 createControlPanel();
                 });
         }
-
+ 
 function createControlPanel() {
             const panel = document.createElement('div');
             panel.id = 'vent-control-panel';
@@ -1883,15 +1898,15 @@ function createControlPanel() {
                 opacity: 0;
                 transition: opacity 1.5s ease-in-out;
             `;
-
+ 
                         panel.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px; min-width: 140px;">
                     <div style="width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; box-shadow: 0 0 8px #4CAF50; animation: pulse 2s infinite;"></div>
                     <span style="font-size: 10px; color: #737373; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'SN Pro', monospace;">Система активна</span>
                 </div>
-
+ 
                 <div style="height: 30px; width: 1px; background: rgba(38, 38, 38, 0.8);"></div>
-
+ 
                 <div style="display: flex; gap: 8px;">
                     <button id="btn-damper-open"
                         style="background: transparent; border: 1px solid #FFBF00; color: #FFBF00; padding: 8px 16px; cursor: pointer; font-size: 9px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s; white-space: nowrap;"
@@ -1899,16 +1914,16 @@ function createControlPanel() {
                     <button id="btn-damper-close"
                         style="background: transparent; border: 1px solid #FFBF00; color: #FFBF00; padding: 8px 16px; cursor: pointer; font-size: 9px; text-transform: uppercase; border-radius: 6px; transition: all 0.3s; white-space: nowrap;">Закрыть</button>
                 </div>
-
+ 
                 <div style="height: 30px; width: 1px; background: rgba(38, 38, 38, 0.8);"></div>
-
+ 
                 <div style="display: flex; align-items: center; gap: 12px; flex: 1; max-width: 350px;">
                     <span style="font-size: 9px; color: #A3A3A3; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Скорость</span>
                     <input type="range" id="fan-speed-slider" min="0" max="100" value="50"
                        style="-webkit-appearance: none; width: 100%; height: 3px; background: #525252; outline: none; cursor: pointer; border-radius: 2px;">
                     <span id="fan-speed-display" style="color: #E5E5E5; font-weight: bold; font-family: monospace; font-size: 11px; min-width: 35px;">50%</span>
                 </div>
-
+ 
                 <style>
                     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
                     #vent-control-panel * {
@@ -1950,15 +1965,15 @@ function createControlPanel() {
                     }
                 </style>
             `;
-
+ 
             document.body.appendChild(panel);
-
+ 
             function updatePosition() {
                 if (window.innerWidth < 768) {
                     panel.style.display = 'none';
                     return;
                 }
-
+ 
                 const projectBtn = document.querySelector('#hero a[href="#projects"]');
                 
                 if (!projectBtn) {
@@ -1969,7 +1984,7 @@ function createControlPanel() {
                 panel.style.display = 'flex';
                 
                 const rect = projectBtn.getBoundingClientRect();
-
+ 
                 const topPosition = rect.bottom + window.scrollY + 20;
   
                 const buttonRight = rect.right + window.scrollX;
@@ -1977,25 +1992,25 @@ function createControlPanel() {
                 
                 const marginLeftOffset = 200;
                 const leftPosition = buttonRight - panelWidth + marginLeftOffset;
-
+ 
                 panel.style.top = `${topPosition}px`;
                 panel.style.left = `${leftPosition}px`;
             }
-
+ 
             updatePosition();
             window.addEventListener('resize', updatePosition);
-
+ 
             requestAnimationFrame(() => {
                 panel.style.opacity = '1';
             });
-
+ 
             const slider = document.getElementById('fan-speed-slider');
             if (slider) {
                 slider.addEventListener('input', function(e) {
                     window.updateFanSpeed(e.target.value);
                 });
             }
-
+ 
             const btnOpen = document.getElementById('btn-damper-open');
             const btnClose = document.getElementById('btn-damper-close');
             if (btnOpen) {
@@ -2016,11 +2031,11 @@ function createControlPanel() {
                 ventAnimation.setFanSpeed(value / 100);
             }
         };
-
+ 
         window.setDamper = function(isOpen) {
             const btnOpen = document.getElementById('btn-damper-open');
             const btnClose = document.getElementById('btn-damper-close');
-
+ 
             if (isOpen) {
                 btnOpen.classList.add('active');
                 btnOpen.classList.remove('closed');
@@ -2032,12 +2047,12 @@ function createControlPanel() {
                 btnOpen.classList.remove('active');
                 btnOpen.classList.remove('closed');
             }
-
+ 
             if (ventAnimation && ventAnimation.setDamperOpen) {
                 ventAnimation.setDamperOpen(isOpen);
             }
         };
-
+ 
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initVentilationBackground);
         } else {
@@ -2045,7 +2060,7 @@ function createControlPanel() {
         }
         
     </script>
-
+ 
 <div id="sert-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Сертификат">
     <div class="modal-a4">
         <button class="modal-close" id="sert-modal-close" aria-label="Закрыть">
@@ -2056,39 +2071,39 @@ function createControlPanel() {
         <img src="sert.png" alt="Сертификат">
     </div>
 </div>
-
+ 
 <script>
     (function() {
         const modal = document.getElementById('sert-modal');
         const closeBtn = document.getElementById('sert-modal-close');
         const trigger = document.getElementById('sert-trigger');
-
+ 
         if (!modal || !trigger) return;
-
+ 
         function openModal() {
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
+ 
         function closeModal() {
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
-
+ 
         trigger.addEventListener('click', openModal);
-
+ 
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
+ 
         modal.addEventListener('click', function(e) {
             if (e.target === modal) closeModal();
         });
-
+ 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
     })();
 </script>
-
+ 
    <script>
     let particles = [];
     let layers = [
@@ -2097,7 +2112,7 @@ function createControlPanel() {
         { color: "#FFC805", size: 3, height: 15, speed: 0.9, frequency: 18 },
         { color: "#FFBF00", size: 1, height: 10, speed: 0.8, frequency: 21 }
     ];
-
+ 
     function setup() {
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.style('z-index', '998'); 
@@ -2106,7 +2121,7 @@ function createControlPanel() {
         canvas.style('left', '0');
         canvas.style('pointer-events', 'none');
     }
-
+ 
     function draw() {
         clear();
         
@@ -2133,7 +2148,7 @@ function createControlPanel() {
             }
         });
         
-
+ 
         for (let i = particles.length - 1; i >= 0; i--) {
             let p = particles[i];
             p.update();
@@ -2145,7 +2160,7 @@ function createControlPanel() {
         
         pop();
     }
-
+ 
     class Particle {
         constructor(x, y, color, size, maxHeight, speed) {
             this.x = x;
@@ -2159,7 +2174,7 @@ function createControlPanel() {
             this.vy = random(0.5, 1.5) * speed;
             this.startY = y;
         }
-
+ 
         update() {
             this.x += this.vx;
             this.y += this.vy;
@@ -2170,24 +2185,24 @@ function createControlPanel() {
                 this.alpha -= 10;
             }
         }
-
+ 
         display() {
             noStroke();
             fill(this.color + hex(this.alpha, 2));
             ellipse(this.x, this.y, this.size);
         }
-
+ 
         isFinished() {
             return this.alpha < 0;
         }
     }
-
+ 
     function windowResized() {
         resizeCanvas(windowWidth, windowHeight);
     }
 </script>
-
-
+ 
+ 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -2222,14 +2237,14 @@ function createControlPanel() {
   ]
 }
 </script>
-
+ 
    <script>
-
+ 
     const devCredit = document.getElementById('dev-credit');
     const devTooltip = document.getElementById('dev-tooltip');
     let showTimeout = null;
     let hideTimeout = null;
-
+ 
     if (devCredit && devTooltip) {
   
         const showTooltip = () => {
@@ -2239,36 +2254,36 @@ function createControlPanel() {
             devTooltip.style.visibility = 'visible';
             devTooltip.style.transform = 'translate(-50%, 0)';
         };
-
-
+ 
+ 
         const hideTooltip = () => {
             devTooltip.style.opacity = '0';
             devTooltip.style.visibility = 'hidden';
             devTooltip.style.transform = 'translate(-50%, 10px)';
             devCredit.classList.remove('neon-active');
         };
-
-
+ 
+ 
         devCredit.addEventListener('mouseenter', () => {
             clearTimeout(hideTimeout);
             showTimeout = setTimeout(showTooltip, 100);
         });
-
+ 
         devCredit.addEventListener('mouseleave', () => {
             clearTimeout(showTimeout);
             hideTimeout = setTimeout(hideTooltip, 1000);
         });
-
+ 
         devTooltip.addEventListener('mouseenter', () => {
             clearTimeout(hideTimeout);
         });
-
+ 
         devTooltip.addEventListener('mouseleave', () => {
             hideTimeout = setTimeout(hideTooltip, 700);
         });
     }
 </script>
-
+ 
 <div id="modal-policy" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-a4" style="background: #1A1A1A;">
         <button class="modal-close" aria-label="Закрыть">
@@ -2295,10 +2310,10 @@ function createControlPanel() {
                 <li>направление консультаций, ответов обратившимся лицам;</li>
                 <li>продвижение товаров, работ, услуг Оператора на рынке (при наличии согласия).</li>
             </ul>
-
+ 
             <h3>ПРИНЦИПЫ ОБРАБОТКИ</h3>
             <p>Обработка организована Оператором на принципах законности, достоверности, достаточности, точности, актуальности и хранения не дольше требуемых сроков.</p>
-
+ 
             <h3>УСЛОВИЯ ОБРАБОТКИ</h3>
             <p>Обработка персональных данных допускается в следующих случаях:</p>
             <ul style="list-style: disc; margin-left: 20px; margin-bottom: 15px;">
@@ -2308,23 +2323,23 @@ function createControlPanel() {
                 <li>для осуществления прав и законных интересов Оператора;</li>
                 <li>в иных случаях, предусмотренных законом.</li>
             </ul>
-
+ 
             <h3>ОБЕСПЕЧЕНИЕ ПРАВ СУБЪЕКТА</h3>
             <p>Субъекты персональных данных обладают правами, предусмотренными ФЗ «О персональных данных». Оператор обеспечивает права субъектов и предоставляет возможность ознакомления с данными.</p>
-
+ 
             <h3>ПОЛУЧЕНИЕ И ХРАНЕНИЕ</h3>
             <p>Оператор получает данные при обращении за услугами. Хранение осуществляется в форме, позволяющей идентифицировать субъекта, с обеспечением безопасности от несанкционированного доступа.</p>
-
+ 
             <h3>ПЕРЕДАЧА ДАННЫХ</h3>
             <p>Передача третьим лицам осуществляется с соблюдением требований закона, преимущественно с согласия субъекта.</p>
-
+ 
             <h3>ОТВЕТСТВЕННОСТЬ</h3>
             <p>Лица, виновные в нарушении порядка обращения с персональными данными, несут ответственность в соответствии с законодательством РФ.</p>
         </div>
     </div>
 </div>
-
-
+ 
+ 
 <div id="modal-consent" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-a4" style="background: #1A1A1A;">
         <button class="modal-close" aria-label="Закрыить">
@@ -2338,40 +2353,40 @@ function createControlPanel() {
             <p>Пользователь, оставляя обращение, заявку на сайте http://grosgroup (далее также – сайт), создавая аккаунт и/или соглашаясь с офертой на сайте, принимает настоящее Согласие на обработку персональных данных.</p>
             
             <p>Пользователь, действуя свободно, своей волей и в своём интересе, подтверждая свою дееспособность, даёт своё согласие ООО "ГРОСГРУПП" (ИНН 4028071432, КПП 402801001, 248021, г. Калуга, пер. Окружной, д. 4) на обработку своих персональных данных как с использованием, так и без использования средств автоматизации для целей обработки входящих запросов физических лиц (пользователей) с целью консультирования, направления комментариев физическим лицам (пользователям); аналитики действий физического лица (пользователя) на сайте и функционирования сайта; выполнения обязательств по договору оферты, принятому пользователем на сайте. При этом:</p>
-
+ 
             <h3>1. ПЕРЕЧЕНЬ ДАННЫХ</h3>
             <p>Согласие предоставлено для использования моих следующих персональных данных: Фамилия, имя, отчество; номера контактных телефонов; адреса электронной почты; место работы и занимаемая должность; адрес; сведения о местоположении; тип, версия, язык операционной системы, браузера; тип устройства и разрешение его экрана; страницы, открываемые пользователем; ip-адрес.</p>
-
+ 
             <h3>2. ДЕЙСТВИЯ С ДАННЫМИ</h3>
             <p>Обработка моих персональных данных может включать следующие действия: сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение.</p>
-
+ 
             <h3>3. ОТЗЫВ СОГЛАСИЯ</h3>
             <p>Настоящее согласие может быть отозвано путём направления субъектом персональных данных (пользователем) или его представителем письменного заявления по адресу: ООО "ГРОСГРУПП" 248021, г. Калуга, пер. Окружной, д. 4 либо по адресу электронной почты: info@grosgroup.ru. В случае отзыва субъектом персональных данных (пользователем) согласия на обработку персональных данных ООО "ГРОСГРУПП" вправе продолжить обработку таких персональных данных в случаях, предусмотренных пунктами 2-11 части 1 статьи 6, пунктами 2-10 части 2 статьи 10, части 2 статьи 11 Федерального закона от 27.07.2006 №152-ФЗ «О персональных данных».</p>
-
+ 
             <h3>4. СРОК ДЕЙСТВИЯ</h3>
             <p>Настоящее согласие предоставляется на неопределённый срок и действует весь период обработки персональных данных. Запросы относительно персональных данных могут быть направлены по электронному адресу: info@grosgroup.ru.</p>
         </div>
     </div>
 </div>
-
+ 
 <script>
     const consentCheckbox = document.getElementById('privacy-consent');
     const submitBtn = document.querySelector('#contact-form button[type="submit"]');
-
+ 
     if (consentCheckbox && submitBtn) {
         consentCheckbox.addEventListener('change', function() {
             submitBtn.disabled = !this.checked;
         });
     }
-
+ 
     const modalPolicy = document.getElementById('modal-policy');
     const modalConsent = document.getElementById('modal-consent');
     const linkPolicy = document.getElementById('link-policy');
     const linkConsent = document.getElementById('link-consent');
-
+ 
     console.log('Policy Button:', linkPolicy);
     console.log('Policy Modal:', modalPolicy);
-
+ 
     function openModal(modal) {
         if(!modal) {
             console.error('Модальное окно не найдено!');
@@ -2380,7 +2395,7 @@ function createControlPanel() {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-
+ 
     function closeModal(modal) {
         if(!modal) return;
         modal.classList.remove('active');
@@ -2394,13 +2409,13 @@ function createControlPanel() {
         console.log('Клик по кнопке, открываем окно');
         openModal(modal);
     }
-
+ 
     if (linkPolicy) {
         linkPolicy.addEventListener('click', (e) => handleChipClick(e, modalPolicy));
     } else {
         console.error('Кнопка #link-policy не найдена!');
     }
-
+ 
     if (linkConsent) {
         linkConsent.addEventListener('click', (e) => handleChipClick(e, modalConsent));
     } else {
@@ -2413,7 +2428,7 @@ function createControlPanel() {
             }
         });
     });
-
+ 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal(modalPolicy);
