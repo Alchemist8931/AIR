@@ -179,9 +179,11 @@
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.95) 0%, rgba(22, 22, 22, 0.98) 100%);
             border: 1px solid rgba(38, 38, 38, 0.8);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            border-radius: 1rem;
             transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.4s ease,
+                        border-radius 0.4s ease,
                         box-shadow 0.4s ease,
                         opacity 0.4s ease,
                         filter 0.4s ease;
@@ -210,9 +212,10 @@
         }
  
         .service-card:hover {
-            transform: translateY(-8px) scale(1.14);
+            transform: translateY(-4px) scale(1.06);
             z-index: 30;
             border-color: rgba(229, 229, 229, 0.28);
+            border-radius: 1rem 1rem 0 0;
             box-shadow: 
                 0 30px 60px -18px rgba(0, 0, 0, 0.65),
                 0 0 70px -25px rgba(229, 229, 229, 0.06);
@@ -227,30 +230,39 @@
             transform: scale(1.08);
         }
 
-        #services-grid { align-items: start; }
+        #services-grid { align-items: stretch; grid-auto-rows: 1fr; }
 
-        /* дополнительный текст — скрыт по умолчанию */
+        /* доп. текст — вынесен из потока, не влияет на размеры сетки */
         .service-extra {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 4;
+            background: linear-gradient(165deg, rgba(26, 26, 26, 0.98) 0%, rgba(22, 22, 22, 1) 100%);
+            border: 1px solid rgba(229, 229, 229, 0.28);
+            border-top: none;
+            border-radius: 0 0 1rem 1rem;
+            box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.65);
+            padding: 0 1.75rem;
             max-height: 0;
             opacity: 0;
-            margin-top: 0;
             overflow: hidden;
-            transform: translateY(6px);
+            pointer-events: none;
             color: var(--fg-secondary);
             font-size: 0.8125rem;
             line-height: 1.65;
             transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 0.4s ease,
-                        margin-top 0.5s ease,
-                        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+                        opacity 0.35s ease,
+                        padding 0.5s ease;
         }
 
-        /* раскрытие при наведении */
+        /* раскрытие: панель примыкает к низу карточки */
         .service-card:hover .service-extra {
-            max-height: 280px;
+            max-height: 260px;
             opacity: 1;
-            margin-top: 14px;
-            transform: translateY(0);
+            padding: 0 1.75rem 1.75rem;
+            pointer-events: auto;
         }
 
         /* затемнение остальных карточек, пока одна активна */
@@ -1689,8 +1701,10 @@
                         </div>
                         <h3 class="font-display text-lg font-semibold mb-3" style="color: #FFBF00;">${s.title}</h3>
                         <p class="text-ink-light text-sm leading-relaxed">${s.description}</p>
-                        <p class="service-extra">${s.extra}</p>
                     </div>
+
+                    <!-- Доп. текст: отдельная панель, примыкает к низу карточки -->
+                    <div class="service-extra">${s.extra}</div>
                 </div>
             `).join('');
         }
