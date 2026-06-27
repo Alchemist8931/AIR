@@ -236,8 +236,8 @@
         .service-extra {
             position: absolute;
             bottom: 100%;
-            left: 0;
-            right: 0;
+            left: -1px;
+            right: -1px;
             z-index: 4;
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.98) 0%, rgba(22, 22, 22, 1) 100%);
             border: 1px solid rgba(229, 229, 229, 0.28);
@@ -261,7 +261,7 @@
         .service-card:hover .service-extra {
             max-height: 260px;
             opacity: 1;
-            padding: 1.75rem 1.75rem 0;
+            padding: 1.75rem 1.75rem 1.75rem;
             pointer-events: auto;
         }
 
