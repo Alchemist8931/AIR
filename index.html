@@ -215,7 +215,7 @@
             transform: translateY(-4px) scale(1.06);
             z-index: 30;
             border-color: rgba(229, 229, 229, 0.28);
-            border-radius: 1rem 1rem 0 0;
+            border-radius: 0 0 1rem 1rem;
             box-shadow: 
                 0 30px 60px -18px rgba(0, 0, 0, 0.65),
                 0 0 70px -25px rgba(229, 229, 229, 0.06);
@@ -232,18 +232,18 @@
 
         #services-grid { align-items: stretch; grid-auto-rows: 1fr; }
 
-        /* доп. текст — вынесен из потока, не влияет на размеры сетки */
+        /* доп. текст — вынесен из потока, появляется НАД карточкой */
         .service-extra {
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 0;
             right: 0;
             z-index: 4;
             background: linear-gradient(165deg, rgba(26, 26, 26, 0.98) 0%, rgba(22, 22, 22, 1) 100%);
             border: 1px solid rgba(229, 229, 229, 0.28);
-            border-top: none;
-            border-radius: 0 0 1rem 1rem;
-            box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.65);
+            border-bottom: none;
+            border-radius: 1rem 1rem 0 0;
+            box-shadow: 0 -30px 60px -18px rgba(0, 0, 0, 0.65);
             padding: 0 1.75rem;
             max-height: 0;
             opacity: 0;
@@ -257,11 +257,11 @@
                         padding 0.5s ease;
         }
 
-        /* раскрытие: панель примыкает к низу карточки */
+        /* раскрытие: панель примыкает к верху карточки и растёт вверх */
         .service-card:hover .service-extra {
             max-height: 260px;
             opacity: 1;
-            padding: 0 1.75rem 1.75rem;
+            padding: 1.75rem 1.75rem 0;
             pointer-events: auto;
         }
 
