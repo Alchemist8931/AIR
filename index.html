@@ -180,9 +180,11 @@
             border: 1px solid rgba(38, 38, 38, 0.8);
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.4s ease,
-                        box-shadow 0.4s ease;
+                        box-shadow 0.4s ease,
+                        opacity 0.4s ease,
+                        filter 0.4s ease;
         }
  
         .service-card::before {
@@ -208,11 +210,12 @@
         }
  
         .service-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(229, 229, 229, 0.15);
+            transform: translateY(-8px) scale(1.14);
+            z-index: 30;
+            border-color: rgba(229, 229, 229, 0.28);
             box-shadow: 
-                0 20px 40px -15px rgba(0, 0, 0, 0.5),
-                0 0 60px -20px rgba(229, 229, 229, 0.03);
+                0 30px 60px -18px rgba(0, 0, 0, 0.65),
+                0 0 70px -25px rgba(229, 229, 229, 0.06);
         }
  
         .service-card:hover::before { opacity: 0.3; }
@@ -222,6 +225,38 @@
             background: rgba(229, 229, 229, 0.08);
             border-color: rgba(229, 229, 229, 0.2);
             transform: scale(1.08);
+        }
+
+        #services-grid { align-items: start; }
+
+        /* дополнительный текст — скрыт по умолчанию */
+        .service-extra {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            overflow: hidden;
+            transform: translateY(6px);
+            color: var(--fg-secondary);
+            font-size: 0.8125rem;
+            line-height: 1.65;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.4s ease,
+                        margin-top 0.5s ease,
+                        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* раскрытие при наведении */
+        .service-card:hover .service-extra {
+            max-height: 280px;
+            opacity: 1;
+            margin-top: 14px;
+            transform: translateY(0);
+        }
+
+        /* затемнение остальных карточек, пока одна активна */
+        #services-grid:has(.service-card:hover) .service-card:not(:hover) {
+            opacity: 0.35;
+            filter: saturate(0.7);
         }
  
         .icon-box {
@@ -1552,38 +1587,44 @@
          const services = [
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 12.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L2.293 6.707A1 1 0 012 6V4z"/></svg>`, 
-                title: 'Местная вытяжная вентиляция', 
+                title: 'Установка вентиляции под ключ', 
                 description: 'Стационарные фильтры<br>Мобильные фильтры<br>Вытяжные устройства<br>Столы сварщиков<br>Фильтровентиляционные системы<br>Вытяжные зонты',
+                extra: 'Предлагаем полный комплекс работ по созданию и модернизации систем вентиляции на предприятии, а также отдельное проектирование вентиляции для цеха под ключ. Наш подход избавит вас от необходимости координировать работу нескольких подрядчиков.',
                 image: '11.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>`, 
                 title: 'Удаление выхлопных газов', 
                 description: 'Вытяжные катушки<br>Вытяжные устройства<br>Рельсовые системы<br>Газоприемные насадки<br>Вентиляторы<br>Автоматика',
+                extra: 'Наши профессиональные решения для эффективного удаления выхлопных газов создают безопасную рабочую среду. Промышленная вентиляция, цены на которую вполне доступны, обеспечивает 100% захват отработанных газов.',
                 image: '22.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`, 
-                title: 'Вакуумная аспирация и пылеуборка', 
+                title: 'Установка систем аспирации под ключ', 
                 description: 'Стационарные системы<br>Мобильные промышленные пылесосы<br>Серия AL для сбора СОЖ и масла<br>Элементы системы и аксессуары',
+                extra: 'Мы проектируем и выполняем монтаж систем аспирации на производстве, которые эффективно улавливают загрязнения непосредственно в местах их образования. Наш подход — это полный комплекс услуг от расчёта до запуска.',
                 image: '33.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a8 8 0 008-8c0-4.418-8-12-8-12S4 8.582 4 13a8 8 0 008 8z"/></svg>`, 
                 title: 'Фильтры масляного тумана', 
                 description: 'Мы предлагаем механические, электростатические и центробежные фильтры для очистки воздуха от масляных аэрозолей, туманов, дымов, а также мельчайших частиц металлов и абразива.',
+                extra: 'Подберём и установим фильтр, который полностью решит проблему масляного тумана на вашем производстве. Выполним монтаж пром вентиляции под ключ для очистки воздуха от масляных аэрозолей, туманов, дымов, а также мельчайших частиц металлов.',
                 image: '44.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`, 
                 title: 'Промышленные системы аспирации', 
                 description: 'Промышленные фильтры<br>Взрывозащищенные промышленные фильтры',
+                extra: 'Мы разрабатываем и внедряем решения, которые на 100% соответствуют специфике вашего производства. Предлагаем заказать проект промышленной вентиляции для защиты здоровья сотрудников и сохранности оборудования.',
                 image: '55.png' 
             },
             { 
                 icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`, 
                 title: 'Защитные ограждения', 
                 description: 'Защита от сварочного излучения<br>Защита от пыли, дыма, влаги<br>Защита от производственного шума<br>Защита от высоких температур',
+                extra: 'Мы предлагаем не только проектирование систем аспирации на заказ, но также изготавливаем барьерные конструкции, которые защищают от сварочного излучения, пыли и высоких температур.',
                 image: '66.png' 
             }
         ];
@@ -1648,6 +1689,7 @@
                         </div>
                         <h3 class="font-display text-lg font-semibold mb-3" style="color: #FFBF00;">${s.title}</h3>
                         <p class="text-ink-light text-sm leading-relaxed">${s.description}</p>
+                        <p class="service-extra">${s.extra}</p>
                     </div>
                 </div>
             `).join('');
