@@ -1539,6 +1539,347 @@
                 </div>
             </div>
 
+            <!-- ============================================================
+                 MAP :: расположение офиса (г. Калуга, пер. Окружной, д. 4)
+                 Самодостаточный блок: стили и скрипт внутри.
+                 ============================================================ -->
+            <div class="mt-16 reveal">
+                <style>
+                    .gg-map {
+                        position: relative;
+                        border-radius: 24px;
+                        overflow: hidden;
+                        background: linear-gradient(165deg, rgba(26, 26, 26, 0.95) 0%, rgba(22, 22, 22, 0.98) 100%);
+                        border: 1px solid rgba(38, 38, 38, 0.8);
+                        box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.75);
+                    }
+
+                    .gg-map__grid {
+                        display: grid;
+                        grid-template-columns: minmax(300px, 34%) 1fr;
+                        min-height: 440px;
+                    }
+
+                    /* ---------- левая панель ---------- */
+                    .gg-map__info {
+                        position: relative;
+                        padding: 40px 36px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        gap: 22px;
+                        background-image:
+                            linear-gradient(rgba(229, 229, 229, 0.018) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(229, 229, 229, 0.018) 1px, transparent 1px);
+                        background-size: 26px 26px, 26px 26px;
+                    }
+
+                    .gg-map__info::after {
+                        content: '';
+                        position: absolute;
+                        top: 12%;
+                        right: 0;
+                        width: 1px;
+                        height: 76%;
+                        background: linear-gradient(180deg, transparent 0%, rgba(229, 229, 229, 0.10) 50%, transparent 100%);
+                    }
+
+                    .gg-map__eyebrow {
+                        font-family: 'SN Pro', monospace;
+                        font-size: 11px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
+                        color: #FFBF00;
+                    }
+
+                    .gg-map__title {
+                        font-family: 'SN Pro', sans-serif;
+                        font-size: 28px;
+                        line-height: 1.15;
+                        font-weight: 300;
+                        color: var(--fg);
+                        margin-top: -10px;
+                    }
+
+                    .gg-map__title b { font-weight: 600; }
+
+                    .gg-map__row {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 16px;
+                    }
+
+                    .gg-map__pin {
+                        flex-shrink: 0;
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(229, 229, 229, 0.03);
+                        border: 1px solid rgba(229, 229, 229, 0.06);
+                        color: var(--fg);
+                    }
+
+                    .gg-map__addr {
+                        color: var(--fg);
+                        font-size: 16px;
+                        line-height: 1.5;
+                    }
+
+                    .gg-map__addr span {
+                        display: block;
+                        color: var(--fg-muted);
+                        font-size: 12px;
+                        font-family: 'SN Pro', monospace;
+                        letter-spacing: 0.06em;
+                        margin-top: 6px;
+                    }
+
+                    .gg-map__actions {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                    }
+
+                    .gg-map__btn {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 9px;
+                        padding: 13px 20px;
+                        border-radius: 12px;
+                        font-size: 14px;
+                        line-height: 1;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        text-decoration: none;
+                        white-space: nowrap;
+                    }
+
+                    .gg-map__btn--primary {
+                        background: linear-gradient(135deg, rgba(229, 229, 229, 0.95) 0%, rgba(200, 200, 200, 1) 100%);
+                        border: 1px solid rgba(229, 229, 229, 1);
+                        color: #0D0D0D;
+                        font-weight: 500;
+                    }
+
+                    .gg-map__btn--primary:hover {
+                        background: linear-gradient(135deg, #FFFFFF 0%, #E5E5E5 100%);
+                        box-shadow: 0 8px 25px -8px rgba(229, 229, 229, 0.22);
+                        transform: translateY(-2px);
+                    }
+
+                    .gg-map__btn--ghost {
+                        background: rgba(229, 229, 229, 0.03);
+                        border: 1px solid rgba(229, 229, 229, 0.10);
+                        color: var(--fg-secondary);
+                    }
+
+                    .gg-map__btn--ghost:hover {
+                        border-color: rgba(255, 191, 0, 0.5);
+                        color: var(--fg);
+                    }
+
+                    /* ---------- карта ---------- */
+                    .gg-map__frame {
+                        position: relative;
+                        min-height: 440px;
+                        background: #101010;
+                    }
+
+                    .gg-map__frame iframe {
+                        position: absolute;
+                        inset: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: 0;
+                        display: block;
+                        pointer-events: none;
+                        filter: invert(0.92) hue-rotate(180deg) saturate(0.7) contrast(0.88) brightness(0.96);
+                        transition: filter 0.6s ease;
+                    }
+
+                    .gg-map__frame.is-active iframe {
+                        pointer-events: auto;
+                        filter: invert(0.92) hue-rotate(180deg) saturate(0.95) contrast(0.95) brightness(1);
+                    }
+
+                    /* мягкое затемнение по краям, чтобы карта «села» в тёмную секцию */
+                    .gg-map__veil {
+                        position: absolute;
+                        inset: 0;
+                        pointer-events: none;
+                        background:
+                            linear-gradient(90deg, rgba(13, 13, 13, 0.75) 0%, rgba(13, 13, 13, 0) 18%),
+                            linear-gradient(180deg, rgba(13, 13, 13, 0.35) 0%, rgba(13, 13, 13, 0) 12%, rgba(13, 13, 13, 0) 88%, rgba(13, 13, 13, 0.35) 100%);
+                    }
+
+                    /* прозрачный «замок»: карта не перехватывает скролл до клика */
+                    .gg-map__lock {
+                        position: absolute;
+                        inset: 0;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        padding-bottom: 28px;
+                        background: transparent;
+                    }
+
+                    .gg-map__frame.is-active .gg-map__lock { display: none; }
+
+                    .gg-map__hint {
+                        font-family: 'SN Pro', monospace;
+                        font-size: 11px;
+                        letter-spacing: 0.14em;
+                        text-transform: uppercase;
+                        color: var(--fg-secondary);
+                        background: rgba(13, 13, 13, 0.88);
+                        border: 1px solid rgba(229, 229, 229, 0.12);
+                        border-radius: 999px;
+                        padding: 9px 18px;
+                        opacity: 0;
+                        transform: translateY(6px);
+                        transition: opacity 0.35s ease, transform 0.35s ease;
+                    }
+
+                    .gg-map__lock:hover .gg-map__hint {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+
+                    @media (hover: none) {
+                        .gg-map__hint { opacity: 1; transform: none; }
+                    }
+
+                    /* ---------- адаптив ---------- */
+                    @media (max-width: 1023px) {
+                        .gg-map__grid { grid-template-columns: 1fr; min-height: 0; }
+                        .gg-map__info { padding: 32px 28px; }
+                        .gg-map__info::after {
+                            top: auto; bottom: 0; right: 12%;
+                            width: 76%; height: 1px;
+                            background: linear-gradient(90deg, transparent 0%, rgba(229, 229, 229, 0.10) 50%, transparent 100%);
+                        }
+                        .gg-map__frame { min-height: 340px; }
+                        .gg-map__veil { background: linear-gradient(180deg, rgba(13, 13, 13, 0.5) 0%, rgba(13, 13, 13, 0) 15%); }
+                    }
+
+                    @media (max-width: 639px) {
+                        .gg-map { border-radius: 18px; }
+                        .gg-map__info { padding: 26px 22px; gap: 18px; }
+                        .gg-map__title { font-size: 24px; }
+                        .gg-map__frame { min-height: 280px; }
+                        .gg-map__btn { flex: 1 1 auto; }
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        .gg-map__frame iframe,
+                        .gg-map__hint,
+                        .gg-map__btn { transition: none; }
+                    }
+                </style>
+
+                <div class="gg-map">
+                    <div class="corner-mark corner-mark-tl"></div>
+                    <div class="corner-mark corner-mark-tr"></div>
+                    <div class="corner-mark corner-mark-bl"></div>
+                    <div class="corner-mark corner-mark-br"></div>
+
+                    <div class="gg-map__grid">
+                        <!-- информационная панель -->
+                        <div class="gg-map__info">
+                            <span class="gg-map__eyebrow">Location</span>
+                            <h3 class="gg-map__title">Как нас <b>найти</b></h3>
+
+                            <div class="gg-map__row">
+                                <div class="gg-map__pin">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <p class="gg-map__addr">
+                                    г. Калуга, пер. Окружной, д. 4
+                                    <span>248021 · Пн–Пт, 9:00 – 18:00</span>
+                                </p>
+                            </div>
+
+                            <div class="gg-map__actions">
+                                <a class="gg-map__btn gg-map__btn--primary"
+                                   href="https://yandex.ru/maps/?mode=routes&amp;rtt=auto&amp;rtext=~%D0%9A%D0%B0%D0%BB%D1%83%D0%B3%D0%B0%2C%20%D0%9E%D0%BA%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C%204"
+                                   target="_blank" rel="noopener noreferrer">
+                                    Построить маршрут
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                    </svg>
+                                </a>
+                                <button type="button" class="gg-map__btn gg-map__btn--ghost" id="gg-map-copy"
+                                        data-address="248021, г. Калуга, пер. Окружной, д. 4">
+                                    Скопировать адрес
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- карта -->
+                        <div class="gg-map__frame" id="gg-map-frame">
+                            <iframe
+                                src="https://yandex.ru/map-widget/v1/?ll=36.264800%2C54.529200&amp;z=17&amp;mode=search&amp;text=%D0%9A%D0%B0%D0%BB%D1%83%D0%B3%D0%B0%2C%20%D0%9E%D0%BA%D1%80%D1%83%D0%B6%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C%204"
+                                title="Карта: GROSGROUP, г. Калуга, пер. Окружной, д. 4"
+                                loading="lazy"
+                                allowfullscreen></iframe>
+                            <div class="gg-map__veil"></div>
+                            <div class="gg-map__lock" role="button" tabindex="0" aria-label="Включить взаимодействие с картой">
+                                <span class="gg-map__hint">Нажмите, чтобы включить карту</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    (function () {
+                        var frame = document.getElementById('gg-map-frame');
+                        if (frame) {
+                            var lock = frame.querySelector('.gg-map__lock');
+                            var unlock = function () { frame.classList.add('is-active'); };
+                            if (lock) {
+                                lock.addEventListener('click', unlock);
+                                lock.addEventListener('keydown', function (e) {
+                                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); unlock(); }
+                                });
+                            }
+                        }
+
+                        var copyBtn = document.getElementById('gg-map-copy');
+                        if (copyBtn) {
+                            copyBtn.addEventListener('click', function () {
+                                var text = copyBtn.getAttribute('data-address') || '';
+                                var done = function () {
+                                    var old = copyBtn.textContent;
+                                    copyBtn.textContent = 'Адрес скопирован';
+                                    setTimeout(function () { copyBtn.textContent = old; }, 1800);
+                                };
+                                if (navigator.clipboard && navigator.clipboard.writeText) {
+                                    navigator.clipboard.writeText(text).then(done).catch(function () {});
+                                } else {
+                                    var ta = document.createElement('textarea');
+                                    ta.value = text;
+                                    ta.style.position = 'fixed';
+                                    ta.style.left = '-9999px';
+                                    document.body.appendChild(ta);
+                                    ta.select();
+                                    try { document.execCommand('copy'); done(); } catch (err) {}
+                                    document.body.removeChild(ta);
+                                }
+                            });
+                        }
+                    })();
+                </script>
+            </div>
+            <!-- ============ /MAP ============ -->
+
             <div class="mt-8 reveal">
                 <p class="text-ink-light leading-relaxed">
                     Мы создаём промышленные системы, обеспечивающие чистый воздух и безопасность производства. Наша цель — проектирование промышленной вентиляции, стоимость которой окупается за счёт снижения рисков, улучшения условий труда и повышения производительности. Каждая установка систем аспирации под ключ проходит строгий контроль. У нас можно заказать проектирование вентиляции для производства, обеспечивая соответствие санитарным и пожарным нормам. Если вам необходима эффективная промышленная вентиляция, цены под ключ будут рассчитаны индивидуально под определенные задачи.
